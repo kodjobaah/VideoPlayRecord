@@ -13,10 +13,12 @@
 
 using namespace cv;
 
-@interface RecordVideoViewController : UIViewController<CvVideoCameraDelegate,SRWebSocketDelegate> {
+@interface RecordVideoViewController : UIViewController<CvVideoCameraDelegate,SRWebSocketDelegate,NSURLConnectionDelegate> {
     SRWebSocket *_webSocket;
      NSMutableArray *_messages;
-     CvVideoCamera* videoCamera;
+     CvVideoCamera *videoCamera;
+    NSMutableData *_responseData;
+
 }
 @property (nonatomic, retain, readonly) NSString *message;
 @property (nonatomic, retain) CvVideoCamera* videoCamera;

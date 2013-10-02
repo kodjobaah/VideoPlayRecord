@@ -322,6 +322,35 @@
             <point key="canvasLocation" x="1456" y="36"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="MergeVideoViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MergeVideoViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="PlayVideoViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayVideoViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="playVideo:"/>
+            </relationships>
+        </class>
+        <class className="RecordVideoViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecordVideoViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="invite:"/>
+                <relationship kind="action" name="recordVideo:"/>
+                <relationship kind="action" name="stopVideo:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="displayImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="emal" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="startVideoButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="stopVideoButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="WhatAmIDoingViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/WhatAmIDoingViewController.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

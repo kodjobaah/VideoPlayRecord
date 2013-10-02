@@ -74,15 +74,9 @@
     
     NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [path objectAtIndex:0];
-    
-    NSString *appFile = [documentsDirectory stringByAppendingPathComponent:@"myFile.jpg"];
     NSData *tempData = [NSData dataWithData:UIImageJPEGRepresentation(resultUIImage,0.8)];
-   // BOOL result = [tempData writeToFile:appFile atomically:YES];
     NSString* ns = [tempData base64EncodedString];
     NSUInteger characterCount = [ns length];
-    NSLog (@" path [%@]",appFile);
-    NSLog (@" before 64 bit encoding[%lu]",(unsigned long)characterCount);
-   
     [_webSocket send:ns];
 
     
@@ -90,18 +84,15 @@
 #endif
 - (IBAction)invite:(id)sender {
     
-   
+    
+    NSString *hostUrlString = @"http://5.79.24.141:9000/invite?email=";
+    NSString *hostMessage = [hostUrlString stringByAppendingString:self.emal.text];
+    
+    NSURL *url=[NSURL URLWithString:hostMessage];
     NSString *post =[[NSString alloc] initWithFormat:@"email=%@",self.emal.text];
-    
-    NSLog(@"post ==> %@", post);
-    
-    NSURL *url=[NSURL URLWithString:@"http://5.79.24.141:9000/invite"];
-    
-    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
-    
-    //NSLog(@" route id is :%@",postLength);
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:url];
@@ -109,30 +100,10 @@
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody:postData];
     
-    
-    NSError *error = [[NSError alloc] init];
-    NSHTTPURLResponse *response = nil;
-    NSData *urlData=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    if ([response statusCode] >=200 && [response statusCode] <300)
-    {
-        NSString *responseData = [[NSString alloc]initWithData:urlData encoding:NSUTF8StringEncoding];
-        NSLog(@"Response ==> %@", responseData);
-    } else {
-        if (error) NSLog(@"Error: %@", error);
-    }
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"hello"
-                                                   message: self.emal.text
-                                                  delegate: self
-                                         cancelButtonTitle:@"Cancel"
-                                         otherButtonTitles:@"OK",nil];
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     
     
-    [alert show];
-       
 }
-
-
 
 - (IBAction)recordVideo:(id)sender {
     _startVideoButton.enabled = NO;
@@ -177,7 +148,10 @@
     _webSocket = nil;
 }
 
-
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.emal resignFirstResponder];
+ }
 
 -(UIImage *)UIImageFromCVMat:(cv::Mat)cvMat
 {
@@ -217,6 +191,55 @@
     CGColorSpaceRelease(colorSpace);
     
     return finalImage;
+}
+
+#pragma mark NSURLConnection Delegate Methods
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    // A response has been received, this is where we initialize the instance var you created
+    // so that we can append data to it in the didReceiveData method
+    // Furthermore, this method is called each time there is a redirect so reinitializing it
+    // also serves to clear it
+    
+    
+    _responseData = [[NSMutableData alloc] init];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    // Append the new data to the instance variable you declared
+    [_responseData appendData:data];
+}
+
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection
+                  willCacheResponse:(NSCachedURLResponse*)cachedResponse {
+    // Return nil to indicate not necessary to store a cached response for this connection
+    return nil;
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    // The request is complete and data has been received
+    // You can parse the stuff in your instance variable now
+    
+    
+    NSString *sentEmailString = @"Email Sent to ";
+    NSString *message = [sentEmailString stringByAppendingString:self.emal.text];
+    
+    UIAlertView* mes=[[UIAlertView alloc]
+                      initWithTitle: message
+                      message: @""
+                      delegate:self
+                      cancelButtonTitle:@"Ok"
+                      otherButtonTitles: nil];
+     [mes show];
+    
+    self.emal.text = @"";
+    
+    
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    // The request has failed for some reason!
+    // Check the error var
 }
 
 @end
