@@ -1,0 +1,519 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9F0ED70D17CD332700555D3C /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F0ED70C17CD332700555D3C /* libssl.a */; };
+		9F0ED71117CD335400555D3C /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F0ED71017CD335400555D3C /* libcrypto.a */; };
+		9F0ED71317CD3A0F00555D3C /* fmemopen.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F0ED71217CD3A0F00555D3C /* fmemopen.c */; };
+		9F16E47217CD7ECF002EEA3F /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F16E46A17CD79C4002EEA3F /* base64.c */; };
+		9F16E47317CD7ECF002EEA3F /* base64.h in Sources */ = {isa = PBXBuildFile; fileRef = 9F16E46B17CD79C4002EEA3F /* base64.h */; };
+		9F16E47417CD7ECF002EEA3F /* NSData+SRB64Additions.h in Sources */ = {isa = PBXBuildFile; fileRef = 9F16E46C17CD79C4002EEA3F /* NSData+SRB64Additions.h */; };
+		9F16E47517CD7ECF002EEA3F /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F16E46D17CD79C4002EEA3F /* NSData+SRB64Additions.m */; };
+		9F16E47617CD7ECF002EEA3F /* SocketRocket-Prefix.pch in Sources */ = {isa = PBXBuildFile; fileRef = 9F16E46E17CD79C4002EEA3F /* SocketRocket-Prefix.pch */; };
+		9F16E47717CD7ECF002EEA3F /* SRWebSocket.h in Sources */ = {isa = PBXBuildFile; fileRef = 9F16E46F17CD79C4002EEA3F /* SRWebSocket.h */; };
+		9F16E47817CD7ECF002EEA3F /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F16E47017CD79C4002EEA3F /* SRWebSocket.m */; };
+		9F52B00E17CB9449009B497E /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9663F117CB8EAE00C315A5 /* CoreImage.framework */; };
+		9F52B00F17CB9462009B497E /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9663F317CB8EB700C315A5 /* CoreVideo.framework */; };
+		9F52B01117CB946B009B497E /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F52B01017CB946B009B497E /* CoreVideo.framework */; };
+		9F52B01317CB9472009B497E /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F52B01217CB9472009B497E /* CoreImage.framework */; };
+		9F52B01517CB9495009B497E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F52B01417CB9495009B497E /* CoreMedia.framework */; };
+		9F52B01717CB949E009B497E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F52B01617CB949E009B497E /* CoreMedia.framework */; };
+		9F619E5117CECB46008782BA /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F619E5017CECB46008782BA /* NSData+Base64.m */; };
+		9F619E5E17CFB95D008782BA /* theBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F619E5D17CFB95D008782BA /* theBase64.m */; };
+		9F6D973317CB9BEF003F0703 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F6D973217CB9BEF003F0703 /* CFNetwork.framework */; };
+		9F6D973517CB9C27003F0703 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F6D973417CB9C27003F0703 /* Security.framework */; };
+		9F6D973717CB9C43003F0703 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F6D973617CB9C43003F0703 /* libicucore.dylib */; };
+		9F9663EE17CB8A2800C315A5 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9663ED17CB8A2800C315A5 /* opencv2.framework */; };
+		9F9663F017CB8E9700C315A5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9663EF17CB8E9700C315A5 /* Accelerate.framework */; };
+		9F9663FA17CB921800C315A5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9663F917CB921800C315A5 /* Accelerate.framework */; };
+		9F9663FC17CB922300C315A5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9663FB17CB922300C315A5 /* QuartzCore.framework */; };
+		9F9663FE17CB922C00C315A5 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9663FD17CB922C00C315A5 /* MobileCoreServices.framework */; };
+		9F96640017CB923500C315A5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9663FF17CB923500C315A5 /* AVFoundation.framework */; };
+		9F96640217CB923C00C315A5 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F96640117CB923C00C315A5 /* AssetsLibrary.framework */; };
+		9F96640417CB924A00C315A5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F96640317CB924A00C315A5 /* Foundation.framework */; };
+		9F96640617CB925200C315A5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F96640517CB925200C315A5 /* CoreGraphics.framework */; };
+		9FA787A517CB6F5500F0BD40 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA787A417CB6F5500F0BD40 /* UIKit.framework */; };
+		9FA787A717CB6F5500F0BD40 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA787A617CB6F5500F0BD40 /* Foundation.framework */; };
+		9FA787AF17CB6F5500F0BD40 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9FA787AD17CB6F5500F0BD40 /* InfoPlist.strings */; };
+		9FA787B117CB6F5500F0BD40 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA787B017CB6F5500F0BD40 /* main.m */; };
+		9FA787B517CB6F5500F0BD40 /* WhatAmIDoingAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA787B417CB6F5500F0BD40 /* WhatAmIDoingAppDelegate.m */; };
+		9FA787B717CB6F5500F0BD40 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA787B617CB6F5500F0BD40 /* Default.png */; };
+		9FA787B917CB6F5500F0BD40 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA787B817CB6F5500F0BD40 /* Default@2x.png */; };
+		9FA787BB17CB6F5500F0BD40 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA787BA17CB6F5500F0BD40 /* Default-568h@2x.png */; };
+		9FA787BE17CB6F5500F0BD40 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FA787BC17CB6F5500F0BD40 /* MainStoryboard_iPhone.storyboard */; };
+		9FA787C417CB6F5600F0BD40 /* WhatAmIDoingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA787C317CB6F5600F0BD40 /* WhatAmIDoingViewController.m */; };
+		9FA787CB17CB6FB000F0BD40 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA787CA17CB6FB000F0BD40 /* AssetsLibrary.framework */; };
+		9FA787CD17CB6FB800F0BD40 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA787CC17CB6FB800F0BD40 /* AVFoundation.framework */; };
+		9FA787CF17CB6FD100F0BD40 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA787CE17CB6FD100F0BD40 /* MediaPlayer.framework */; };
+		9FA787D117CB6FDA00F0BD40 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA787D017CB6FDA00F0BD40 /* MobileCoreServices.framework */; };
+		9FA787DE17CB753C00F0BD40 /* MergeVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA787DD17CB753C00F0BD40 /* MergeVideoViewController.m */; };
+		9FA787E117CB755B00F0BD40 /* PlayVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA787E017CB755B00F0BD40 /* PlayVideoViewController.m */; };
+		9FA787E417CB757700F0BD40 /* RecordVideoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FA787E317CB757700F0BD40 /* RecordVideoViewController.mm */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		9F0ED70C17CD332700555D3C /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = lib/libssl.a; sourceTree = "<group>"; };
+		9F0ED71017CD335400555D3C /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = lib/libcrypto.a; sourceTree = "<group>"; };
+		9F0ED71217CD3A0F00555D3C /* fmemopen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fmemopen.c; sourceTree = "<group>"; };
+		9F0ED71417CD3A2600555D3C /* fmemopen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fmemopen.h; sourceTree = "<group>"; };
+		9F0ED71517CD6F9F00555D3C /* base642.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = base642.h; sourceTree = "<group>"; };
+		9F16E46A17CD79C4002EEA3F /* base64.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = base64.c; sourceTree = "<group>"; };
+		9F16E46B17CD79C4002EEA3F /* base64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
+		9F16E46C17CD79C4002EEA3F /* NSData+SRB64Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+SRB64Additions.h"; sourceTree = "<group>"; };
+		9F16E46D17CD79C4002EEA3F /* NSData+SRB64Additions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+SRB64Additions.m"; sourceTree = "<group>"; };
+		9F16E46E17CD79C4002EEA3F /* SocketRocket-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-Prefix.pch"; sourceTree = "<group>"; };
+		9F16E46F17CD79C4002EEA3F /* SRWebSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
+		9F16E47017CD79C4002EEA3F /* SRWebSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
+		9F16E47117CD7C32002EEA3F /* SocketRocket-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-Prefix.pch"; sourceTree = "<group>"; };
+		9F52B01017CB946B009B497E /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		9F52B01217CB9472009B497E /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		9F52B01417CB9495009B497E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		9F52B01617CB949E009B497E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		9F619E4F17CECB46008782BA /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		9F619E5017CECB46008782BA /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		9F619E5C17CFB95C008782BA /* theBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = theBase64.h; sourceTree = "<group>"; };
+		9F619E5D17CFB95D008782BA /* theBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = theBase64.m; sourceTree = "<group>"; };
+		9F6D973217CB9BEF003F0703 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		9F6D973417CB9C27003F0703 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		9F6D973617CB9C43003F0703 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		9F9663ED17CB8A2800C315A5 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../../../software/opencvframework/opencv2.framework; sourceTree = "<group>"; };
+		9F9663EF17CB8E9700C315A5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		9F9663F117CB8EAE00C315A5 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		9F9663F317CB8EB700C315A5 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		9F9663F917CB921800C315A5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		9F9663FB17CB922300C315A5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9F9663FD17CB922C00C315A5 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		9F9663FF17CB923500C315A5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9F96640117CB923C00C315A5 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		9F96640317CB924A00C315A5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9F96640517CB925200C315A5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9FA787A117CB6F5500F0BD40 /* VideoPlayRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoPlayRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FA787A417CB6F5500F0BD40 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9FA787A617CB6F5500F0BD40 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9FA787A817CB6F5500F0BD40 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9FA787AC17CB6F5500F0BD40 /* VideoPlayRecord-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VideoPlayRecord-Info.plist"; sourceTree = "<group>"; };
+		9FA787AE17CB6F5500F0BD40 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9FA787B017CB6F5500F0BD40 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9FA787B217CB6F5500F0BD40 /* VideoPlayRecord-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VideoPlayRecord-Prefix.pch"; sourceTree = "<group>"; };
+		9FA787B317CB6F5500F0BD40 /* WhatAmIDoingAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WhatAmIDoingAppDelegate.h; sourceTree = "<group>"; };
+		9FA787B417CB6F5500F0BD40 /* WhatAmIDoingAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhatAmIDoingAppDelegate.m; sourceTree = "<group>"; };
+		9FA787B617CB6F5500F0BD40 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		9FA787B817CB6F5500F0BD40 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		9FA787BA17CB6F5500F0BD40 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		9FA787BD17CB6F5500F0BD40 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		9FA787C217CB6F5600F0BD40 /* WhatAmIDoingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WhatAmIDoingViewController.h; sourceTree = "<group>"; };
+		9FA787C317CB6F5600F0BD40 /* WhatAmIDoingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhatAmIDoingViewController.m; sourceTree = "<group>"; };
+		9FA787CA17CB6FB000F0BD40 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		9FA787CC17CB6FB800F0BD40 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9FA787CE17CB6FD100F0BD40 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		9FA787D017CB6FDA00F0BD40 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		9FA787D217CB6FE500F0BD40 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9FA787DC17CB753C00F0BD40 /* MergeVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MergeVideoViewController.h; sourceTree = "<group>"; };
+		9FA787DD17CB753C00F0BD40 /* MergeVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MergeVideoViewController.m; sourceTree = "<group>"; };
+		9FA787DF17CB755B00F0BD40 /* PlayVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayVideoViewController.h; sourceTree = "<group>"; };
+		9FA787E017CB755B00F0BD40 /* PlayVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayVideoViewController.m; sourceTree = "<group>"; };
+		9FA787E217CB757700F0BD40 /* RecordVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordVideoViewController.h; sourceTree = "<group>"; };
+		9FA787E317CB757700F0BD40 /* RecordVideoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RecordVideoViewController.mm; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9FA7879E17CB6F5500F0BD40 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F6D973717CB9C43003F0703 /* libicucore.dylib in Frameworks */,
+				9F6D973517CB9C27003F0703 /* Security.framework in Frameworks */,
+				9F6D973317CB9BEF003F0703 /* CFNetwork.framework in Frameworks */,
+				9F52B01517CB9495009B497E /* CoreMedia.framework in Frameworks */,
+				9F52B00F17CB9462009B497E /* CoreVideo.framework in Frameworks */,
+				9F52B00E17CB9449009B497E /* CoreImage.framework in Frameworks */,
+				9F9663F017CB8E9700C315A5 /* Accelerate.framework in Frameworks */,
+				9FA787D117CB6FDA00F0BD40 /* MobileCoreServices.framework in Frameworks */,
+				9FA787CF17CB6FD100F0BD40 /* MediaPlayer.framework in Frameworks */,
+				9FA787CD17CB6FB800F0BD40 /* AVFoundation.framework in Frameworks */,
+				9FA787CB17CB6FB000F0BD40 /* AssetsLibrary.framework in Frameworks */,
+				9FA787A517CB6F5500F0BD40 /* UIKit.framework in Frameworks */,
+				9FA787A717CB6F5500F0BD40 /* Foundation.framework in Frameworks */,
+				9F9663EE17CB8A2800C315A5 /* opencv2.framework in Frameworks */,
+				9F9663FA17CB921800C315A5 /* Accelerate.framework in Frameworks */,
+				9F9663FC17CB922300C315A5 /* QuartzCore.framework in Frameworks */,
+				9F9663FE17CB922C00C315A5 /* MobileCoreServices.framework in Frameworks */,
+				9F96640017CB923500C315A5 /* AVFoundation.framework in Frameworks */,
+				9F96640217CB923C00C315A5 /* AssetsLibrary.framework in Frameworks */,
+				9F96640417CB924A00C315A5 /* Foundation.framework in Frameworks */,
+				9F96640617CB925200C315A5 /* CoreGraphics.framework in Frameworks */,
+				9F52B01117CB946B009B497E /* CoreVideo.framework in Frameworks */,
+				9F52B01317CB9472009B497E /* CoreImage.framework in Frameworks */,
+				9F52B01717CB949E009B497E /* CoreMedia.framework in Frameworks */,
+				9F0ED70D17CD332700555D3C /* libssl.a in Frameworks */,
+				9F0ED71117CD335400555D3C /* libcrypto.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9FA7879817CB6F5500F0BD40 = {
+			isa = PBXGroup;
+			children = (
+				9F6D973617CB9C43003F0703 /* libicucore.dylib */,
+				9F6D973417CB9C27003F0703 /* Security.framework */,
+				9F6D973217CB9BEF003F0703 /* CFNetwork.framework */,
+				9F52B01417CB9495009B497E /* CoreMedia.framework */,
+				9F9663F317CB8EB700C315A5 /* CoreVideo.framework */,
+				9F9663F117CB8EAE00C315A5 /* CoreImage.framework */,
+				9F9663EF17CB8E9700C315A5 /* Accelerate.framework */,
+				9FA787D217CB6FE500F0BD40 /* QuartzCore.framework */,
+				9FA787D017CB6FDA00F0BD40 /* MobileCoreServices.framework */,
+				9FA787CE17CB6FD100F0BD40 /* MediaPlayer.framework */,
+				9FA787CC17CB6FB800F0BD40 /* AVFoundation.framework */,
+				9FA787CA17CB6FB000F0BD40 /* AssetsLibrary.framework */,
+				9FA787AA17CB6F5500F0BD40 /* VideoPlayRecord */,
+				9FA787A317CB6F5500F0BD40 /* Frameworks */,
+				9FA787A217CB6F5500F0BD40 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9FA787A217CB6F5500F0BD40 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9FA787A117CB6F5500F0BD40 /* VideoPlayRecord.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9FA787A317CB6F5500F0BD40 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9F0ED71017CD335400555D3C /* libcrypto.a */,
+				9F0ED70C17CD332700555D3C /* libssl.a */,
+				9F52B01617CB949E009B497E /* CoreMedia.framework */,
+				9F52B01217CB9472009B497E /* CoreImage.framework */,
+				9F52B01017CB946B009B497E /* CoreVideo.framework */,
+				9F96640517CB925200C315A5 /* CoreGraphics.framework */,
+				9F96640317CB924A00C315A5 /* Foundation.framework */,
+				9F96640117CB923C00C315A5 /* AssetsLibrary.framework */,
+				9F9663FF17CB923500C315A5 /* AVFoundation.framework */,
+				9F9663FD17CB922C00C315A5 /* MobileCoreServices.framework */,
+				9F9663FB17CB922300C315A5 /* QuartzCore.framework */,
+				9F9663F917CB921800C315A5 /* Accelerate.framework */,
+				9F9663ED17CB8A2800C315A5 /* opencv2.framework */,
+				9FA787A417CB6F5500F0BD40 /* UIKit.framework */,
+				9FA787A617CB6F5500F0BD40 /* Foundation.framework */,
+				9FA787A817CB6F5500F0BD40 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9FA787AA17CB6F5500F0BD40 /* VideoPlayRecord */ = {
+			isa = PBXGroup;
+			children = (
+				9F16E46A17CD79C4002EEA3F /* base64.c */,
+				9F16E46B17CD79C4002EEA3F /* base64.h */,
+				9F16E46C17CD79C4002EEA3F /* NSData+SRB64Additions.h */,
+				9F16E46D17CD79C4002EEA3F /* NSData+SRB64Additions.m */,
+				9F16E46E17CD79C4002EEA3F /* SocketRocket-Prefix.pch */,
+				9F16E46F17CD79C4002EEA3F /* SRWebSocket.h */,
+				9F16E47017CD79C4002EEA3F /* SRWebSocket.m */,
+				9F0ED71417CD3A2600555D3C /* fmemopen.h */,
+				9F0ED71217CD3A0F00555D3C /* fmemopen.c */,
+				9FA787B317CB6F5500F0BD40 /* WhatAmIDoingAppDelegate.h */,
+				9FA787B417CB6F5500F0BD40 /* WhatAmIDoingAppDelegate.m */,
+				9FA787BC17CB6F5500F0BD40 /* MainStoryboard_iPhone.storyboard */,
+				9F0ED71517CD6F9F00555D3C /* base642.h */,
+				9FA787C217CB6F5600F0BD40 /* WhatAmIDoingViewController.h */,
+				9FA787C317CB6F5600F0BD40 /* WhatAmIDoingViewController.m */,
+				9F16E47117CD7C32002EEA3F /* SocketRocket-Prefix.pch */,
+				9FA787DC17CB753C00F0BD40 /* MergeVideoViewController.h */,
+				9FA787DD17CB753C00F0BD40 /* MergeVideoViewController.m */,
+				9FA787DF17CB755B00F0BD40 /* PlayVideoViewController.h */,
+				9FA787E017CB755B00F0BD40 /* PlayVideoViewController.m */,
+				9FA787E217CB757700F0BD40 /* RecordVideoViewController.h */,
+				9FA787E317CB757700F0BD40 /* RecordVideoViewController.mm */,
+				9FA787AB17CB6F5500F0BD40 /* Supporting Files */,
+				9F619E4F17CECB46008782BA /* NSData+Base64.h */,
+				9F619E5017CECB46008782BA /* NSData+Base64.m */,
+				9F619E5C17CFB95C008782BA /* theBase64.h */,
+				9F619E5D17CFB95D008782BA /* theBase64.m */,
+			);
+			path = VideoPlayRecord;
+			sourceTree = "<group>";
+		};
+		9FA787AB17CB6F5500F0BD40 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9FA787AC17CB6F5500F0BD40 /* VideoPlayRecord-Info.plist */,
+				9FA787AD17CB6F5500F0BD40 /* InfoPlist.strings */,
+				9FA787B017CB6F5500F0BD40 /* main.m */,
+				9FA787B217CB6F5500F0BD40 /* VideoPlayRecord-Prefix.pch */,
+				9FA787B617CB6F5500F0BD40 /* Default.png */,
+				9FA787B817CB6F5500F0BD40 /* Default@2x.png */,
+				9FA787BA17CB6F5500F0BD40 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9FA787A017CB6F5500F0BD40 /* VideoPlayRecord */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9FA787C717CB6F5600F0BD40 /* Build configuration list for PBXNativeTarget "VideoPlayRecord" */;
+			buildPhases = (
+				9FA7879D17CB6F5500F0BD40 /* Sources */,
+				9FA7879E17CB6F5500F0BD40 /* Frameworks */,
+				9FA7879F17CB6F5500F0BD40 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VideoPlayRecord;
+			productName = VideoPlayRecord;
+			productReference = 9FA787A117CB6F5500F0BD40 /* VideoPlayRecord.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9FA7879917CB6F5500F0BD40 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = WhatAmIDoing;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "What am I doing";
+			};
+			buildConfigurationList = 9FA7879C17CB6F5500F0BD40 /* Build configuration list for PBXProject "VideoPlayRecord" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9FA7879817CB6F5500F0BD40;
+			productRefGroup = 9FA787A217CB6F5500F0BD40 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9FA787A017CB6F5500F0BD40 /* VideoPlayRecord */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9FA7879F17CB6F5500F0BD40 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FA787AF17CB6F5500F0BD40 /* InfoPlist.strings in Resources */,
+				9FA787B717CB6F5500F0BD40 /* Default.png in Resources */,
+				9FA787B917CB6F5500F0BD40 /* Default@2x.png in Resources */,
+				9FA787BB17CB6F5500F0BD40 /* Default-568h@2x.png in Resources */,
+				9FA787BE17CB6F5500F0BD40 /* MainStoryboard_iPhone.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9FA7879D17CB6F5500F0BD40 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F16E47217CD7ECF002EEA3F /* base64.c in Sources */,
+				9F16E47317CD7ECF002EEA3F /* base64.h in Sources */,
+				9F16E47417CD7ECF002EEA3F /* NSData+SRB64Additions.h in Sources */,
+				9F16E47517CD7ECF002EEA3F /* NSData+SRB64Additions.m in Sources */,
+				9F16E47617CD7ECF002EEA3F /* SocketRocket-Prefix.pch in Sources */,
+				9F16E47717CD7ECF002EEA3F /* SRWebSocket.h in Sources */,
+				9F16E47817CD7ECF002EEA3F /* SRWebSocket.m in Sources */,
+				9FA787B117CB6F5500F0BD40 /* main.m in Sources */,
+				9FA787B517CB6F5500F0BD40 /* WhatAmIDoingAppDelegate.m in Sources */,
+				9FA787C417CB6F5600F0BD40 /* WhatAmIDoingViewController.m in Sources */,
+				9FA787DE17CB753C00F0BD40 /* MergeVideoViewController.m in Sources */,
+				9FA787E117CB755B00F0BD40 /* PlayVideoViewController.m in Sources */,
+				9FA787E417CB757700F0BD40 /* RecordVideoViewController.mm in Sources */,
+				9F0ED71317CD3A0F00555D3C /* fmemopen.c in Sources */,
+				9F619E5117CECB46008782BA /* NSData+Base64.m in Sources */,
+				9F619E5E17CFB95D008782BA /* theBase64.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		9FA787AD17CB6F5500F0BD40 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9FA787AE17CB6F5500F0BD40 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		9FA787BC17CB6F5500F0BD40 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9FA787BD17CB6F5500F0BD40 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9FA787C517CB6F5600F0BD40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: kodjo baah (298BH8F8HM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "49790FC2-C2CA-4278-805E-D9DAC2AA1125";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9FA787C617CB6F5600F0BD40 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: kodjo baah (298BH8F8HM)";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "49790FC2-C2CA-4278-805E-D9DAC2AA1125";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9FA787C817CB6F5600F0BD40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: kodjo baah (298BH8F8HM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: kodjo baah (298BH8F8HM)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../software/opencvframework\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VideoPlayRecord/VideoPlayRecord-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/include",
+					"$(SRCROOT)/Library/openssl/build/openssl.build/openssl/include",
+				);
+				INFOPLIST_FILE = "VideoPlayRecord/VideoPlayRecord-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/lib\"",
+				);
+				New_Setting = "";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "49790FC2-C2CA-4278-805E-D9DAC2AA1125";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "49790FC2-C2CA-4278-805E-D9DAC2AA1125";
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(TARGET_NAME)";
+				"PUBLIC_HEADERS_FOLDER_PATH[sdk=*]" = "$(CONTENTS_FOLDER_PATH)/include";
+				USER_HEADER_SEARCH_PATHS = "\"$(TARGET_BUILD_DIR)/usr/local/lib/include\" \"$(OBJROOT)/include\" $(SRCROOT)/include";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		9FA787C917CB6F5600F0BD40 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: kodjo baah (298BH8F8HM)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../software/opencvframework\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VideoPlayRecord/VideoPlayRecord-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/include",
+					"$(SRCROOT)/Library/openssl/build/openssl.build/openssl/include",
+				);
+				INFOPLIST_FILE = "VideoPlayRecord/VideoPlayRecord-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/lib\"",
+				);
+				New_Setting = "";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "49790FC2-C2CA-4278-805E-D9DAC2AA1125";
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "\"$(TARGET_BUILD_DIR)/usr/local/lib/include\" \"$(OBJROOT)/include\" $(SRCROOT)/include";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9FA7879C17CB6F5500F0BD40 /* Build configuration list for PBXProject "VideoPlayRecord" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9FA787C517CB6F5600F0BD40 /* Debug */,
+				9FA787C617CB6F5600F0BD40 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9FA787C717CB6F5600F0BD40 /* Build configuration list for PBXNativeTarget "VideoPlayRecord" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9FA787C817CB6F5600F0BD40 /* Debug */,
+				9FA787C917CB6F5600F0BD40 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9FA7879917CB6F5500F0BD40 /* Project object */;
+}
