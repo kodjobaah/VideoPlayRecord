@@ -86,11 +86,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "VideoPlayRecord/RecordVideoViewController.mm"
-         timestampString = "402406939.199104"
+         timestampString = "402420514.978905"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "89"
-         endingLineNumber = "89"
+         startingLineNumber = "84"
+         endingLineNumber = "84"
          landmarkName = "-invite:"
          landmarkType = "5">
       </FileBreakpoint>

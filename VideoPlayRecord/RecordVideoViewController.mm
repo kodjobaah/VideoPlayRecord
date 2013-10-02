@@ -33,7 +33,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	
     
     
     self.videoCamera = [[CvVideoCamera alloc] initWithParentView:_displayImage];
@@ -71,14 +71,9 @@
 {
     Mat image_copy;
     UIImage *resultUIImage = [self UIImageFromCVMat:image];
-    
-    NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [path objectAtIndex:0];
-    NSData *tempData = [NSData dataWithData:UIImageJPEGRepresentation(resultUIImage,0.8)];
+    NSData *tempData = [NSData dataWithData:UIImageJPEGRepresentation(resultUIImage,1.0)];
     NSString* ns = [tempData base64EncodedString];
-    NSUInteger characterCount = [ns length];
     [_webSocket send:ns];
-
     
 }
 #endif

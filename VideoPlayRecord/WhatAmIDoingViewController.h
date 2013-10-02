@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WhatAmIDoingViewController : UIViewController
+@interface WhatAmIDoingViewController : UIViewController<NSURLConnectionDelegate> {
+    NSMutableData *_responseData;
+}
+
+@property (weak, nonatomic) IBOutlet UITextField *email;
+@property (weak, nonatomic) IBOutlet UITextField *password;
+@property (weak, nonatomic) IBOutlet UITextField *repeatPassword;
+@property (weak, nonatomic) IBOutlet UITextField *firstName;
+@property (weak, nonatomic) IBOutlet UITextField *lastName;
 
 @end
