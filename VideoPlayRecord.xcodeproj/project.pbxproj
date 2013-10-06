@@ -54,6 +54,10 @@
 		9FA787DE17CB753C00F0BD40 /* MergeVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA787DD17CB753C00F0BD40 /* MergeVideoViewController.m */; };
 		9FA787E117CB755B00F0BD40 /* PlayVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA787E017CB755B00F0BD40 /* PlayVideoViewController.m */; };
 		9FA787E417CB757700F0BD40 /* RecordVideoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FA787E317CB757700F0BD40 /* RecordVideoViewController.mm */; };
+		9FB1B8A61800E20200E3ACBA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FB1B8A51800E20200E3ACBA /* CoreData.framework */; };
+		9FB1B8E31800E9A800E3ACBA /* WhatAmIdoingModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9FB1B8E11800E9A800E3ACBA /* WhatAmIdoingModel.xcdatamodeld */; };
+		9FB1B8EE1801685000E3ACBA /* WhatAmIdoing.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9FB1B8EC1801685000E3ACBA /* WhatAmIdoing.xcdatamodeld */; };
+		9FB1B8F1180168C200E3ACBA /* AuthenticationToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FB1B8F0180168C200E3ACBA /* AuthenticationToken.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -119,6 +123,13 @@
 		9FA787E017CB755B00F0BD40 /* PlayVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayVideoViewController.m; sourceTree = "<group>"; };
 		9FA787E217CB757700F0BD40 /* RecordVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordVideoViewController.h; sourceTree = "<group>"; };
 		9FA787E317CB757700F0BD40 /* RecordVideoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RecordVideoViewController.mm; sourceTree = "<group>"; };
+		9FB1B8A51800E20200E3ACBA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		9FB1B8E21800E9A800E3ACBA /* WhatAmIdoingModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WhatAmIdoingModel.xcdatamodel; sourceTree = "<group>"; };
+		9FB1B8EA180165D700E3ACBA /* WhatAmIdoingModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WhatAmIdoingModel 2.xcdatamodel"; sourceTree = "<group>"; };
+		9FB1B8EB180166B400E3ACBA /* WhatAmIdoingModel3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = WhatAmIdoingModel3.xcdatamodel; sourceTree = "<group>"; };
+		9FB1B8ED1801685000E3ACBA /* WhatAmIdoing.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WhatAmIdoing.xcdatamodel; sourceTree = "<group>"; };
+		9FB1B8EF180168C200E3ACBA /* AuthenticationToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AuthenticationToken.h; path = ../AuthenticationToken.h; sourceTree = "<group>"; };
+		9FB1B8F0180168C200E3ACBA /* AuthenticationToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AuthenticationToken.m; path = ../AuthenticationToken.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FB1B8A61800E20200E3ACBA /* CoreData.framework in Frameworks */,
 				9F6D973717CB9C43003F0703 /* libicucore.dylib in Frameworks */,
 				9F6D973517CB9C27003F0703 /* Security.framework in Frameworks */,
 				9F6D973317CB9BEF003F0703 /* CFNetwork.framework in Frameworks */,
@@ -161,6 +173,7 @@
 		9FA7879817CB6F5500F0BD40 = {
 			isa = PBXGroup;
 			children = (
+				9FB1B8A51800E20200E3ACBA /* CoreData.framework */,
 				9F6D973617CB9C43003F0703 /* libicucore.dylib */,
 				9F6D973417CB9C27003F0703 /* Security.framework */,
 				9F6D973217CB9BEF003F0703 /* CFNetwork.framework */,
@@ -213,6 +226,9 @@
 		9FA787AA17CB6F5500F0BD40 /* VideoPlayRecord */ = {
 			isa = PBXGroup;
 			children = (
+				9FB1B8EF180168C200E3ACBA /* AuthenticationToken.h */,
+				9FB1B8F0180168C200E3ACBA /* AuthenticationToken.m */,
+				9FB1B8E11800E9A800E3ACBA /* WhatAmIdoingModel.xcdatamodeld */,
 				9F16E46A17CD79C4002EEA3F /* base64.c */,
 				9F16E46B17CD79C4002EEA3F /* base64.h */,
 				9F16E46C17CD79C4002EEA3F /* NSData+SRB64Additions.h */,
@@ -240,6 +256,7 @@
 				9F619E5017CECB46008782BA /* NSData+Base64.m */,
 				9F619E5C17CFB95C008782BA /* theBase64.h */,
 				9F619E5D17CFB95D008782BA /* theBase64.m */,
+				9FB1B8EC1801685000E3ACBA /* WhatAmIdoing.xcdatamodeld */,
 			);
 			path = VideoPlayRecord;
 			sourceTree = "<group>";
@@ -341,6 +358,9 @@
 				9F0ED71317CD3A0F00555D3C /* fmemopen.c in Sources */,
 				9F619E5117CECB46008782BA /* NSData+Base64.m in Sources */,
 				9F619E5E17CFB95D008782BA /* theBase64.m in Sources */,
+				9FB1B8E31800E9A800E3ACBA /* WhatAmIdoingModel.xcdatamodeld in Sources */,
+				9FB1B8EE1801685000E3ACBA /* WhatAmIdoing.xcdatamodeld in Sources */,
+				9FB1B8F1180168C200E3ACBA /* AuthenticationToken.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,6 +534,32 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9FB1B8E11800E9A800E3ACBA /* WhatAmIdoingModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9FB1B8EA180165D700E3ACBA /* WhatAmIdoingModel 2.xcdatamodel */,
+				9FB1B8E21800E9A800E3ACBA /* WhatAmIdoingModel.xcdatamodel */,
+				9FB1B8EB180166B400E3ACBA /* WhatAmIdoingModel3.xcdatamodel */,
+			);
+			currentVersion = 9FB1B8E21800E9A800E3ACBA /* WhatAmIdoingModel.xcdatamodel */;
+			name = WhatAmIdoingModel.xcdatamodeld;
+			path = ../WhatAmIdoingModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		9FB1B8EC1801685000E3ACBA /* WhatAmIdoing.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9FB1B8ED1801685000E3ACBA /* WhatAmIdoing.xcdatamodel */,
+			);
+			currentVersion = 9FB1B8ED1801685000E3ACBA /* WhatAmIdoing.xcdatamodel */;
+			path = WhatAmIdoing.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 9FA7879917CB6F5500F0BD40 /* Project object */;
 }

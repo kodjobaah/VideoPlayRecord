@@ -10,11 +10,17 @@
 
 @interface WhatAmIDoingViewController : UIViewController<NSURLConnectionDelegate> {
     NSMutableData *_responseData;
+    NSManagedObjectContext *managedObjectContext;
+    NSString *_playSession;
+
 }
 
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+
+
+@property (weak, nonatomic) IBOutlet UIButton *registerOrJoin;
 @property (weak, nonatomic) IBOutlet UITextField *email;
 @property (weak, nonatomic) IBOutlet UITextField *password;
-@property (weak, nonatomic) IBOutlet UITextField *repeatPassword;
 @property (weak, nonatomic) IBOutlet UITextField *firstName;
 @property (weak, nonatomic) IBOutlet UITextField *lastName;
 
