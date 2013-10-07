@@ -13,6 +13,7 @@
 #include "SRWebSocket.h"
 #import "NSData+Base64.h"
 #import "WhatAmIDoingAppDelegate.h"
+#import "PropertyAccessor.h"
 
 using namespace cv;
 
@@ -23,8 +24,14 @@ using namespace cv;
 @end
 
 @implementation RecordVideoViewController
+
+@synthesize publishVideoUrl = _publishVideoUrl;
+@synthesize webSocket = _webSocket;
+@synthesize webSocketRequest = _webSocketRequest;
+@synthesize startRecording = _startRecording;
 @synthesize videoCamera = _videoCamera;
 @synthesize managedObjectContext = __managedObjectContext;
+@synthesize propertyAccessor = _propertyAccessor;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,6 +45,10 @@ using namespace cv;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    self.propertyAccessor = [[PropertyAccessor alloc] init];
+    
     _startVideoButton.enabled = NO;
     _stopVideoButton.enabled = NO;
 	
@@ -54,23 +65,27 @@ using namespace cv;
     _startVideoButton.enabled = YES;
     _stopVideoButton.enabled = NO;
     
-    
-    
-    // 2 - Request that Entity
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"AuthenticationToken"
                                               inManagedObjectContext:appDelegate.managedObjectContext];
     [fetchRequest setEntity:entity];
     NSError *error = nil;
-    NSArray *fetchedObjects = [appDelegate.managedObjectContext
-                               executeFetchRequest:fetchRequest error:&error];
+    NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     AuthenticationToken *token =  [fetchedObjects objectAtIndex: 0];
     
-    NSURL *urlNew = [NSURL URLWithString:@"http://5.79.24.141:9000/publishVideo?username=javapp"];
+    self.publishVideoUrl = [self.propertyAccessor getPropertyValue:@"WHAT_AM_I_DOING_PUBLISH_VIDEO"];
+    if (self.publishVideoUrl == nil) {
+        self.publishVideoUrl = @"http://5.79.24.141:9000/publishVideo";
+    }
+    
+    
+    NSURL *urlNew = [NSURL URLWithString:self.publishVideoUrl];
     self.webSocketRequest = [NSMutableURLRequest requestWithURL:urlNew];
+
+    NSString *domain = [self.propertyAccessor getPropertyValue:@"WHAT_AM_I_DOING_DOMAIN"];
     NSDictionary *cookieProperties = [NSDictionary dictionaryWithObjectsAndKeys:
-                                      @"5.79.24.141", NSHTTPCookieDomain,
+                                      domain, NSHTTPCookieDomain,
                                       @"\\", NSHTTPCookiePath,
                                       @"PLAY_SESSION", NSHTTPCookieName,
                                       token.playSession, NSHTTPCookieValue,

@@ -8,11 +8,16 @@
 
 #import "WhatAmIDoingViewController.h"
 #import "AuthenticationToken.h"
+#import "PropertyAccessor.h"
+
 @interface WhatAmIDoingViewController ()
 
 @end
 
 @implementation WhatAmIDoingViewController
+
+@synthesize whatAmIdoingUrl = _whatAmIdoingUrl;
+@synthesize propertyAccessor = _propertyAccessor;
 
 @synthesize managedObjectContext = __managedObjectContext;
 
@@ -20,30 +25,20 @@
 {
     [super viewDidLoad];
     
-    // Do any additional setup after loading the view, typically from a nib.
     
-    NSString *errorDesc = nil;
-    NSPropertyListFormat format;
-    NSString *plistPath;
-    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                              NSUserDomainMask, YES) objectAtIndex:0];
-    plistPath = [rootPath stringByAppendingPathComponent:@"whatAmIdoing.plist"];
-    if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
-        plistPath = [[NSBundle mainBundle] pathForResource:@"whatAmIdoing" ofType:@"plist"];
-    }
-    NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
-    NSDictionary *temp = (NSDictionary *)[NSPropertyListSerialization
-                                          propertyListFromData:plistXML
-                                          mutabilityOption:NSPropertyListMutableContainersAndLeaves
-                                          format:&format
-                                          errorDescription:&errorDesc];
-    if (!temp) {
-        NSLog(@"Error reading plist: %@, format: %d", errorDesc, format);
+    self.propertyAccessor = [[PropertyAccessor alloc] init];
+    
+    self.whatAmIdoingUrl = [self.propertyAccessor getPropertyValue:@"WHAT_AM_I_DOING_URL"];
+
+    
+    if (self.whatAmIdoingUrl == nil) {
         self.whatAmIdoingUrl = @"http://5.79.24.141:9000/";
+    }
+    
+    self.registerUrl = [self.propertyAccessor getPropertyValue:@"WHAT_AM_I_DOING_REGISTER_URL"];
+    
+    if (self.registerUrl == nil) {
         self.registerUrl = @"http://5.79.24.141:9000/registerLogin?";
-    } else {
-        self.whatAmIdoingUrl = [temp objectForKey:@"WHAT_AM_I_DOING_URL"];
-        self.registerUrl = [temp objectForKey:@"WHAT_AM_I_DOING_REGISTER_URL"];
     }
     
 

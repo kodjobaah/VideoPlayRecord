@@ -10,10 +10,11 @@
 #import "SRWebSocket.h"
 #import <opencv2/highgui/cap_ios.h>
 #import "AuthenticationToken.h"
+#import "PropertyAccessor.h"
 
 
 @interface RecordVideoViewController : UIViewController<CvVideoCameraDelegate,SRWebSocketDelegate,NSURLConnectionDelegate> {
-    SRWebSocket *_webSocket;
+    SRWebSocket *webSocket;
     NSMutableArray *_messages;
     CvVideoCamera *videoCamera;
     NSMutableData *_responseData;
@@ -21,10 +22,13 @@
     NSManagedObjectContext *managedObjectContext;
     NSMutableURLRequest *webSocketRequest;
     BOOL startRecording;
-  
+    NSString *publishVideoUrl;
+    PropertyAccessor *propertyAccessor;
 }
 
-@property (retain, nonatomic) SRWebSocket *_webSocket;
+@property (nonatomic, retain) PropertyAccessor *propertyAccessor;
+@property (nonatomic, retain) NSString *publishVideoUrl;
+@property (nonatomic, retain) SRWebSocket *webSocket;
 @property (nonatomic) NSMutableURLRequest *webSocketRequest;
 @property (nonatomic) BOOL startRecording;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;

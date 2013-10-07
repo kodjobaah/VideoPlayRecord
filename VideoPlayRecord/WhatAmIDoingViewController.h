@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PropertyAccessor.h"
 
 @interface WhatAmIDoingViewController : UIViewController<NSURLConnectionDelegate> {
     NSMutableData *_responseData;
@@ -14,9 +15,12 @@
     NSString *_playSession;
     NSString *whatAmIdoingUrl;
     NSString *registerUrl;
+    PropertyAccessor *propertyAccessor;
 
 }
 
+
+@property (nonatomic, retain) PropertyAccessor *propertyAccessor;
 @property (nonatomic, retain) NSString *registerUrl;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSString *whatAmIdoingUrl;

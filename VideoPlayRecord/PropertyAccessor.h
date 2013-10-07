@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PropertyAccessor : NSObject
+@interface PropertyAccessor : NSObject {
+    NSDictionary *properties;
+}
 
+
+@property NSDictionary *properties;
+- (NSString *) getPropertyValue:(NSString *)key;
 @end
