@@ -12,14 +12,19 @@
 #include <math.h>
 #include "SRWebSocket.h"
 #import "NSData+Base64.h"
+#import "WhatAmIDoingAppDelegate.h"
 
-
+using namespace cv;
 
 @interface RecordVideoViewController ()
+
+
 
 @end
 
 @implementation RecordVideoViewController
+@synthesize videoCamera = _videoCamera;
+@synthesize managedObjectContext = __managedObjectContext;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,8 +38,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _startVideoButton.enabled = NO;
+    _stopVideoButton.enabled = NO;
 	
-    
+    WhatAmIDoingAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
     self.videoCamera = [[CvVideoCamera alloc] initWithParentView:_displayImage];
     self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionFront;
@@ -47,15 +54,43 @@
     _startVideoButton.enabled = YES;
     _stopVideoButton.enabled = NO;
     
+    
+    
+    // 2 - Request that Entity
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"AuthenticationToken"
+                                              inManagedObjectContext:appDelegate.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSError *error = nil;
+    NSArray *fetchedObjects = [appDelegate.managedObjectContext
+                               executeFetchRequest:fetchRequest error:&error];
+    
+    AuthenticationToken *token =  [fetchedObjects objectAtIndex: 0];
+    
+    NSURL *urlNew = [NSURL URLWithString:@"http://5.79.24.141:9000/publishVideo?username=javapp"];
+    self.webSocketRequest = [NSMutableURLRequest requestWithURL:urlNew];
+    NSDictionary *cookieProperties = [NSDictionary dictionaryWithObjectsAndKeys:
+                                      @"5.79.24.141", NSHTTPCookieDomain,
+                                      @"\\", NSHTTPCookiePath,
+                                      @"PLAY_SESSION", NSHTTPCookieName,
+                                      token.playSession, NSHTTPCookieValue,
+                                      nil];
+    
+    NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:cookieProperties];
+    NSArray* cookieArray = [NSArray arrayWithObjects: cookie, nil];
+    NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:cookieArray];
+   [self.webSocketRequest setAllHTTPHeaderFields:headers];
+    
     _webSocket.delegate = nil;
     [_webSocket close];
     
-    _webSocket = [[SRWebSocket alloc]
-                  initWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"ws://5.79.24.141:9000/publishVideo?username=javapp"]]];
+    _webSocket = [[SRWebSocket alloc] initWithURLRequest:self.webSocketRequest];
     _webSocket.delegate = self;
     
     self.title = @"Opening Connection...";
     [_webSocket open];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -101,9 +136,21 @@
 }
 
 - (IBAction)recordVideo:(id)sender {
+    
+    if (_webSocket == nil) {
+        _webSocket = [[SRWebSocket alloc] initWithURLRequest:self.webSocketRequest];
+        _webSocket.delegate = self;
+    
+        self.title = @"Opening Connection...";
+        [_webSocket open];
+        _stopVideoButton.enabled = NO;
+        self.startRecording = YES;
+    } else {
+        [self.videoCamera start];
+        _stopVideoButton.enabled = YES;
+
+    }
     _startVideoButton.enabled = NO;
-    _stopVideoButton.enabled = YES;
-    [self.videoCamera start];
 }
 
 -(IBAction) stopVideo:(id)sender
@@ -111,7 +158,12 @@
     _startVideoButton.enabled = YES;
     _stopVideoButton.enabled = NO;
     [self.videoCamera stop];
-    NSLog(@"Button Touch Down Event Fired.");
+    [_webSocket close];
+    _webSocket.delegate = nil;
+    _webSocket = nil;
+ 
+    self.startRecording = NO;
+   ;
 }
 
 #pragma mark - SRWebSocketDelegate
@@ -120,6 +172,10 @@
 {
     NSLog(@"Websocket Connected");
     self.title = @"Connected!";
+    if (self.startRecording) {
+        [self.videoCamera start];
+        _stopVideoButton.enabled = YES;
+    }
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
@@ -141,6 +197,8 @@
     NSLog(@"WebSocket closed");
     self.title = @"Connection Closed! (see logs)";
     _webSocket = nil;
+    _startVideoButton.enabled = YES;
+    _stopVideoButton.enabled = NO;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

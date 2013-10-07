@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--What AmI Doing View Controller-->
+        <!--What AmI Doing View Controller - RegistrationOrLogin-->
         <scene sceneID="5">
             <objects>
-                <viewController id="2" customClass="WhatAmIDoingViewController" sceneMemberID="viewController">
+                <viewController title="RegistrationOrLogin" id="2" customClass="WhatAmIDoingViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
                         <rect key="frame" x="0.0" y="64" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -159,10 +159,10 @@
             </objects>
             <point key="canvasLocation" x="416" y="36"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - NavigationController-->
         <scene sceneID="jX1-56-kMe">
             <objects>
-                <navigationController id="toB-xh-wKo" sceneMemberID="viewController">
+                <navigationController title="NavigationController" id="toB-xh-wKo" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PkU-0y-CNQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -177,10 +177,10 @@
             </objects>
             <point key="canvasLocation" x="-24" y="36"/>
         </scene>
-        <!--Record Video View Controller-->
+        <!--Record Video View Controller - VideViewController-->
         <scene sceneID="U14-2H-e9v">
             <objects>
-                <viewController storyboardIdentifier="thisIsWhatAmIdoing" useStoryboardIdentifierAsRestorationIdentifier="YES" id="s7P-y2-8pO" customClass="RecordVideoViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="thisIsWhatAmIdoing" title="VideViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="s7P-y2-8pO" customClass="RecordVideoViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Kz-3b-lNe">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

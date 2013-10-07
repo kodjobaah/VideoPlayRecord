@@ -12,11 +12,15 @@
     NSMutableData *_responseData;
     NSManagedObjectContext *managedObjectContext;
     NSString *_playSession;
+    NSString *whatAmIdoingUrl;
+    NSString *registerUrl;
 
 }
 
+@property (nonatomic, retain) NSString *registerUrl;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-
+@property (nonatomic, retain) NSString *whatAmIdoingUrl;
+@property (nonatomic, retain) NSString *_playSession;
 
 @property (weak, nonatomic) IBOutlet UIButton *registerOrJoin;
 @property (weak, nonatomic) IBOutlet UITextField *email;

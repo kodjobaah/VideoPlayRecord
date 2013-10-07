@@ -23,6 +23,8 @@
 		9F52B01317CB9472009B497E /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F52B01217CB9472009B497E /* CoreImage.framework */; };
 		9F52B01517CB9495009B497E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F52B01417CB9495009B497E /* CoreMedia.framework */; };
 		9F52B01717CB949E009B497E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F52B01617CB949E009B497E /* CoreMedia.framework */; };
+		9F58467F18016B8300CA74DA /* AuthenticationToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F58467E18016B8300CA74DA /* AuthenticationToken.m */; };
+		9F584681180276E700CA74DA /* whatAmIdoing.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F584680180276E700CA74DA /* whatAmIdoing.plist */; };
 		9F619E5117CECB46008782BA /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F619E5017CECB46008782BA /* NSData+Base64.m */; };
 		9F619E5E17CFB95D008782BA /* theBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F619E5D17CFB95D008782BA /* theBase64.m */; };
 		9F6D973317CB9BEF003F0703 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F6D973217CB9BEF003F0703 /* CFNetwork.framework */; };
@@ -55,9 +57,7 @@
 		9FA787E117CB755B00F0BD40 /* PlayVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA787E017CB755B00F0BD40 /* PlayVideoViewController.m */; };
 		9FA787E417CB757700F0BD40 /* RecordVideoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FA787E317CB757700F0BD40 /* RecordVideoViewController.mm */; };
 		9FB1B8A61800E20200E3ACBA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FB1B8A51800E20200E3ACBA /* CoreData.framework */; };
-		9FB1B8E31800E9A800E3ACBA /* WhatAmIdoingModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9FB1B8E11800E9A800E3ACBA /* WhatAmIdoingModel.xcdatamodeld */; };
 		9FB1B8EE1801685000E3ACBA /* WhatAmIdoing.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9FB1B8EC1801685000E3ACBA /* WhatAmIdoing.xcdatamodeld */; };
-		9FB1B8F1180168C200E3ACBA /* AuthenticationToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FB1B8F0180168C200E3ACBA /* AuthenticationToken.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +78,9 @@
 		9F52B01217CB9472009B497E /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		9F52B01417CB9495009B497E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		9F52B01617CB949E009B497E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		9F58467D18016B6D00CA74DA /* AuthenticationToken.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationToken.h; sourceTree = "<group>"; };
+		9F58467E18016B8300CA74DA /* AuthenticationToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationToken.m; sourceTree = "<group>"; };
+		9F584680180276E700CA74DA /* whatAmIdoing.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = whatAmIdoing.plist; sourceTree = "<group>"; };
 		9F619E4F17CECB46008782BA /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		9F619E5017CECB46008782BA /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		9F619E5C17CFB95C008782BA /* theBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = theBase64.h; sourceTree = "<group>"; };
@@ -121,15 +124,10 @@
 		9FA787DD17CB753C00F0BD40 /* MergeVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MergeVideoViewController.m; sourceTree = "<group>"; };
 		9FA787DF17CB755B00F0BD40 /* PlayVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayVideoViewController.h; sourceTree = "<group>"; };
 		9FA787E017CB755B00F0BD40 /* PlayVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayVideoViewController.m; sourceTree = "<group>"; };
-		9FA787E217CB757700F0BD40 /* RecordVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordVideoViewController.h; sourceTree = "<group>"; };
+		9FA787E217CB757700F0BD40 /* RecordVideoViewController.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = RecordVideoViewController.h; sourceTree = "<group>"; };
 		9FA787E317CB757700F0BD40 /* RecordVideoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RecordVideoViewController.mm; sourceTree = "<group>"; };
 		9FB1B8A51800E20200E3ACBA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		9FB1B8E21800E9A800E3ACBA /* WhatAmIdoingModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WhatAmIdoingModel.xcdatamodel; sourceTree = "<group>"; };
-		9FB1B8EA180165D700E3ACBA /* WhatAmIdoingModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WhatAmIdoingModel 2.xcdatamodel"; sourceTree = "<group>"; };
-		9FB1B8EB180166B400E3ACBA /* WhatAmIdoingModel3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = WhatAmIdoingModel3.xcdatamodel; sourceTree = "<group>"; };
 		9FB1B8ED1801685000E3ACBA /* WhatAmIdoing.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WhatAmIdoing.xcdatamodel; sourceTree = "<group>"; };
-		9FB1B8EF180168C200E3ACBA /* AuthenticationToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AuthenticationToken.h; path = ../AuthenticationToken.h; sourceTree = "<group>"; };
-		9FB1B8F0180168C200E3ACBA /* AuthenticationToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AuthenticationToken.m; path = ../AuthenticationToken.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,15 +224,13 @@
 		9FA787AA17CB6F5500F0BD40 /* VideoPlayRecord */ = {
 			isa = PBXGroup;
 			children = (
-				9FB1B8EF180168C200E3ACBA /* AuthenticationToken.h */,
-				9FB1B8F0180168C200E3ACBA /* AuthenticationToken.m */,
-				9FB1B8E11800E9A800E3ACBA /* WhatAmIdoingModel.xcdatamodeld */,
 				9F16E46A17CD79C4002EEA3F /* base64.c */,
 				9F16E46B17CD79C4002EEA3F /* base64.h */,
 				9F16E46C17CD79C4002EEA3F /* NSData+SRB64Additions.h */,
 				9F16E46D17CD79C4002EEA3F /* NSData+SRB64Additions.m */,
 				9F16E46E17CD79C4002EEA3F /* SocketRocket-Prefix.pch */,
 				9F16E46F17CD79C4002EEA3F /* SRWebSocket.h */,
+				9F58467E18016B8300CA74DA /* AuthenticationToken.m */,
 				9F16E47017CD79C4002EEA3F /* SRWebSocket.m */,
 				9F0ED71417CD3A2600555D3C /* fmemopen.h */,
 				9F0ED71217CD3A0F00555D3C /* fmemopen.c */,
@@ -246,6 +242,7 @@
 				9FA787C317CB6F5600F0BD40 /* WhatAmIDoingViewController.m */,
 				9F16E47117CD7C32002EEA3F /* SocketRocket-Prefix.pch */,
 				9FA787DC17CB753C00F0BD40 /* MergeVideoViewController.h */,
+				9F58467D18016B6D00CA74DA /* AuthenticationToken.h */,
 				9FA787DD17CB753C00F0BD40 /* MergeVideoViewController.m */,
 				9FA787DF17CB755B00F0BD40 /* PlayVideoViewController.h */,
 				9FA787E017CB755B00F0BD40 /* PlayVideoViewController.m */,
@@ -257,6 +254,7 @@
 				9F619E5C17CFB95C008782BA /* theBase64.h */,
 				9F619E5D17CFB95D008782BA /* theBase64.m */,
 				9FB1B8EC1801685000E3ACBA /* WhatAmIdoing.xcdatamodeld */,
+				9F584680180276E700CA74DA /* whatAmIdoing.plist */,
 			);
 			path = VideoPlayRecord;
 			sourceTree = "<group>";
@@ -332,6 +330,7 @@
 				9FA787B917CB6F5500F0BD40 /* Default@2x.png in Resources */,
 				9FA787BB17CB6F5500F0BD40 /* Default-568h@2x.png in Resources */,
 				9FA787BE17CB6F5500F0BD40 /* MainStoryboard_iPhone.storyboard in Resources */,
+				9F584681180276E700CA74DA /* whatAmIdoing.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,9 +357,8 @@
 				9F0ED71317CD3A0F00555D3C /* fmemopen.c in Sources */,
 				9F619E5117CECB46008782BA /* NSData+Base64.m in Sources */,
 				9F619E5E17CFB95D008782BA /* theBase64.m in Sources */,
-				9FB1B8E31800E9A800E3ACBA /* WhatAmIdoingModel.xcdatamodeld in Sources */,
 				9FB1B8EE1801685000E3ACBA /* WhatAmIdoing.xcdatamodeld in Sources */,
-				9FB1B8F1180168C200E3ACBA /* AuthenticationToken.m in Sources */,
+				9F58467F18016B8300CA74DA /* AuthenticationToken.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,19 +534,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		9FB1B8E11800E9A800E3ACBA /* WhatAmIdoingModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				9FB1B8EA180165D700E3ACBA /* WhatAmIdoingModel 2.xcdatamodel */,
-				9FB1B8E21800E9A800E3ACBA /* WhatAmIdoingModel.xcdatamodel */,
-				9FB1B8EB180166B400E3ACBA /* WhatAmIdoingModel3.xcdatamodel */,
-			);
-			currentVersion = 9FB1B8E21800E9A800E3ACBA /* WhatAmIdoingModel.xcdatamodel */;
-			name = WhatAmIdoingModel.xcdatamodeld;
-			path = ../WhatAmIdoingModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
 		9FB1B8EC1801685000E3ACBA /* WhatAmIdoing.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

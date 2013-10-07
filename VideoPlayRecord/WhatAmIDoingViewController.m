@@ -19,15 +19,40 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    // Do any additional setup after loading the view, typically from a nib.
+    
+    NSString *errorDesc = nil;
+    NSPropertyListFormat format;
+    NSString *plistPath;
+    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                              NSUserDomainMask, YES) objectAtIndex:0];
+    plistPath = [rootPath stringByAppendingPathComponent:@"whatAmIdoing.plist"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
+        plistPath = [[NSBundle mainBundle] pathForResource:@"whatAmIdoing" ofType:@"plist"];
+    }
+    NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
+    NSDictionary *temp = (NSDictionary *)[NSPropertyListSerialization
+                                          propertyListFromData:plistXML
+                                          mutabilityOption:NSPropertyListMutableContainersAndLeaves
+                                          format:&format
+                                          errorDescription:&errorDesc];
+    if (!temp) {
+        NSLog(@"Error reading plist: %@, format: %d", errorDesc, format);
+        self.whatAmIdoingUrl = @"http://5.79.24.141:9000/";
+        self.registerUrl = @"http://5.79.24.141:9000/registerLogin?";
+    } else {
+        self.whatAmIdoingUrl = [temp objectForKey:@"WHAT_AM_I_DOING_URL"];
+        self.registerUrl = [temp objectForKey:@"WHAT_AM_I_DOING_REGISTER_URL"];
+    }
+    
+
 }
 - (IBAction)registerOrLoginAction:(id)sender {
     
     NSString *params = [NSString stringWithFormat:@"email=%@&password=%@&firstName=%@&lastName=%@", self.email.text,self.password.text, self.firstName.text,self.lastName.text];
    
-    NSString *hostUrlString = @"http://5.79.24.141:9000/registerLogin?";
-    NSString *hostMessage = [hostUrlString stringByAppendingString:params];
-    NSLog(@":( URL %@", hostMessage);
+    NSString *hostMessage = [self.registerUrl stringByAppendingString:params];
     NSURL *url=[NSURL URLWithString:hostMessage];
     NSData *postData = [params dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     
@@ -35,25 +60,14 @@
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:url];
-    //[request setHTTPShouldHandleCookies:YES];
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody:postData];
     
     NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
     //Disabling the join  button
     self.registerOrJoin.enabled = NO;
-    
-    NSArray * cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"5.79.24.141"]];
-    
-    UIAlertView* mes=[[UIAlertView alloc]
-                      initWithTitle: @"received a response"
-                      message: [NSString stringWithFormat:@"my dictionary is %@", cookies]
-                      delegate:self
-                      cancelButtonTitle:@"Ok"
-                      otherButtonTitles: nil];
-    [mes show];
-
     
 }
 
@@ -76,15 +90,18 @@
     NSDictionary *fields = [HTTPResponse allHeaderFields];
     NSString *cookie = [fields objectForKey:@"Set-Cookie"];
     
-    UIAlertView* mes=[[UIAlertView alloc]
-                      initWithTitle: @"received a response"
-                      message: [NSString stringWithFormat:@"i want to see %@", cookie]
-                      delegate:self
-                      cancelButtonTitle:@"Ok"
-                      otherButtonTitles: nil];
-    [mes show];
+    NSRange range = [cookie rangeOfString:@"PLAY_SESSION="];
+    int location = range.location;
+    int length = range.length;
+    NSString *substring = [cookie substringFromIndex:location+1+length];
     
-    _playSession = cookie;
+    NSRange rangeEndOfPlaySession = [substring rangeOfString:@"\""];
+    int endOfPlaySessionLocation =  rangeEndOfPlaySession.location;
+    
+    NSString *newDes = [substring substringWithRange: NSMakeRange (0, endOfPlaySessionLocation)];
+    
+ 
+    _playSession = newDes;
     _responseData = [[NSMutableData alloc] init];
 }
 
@@ -103,22 +120,18 @@
     // The request is complete and data has been received
     // You can parse the stuff in your instance variable now
     
-    UIAlertView* mes=[[UIAlertView alloc]
-                      initWithTitle: [[NSString alloc] initWithData:_responseData encoding:NSASCIIStringEncoding]
-                      message:[[NSString alloc] initWithData:_responseData encoding:NSASCIIStringEncoding]
-                      delegate:self
-                      cancelButtonTitle:@"Ok"
-                      otherButtonTitles: nil];
-    [mes show];
     
     self.registerOrJoin.enabled = YES;
     
     // Grab the context
     NSManagedObjectContext *context = [self managedObjectContext];
     
-    // Grab the Label entity
+    // Deleting old authentication token
     
-    AuthenticationToken *athenticationToken = [NSEntityDescription insertNewObjectForEntityForName:@"AuthenticationToken" inManagedObjectContext:context];
+    [self deleteAllObjects:@"AuthenticationToken"];
+    AuthenticationToken *authenticationToken = [NSEntityDescription insertNewObjectForEntityForName:@"AuthenticationToken" inManagedObjectContext:context];
+    
+    authenticationToken.playSession = _playSession;
     
     // Save everything
     NSError *error = nil;
@@ -129,21 +142,7 @@
     }
 
     
-    NSString *entityName = @"AuthenticationToken"; // Put your entity name here
-    NSLog(@"Setting up a Fetched Results Controller for the Entity named %@", entityName);
-    
-    // 2 - Request that Entity
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entityName];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"AuthenticationToken"
-                                              inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    NSArray *fetchedObjects = [self.managedObjectContext
-                               executeFetchRequest:fetchRequest error:&error];
-    NSLog(@"fetech objects %@", fetchedObjects);
-    
-    
-  // [self performSegueWithIdentifier:@"thisIsWhatIAmDoing" sender:self];
+    [self performSegueWithIdentifier:@"thisIsWhatIAmDoing" sender:self];
        
 }
 
@@ -151,13 +150,6 @@
     // The request has failed for some reason!
     // Check the error var
     
-    UIAlertView* mes=[[UIAlertView alloc]
-                      initWithTitle: [error localizedDescription]
-                      message: [error localizedDescription]
-                      delegate:self
-                      cancelButtonTitle:@"Ok"
-                      otherButtonTitles: nil];
-    [mes show];
     self.registerOrJoin.enabled = YES;
 }
 
@@ -167,6 +159,25 @@
     [self.password resignFirstResponder];
     [self.firstName resignFirstResponder];
     [self.lastName resignFirstResponder];
+}
+
+- (void) deleteAllObjects: (NSString *) entityDescription  {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityDescription inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSError *error;
+    NSArray *items = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    
+    for (NSManagedObject *managedObject in items) {
+    	[self.managedObjectContext deleteObject:managedObject];
+    	NSLog(@"%@ object deleted",entityDescription);
+    }
+    if (![self.managedObjectContext save:&error]) {
+    	NSLog(@"Error deleting %@ - error:%@",entityDescription,error);
+    }
+    
 }
 
 @end

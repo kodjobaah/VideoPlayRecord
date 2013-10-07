@@ -9,6 +9,8 @@
 #import "WhatAmIDoingAppDelegate.h"
 
 #import "WhatAmIDoingViewController.h"
+#import "RecordVideoViewController.h"
+
 
 @implementation WhatAmIDoingAppDelegate
 @synthesize managedObjectContext = _managedObjectContext;
@@ -17,6 +19,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    
+    
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
@@ -159,5 +164,4 @@
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
-
 @end
