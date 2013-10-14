@@ -15,6 +15,7 @@
 #import "WhatAmIDoingAppDelegate.h"
 #import "PropertyAccessor.h"
 #import "WhatAmIDoingViewController.h"
+#import "SBJson.h"
 
 using namespace cv;
 
@@ -125,7 +126,13 @@ using namespace cv;
         
         NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
         [parameters setObject:ns forKey:@"frame"];
+        /*
+        SBJsonWriter *writer = [[SBJsonWriter alloc] init];
+        NSString *jsonCommand = [writer stringWithObject:parameters];
         
+        //NSLog(@"Data =%@",converted);
+        [self.webSocket send:jsonCommand];
+         */
         NSError *error;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters  options:NSJSONWritingPrettyPrinted error:&error];
         
