@@ -39,6 +39,7 @@
 		9F9663F017CB8E9700C315A5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9663EF17CB8E9700C315A5 /* Accelerate.framework */; };
 		9F9663FC17CB922300C315A5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9663FB17CB922300C315A5 /* QuartzCore.framework */; };
 		9F96640617CB925200C315A5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F96640517CB925200C315A5 /* CoreGraphics.framework */; };
+		9FA5382D180C183700500272 /* Logout.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA5382C180C183700500272 /* Logout.m */; };
 		9FA787A517CB6F5500F0BD40 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA787A417CB6F5500F0BD40 /* UIKit.framework */; };
 		9FA787A717CB6F5500F0BD40 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA787A617CB6F5500F0BD40 /* Foundation.framework */; };
 		9FA787AF17CB6F5500F0BD40 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9FA787AD17CB6F5500F0BD40 /* InfoPlist.strings */; };
@@ -112,6 +113,8 @@
 		9F96640117CB923C00C315A5 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		9F96640317CB924A00C315A5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9F96640517CB925200C315A5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9FA5382B180C183700500272 /* Logout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logout.h; sourceTree = "<group>"; };
+		9FA5382C180C183700500272 /* Logout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logout.m; sourceTree = "<group>"; };
 		9FA787A117CB6F5500F0BD40 /* VideoPlayRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoPlayRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FA787A417CB6F5500F0BD40 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9FA787A617CB6F5500F0BD40 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -274,6 +277,8 @@
 				9F0ED71217CD3A0F00555D3C /* fmemopen.c */,
 				9FA787B317CB6F5500F0BD40 /* WhatAmIDoingAppDelegate.h */,
 				9FA787B417CB6F5500F0BD40 /* WhatAmIDoingAppDelegate.m */,
+				9FA5382B180C183700500272 /* Logout.h */,
+				9FA5382C180C183700500272 /* Logout.m */,
 				9FA787BC17CB6F5500F0BD40 /* MainStoryboard_iPhone.storyboard */,
 				9F0ED71517CD6F9F00555D3C /* base642.h */,
 				9FA787C217CB6F5600F0BD40 /* WhatAmIDoingViewController.h */,
@@ -437,6 +442,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F16E47217CD7ECF002EEA3F /* base64.c in Sources */,
+				9FA5382D180C183700500272 /* Logout.m in Sources */,
 				9F16E47317CD7ECF002EEA3F /* base64.h in Sources */,
 				9F16E47417CD7ECF002EEA3F /* NSData+SRB64Additions.h in Sources */,
 				9F16E47517CD7ECF002EEA3F /* NSData+SRB64Additions.m in Sources */,

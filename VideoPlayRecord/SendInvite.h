@@ -15,4 +15,5 @@
 @property (nonatomic, retain) UITextField *emal;
 @property (nonatomic, retain) NSMutableData *responseData;
 -(SendInvite*) initWithEmail:(UITextField*) email;
+-(void) sendInvitation:(NSString *) token;
 @end

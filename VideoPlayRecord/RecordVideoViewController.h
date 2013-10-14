@@ -13,6 +13,8 @@
 #import "PropertyAccessor.h"
 #import "WhatAmIDoingConstants.h"
 #import "SendInvite.h"
+#import "Logout.h"
+
 
 
 @interface RecordVideoViewController : UIViewController<CvVideoCameraDelegate,SRWebSocketDelegate,NSURLConnectionDelegate> {
@@ -30,10 +32,13 @@
     AuthenticationToken *token;
     NSString *action;
     WhatAmIDoingConstants *constants;
+    SendInvite *sendInvite;
+    Logout *logout;
     
 }
 
-@property (nonatomic, retain) SendInvite *sendInvite;
+@property (nonatomic, strong) Logout *logout;
+@property (nonatomic, strong) SendInvite *sendInvite;
 @property (nonatomic, strong) WhatAmIDoingConstants *constants;
 @property (nonatomic, strong) NSString *action;
 @property (nonatomic, strong) AuthenticationToken *token;
@@ -42,7 +47,7 @@
 @property (nonatomic, strong) PropertyAccessor *propertyAccessor;
 @property (nonatomic, strong) NSString *publishVideoUrl;
 @property (nonatomic, strong) SRWebSocket *webSocket;
-@property (weak, nonatomic) NSMutableURLRequest *webSocketRequest;
+@property (strong, nonatomic) NSMutableURLRequest *webSocketRequest;
 @property (nonatomic) BOOL startRecording;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong, readonly) NSString *message;

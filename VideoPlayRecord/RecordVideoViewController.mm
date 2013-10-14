@@ -26,6 +26,7 @@ using namespace cv;
 
 @implementation RecordVideoViewController
 
+@synthesize sendInvite = _sendInvite;
 @synthesize constants = _constants;
 @synthesize action = _action;
 @synthesize token = _token;
@@ -59,6 +60,7 @@ using namespace cv;
     _startVideoButton.enabled = YES;
     _stopVideoButton.enabled = NO;
     self.sendInvite = [[SendInvite alloc] initWithEmail: self.emal];
+    self.logout = [[Logout alloc] initWithController:self];
 
     
     /*
@@ -78,14 +80,16 @@ using namespace cv;
      * Create the url used to publish videos
      */
     self.propertyAccessor = [[PropertyAccessor alloc] init];
-    NSString * url = [NSString stringWithFormat:@"http://5.79.24.141:9000/publishVideo?token=%@",self.token.playSession];
+    NSString * url = [NSString stringWithFormat:@"ws://5.79.24.141:9000/publishVideo?token=%@",self.token.playSession];
     self.publishVideoUrl = url;
-    
+   
+    NSLog(@"---------publishurl-%@--",self.publishVideoUrl);
     /*
      * Creating the websocket request used to publish the movie
      */
     NSURL *urlNew = [NSURL URLWithString:self.publishVideoUrl];
     self.webSocketRequest = [NSMutableURLRequest requestWithURL:urlNew];
+    NSLog(@"---------prequest url-%@--",self.webSocketRequest.URL);
     
     /*
      * Setting the video camera
@@ -128,39 +132,23 @@ using namespace cv;
         NSString * converted =[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         //NSLog(@"Data =%@",converted);
         [self.webSocket send:converted];
+
         
     }
     
 }
 #endif
 - (IBAction)invite:(id)sender {
-    
-    
     self.action = [self.constants inviteAction];
-    
-    NSString *hostMessage = [NSString stringWithFormat:@"http://5.79.24.141:9000/invite?email=%@&token=%@",self.emal.text,self.token.playSession];
-    
-    NSURL *url=[NSURL URLWithString:hostMessage];
-    NSString *post =[[NSString alloc] initWithFormat:@"email=%@&token=%@",self.emal.text,self.token];
-    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
-    
-    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:url];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setHTTPBody:postData];
-    
-    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
+    [self.sendInvite sendInvitation:self.token.playSession];
     
 }
 
 - (IBAction)recordVideo:(id)sender {
     
     if (self.webSocket == nil) {
-        self.webSocket = [[SRWebSocket alloc] initWithURLRequest:self.webSocketRequest];
+        NSLog(@"---request-url:%@:",self.webSocketRequest.URL);
+        self.webSocket = [[SRWebSocket alloc]  initWithURLRequest:self.webSocketRequest];
         self.webSocket.delegate = self;
         
         self.title = @"Opening Connection...";
@@ -199,21 +187,7 @@ using namespace cv;
     
     self.action = [self.constants logoutAction];
     
-    NSString *hostMessage = [NSString stringWithFormat:@"http://5.79.24.141:9000/invalidateToken?token=%@",self.token.playSession];
-    
-    NSURL *url=[NSURL URLWithString:hostMessage];
-    NSString *post =[[NSString alloc] initWithFormat:@"invalidateToken=%@",self.token];
-    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
-    
-    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:url];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setHTTPBody:postData];
-    
-    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [self.logout logout:self.token.playSession];
     
 }
 
@@ -301,61 +275,5 @@ using namespace cv;
     return finalImage;
 }
 
-#pragma mark NSURLConnection Delegate Methods
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    // A response has been received, this is where we initialize the instance var you created
-    // so that we can append data to it in the didReceiveData method
-    // Furthermore, this method is called each time there is a redirect so reinitializing it
-    // also serves to clear it
-    
-    
-    self.responseData = [[NSMutableData alloc] init];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    // Append the new data to the instance variable you declared
-    [self.responseData appendData:data];
-}
-
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection
-                  willCacheResponse:(NSCachedURLResponse*)cachedResponse {
-    // Return nil to indicate not necessary to store a cached response for this connection
-    return nil;
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    // The request is complete and data has been received
-    // You can parse the stuff in your instance variable now
-    
-    if ([self.action isEqualToString:[self.constants inviteAction]]) {
-        NSString *sentEmailString = @"Email Sent to ";
-        NSString *message = [sentEmailString stringByAppendingString:self.emal.text];
-        
-        UIAlertView* mes=[[UIAlertView alloc]
-                          initWithTitle: message
-                          message: @""
-                          delegate:self
-                          cancelButtonTitle:@"Ok"
-                          otherButtonTitles: nil];
-        [mes show];
-        self.emal.text = @"";
-        
-        
-    }
-    
-    if ([self.action isEqualToString:[self.constants logoutAction]]) {
-       
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
-        WhatAmIDoingViewController *viewController = (WhatAmIDoingViewController *)[storyboard instantiateViewControllerWithIdentifier:[self.constants registerOrLoginId]];
-        [self presentViewController:viewController animated:YES completion:nil];
-
-    }
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    // The request has failed for some reason!
-    // Check the error var
-}
 
 @end
