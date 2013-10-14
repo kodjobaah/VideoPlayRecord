@@ -17,12 +17,16 @@
 		9F16E47617CD7ECF002EEA3F /* SocketRocket-Prefix.pch in Sources */ = {isa = PBXBuildFile; fileRef = 9F16E46E17CD79C4002EEA3F /* SocketRocket-Prefix.pch */; };
 		9F16E47717CD7ECF002EEA3F /* SRWebSocket.h in Sources */ = {isa = PBXBuildFile; fileRef = 9F16E46F17CD79C4002EEA3F /* SRWebSocket.h */; };
 		9F16E47817CD7ECF002EEA3F /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F16E47017CD79C4002EEA3F /* SRWebSocket.m */; };
+		9F23CBE7180B5EB300388D54 /* WhatAmIDoingConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F23CBE6180B5EB300388D54 /* WhatAmIDoingConstants.m */; };
+		9F2719AC180B8C2100DA873E /* SendInvite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2719AB180B8C2100DA873E /* SendInvite.m */; };
+		9F35E60E18082CB200AD4F79 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F35E60D18082CB200AD4F79 /* SenTestingKit.framework */; };
+		9F35E60F18082CB200AD4F79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA787A417CB6F5500F0BD40 /* UIKit.framework */; };
+		9F35E61018082CB200AD4F79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F96640317CB924A00C315A5 /* Foundation.framework */; };
+		9F35E61618082CB200AD4F79 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F35E61418082CB200AD4F79 /* InfoPlist.strings */; };
+		9F35E61918082CB200AD4F79 /* ThisIsWhatIamDoing.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F35E61818082CB200AD4F79 /* ThisIsWhatIamDoing.m */; };
 		9F52B00E17CB9449009B497E /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9663F117CB8EAE00C315A5 /* CoreImage.framework */; };
 		9F52B00F17CB9462009B497E /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9663F317CB8EB700C315A5 /* CoreVideo.framework */; };
-		9F52B01117CB946B009B497E /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F52B01017CB946B009B497E /* CoreVideo.framework */; };
-		9F52B01317CB9472009B497E /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F52B01217CB9472009B497E /* CoreImage.framework */; };
 		9F52B01517CB9495009B497E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F52B01417CB9495009B497E /* CoreMedia.framework */; };
-		9F52B01717CB949E009B497E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F52B01617CB949E009B497E /* CoreMedia.framework */; };
 		9F58467F18016B8300CA74DA /* AuthenticationToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F58467E18016B8300CA74DA /* AuthenticationToken.m */; };
 		9F584681180276E700CA74DA /* whatAmIdoing.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F584680180276E700CA74DA /* whatAmIdoing.plist */; };
 		9F5846841802B35400CA74DA /* PropertyAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5846831802B35300CA74DA /* PropertyAccessor.m */; };
@@ -33,12 +37,7 @@
 		9F6D973717CB9C43003F0703 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F6D973617CB9C43003F0703 /* libicucore.dylib */; };
 		9F9663EE17CB8A2800C315A5 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9663ED17CB8A2800C315A5 /* opencv2.framework */; };
 		9F9663F017CB8E9700C315A5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9663EF17CB8E9700C315A5 /* Accelerate.framework */; };
-		9F9663FA17CB921800C315A5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9663F917CB921800C315A5 /* Accelerate.framework */; };
 		9F9663FC17CB922300C315A5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9663FB17CB922300C315A5 /* QuartzCore.framework */; };
-		9F9663FE17CB922C00C315A5 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9663FD17CB922C00C315A5 /* MobileCoreServices.framework */; };
-		9F96640017CB923500C315A5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9663FF17CB923500C315A5 /* AVFoundation.framework */; };
-		9F96640217CB923C00C315A5 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F96640117CB923C00C315A5 /* AssetsLibrary.framework */; };
-		9F96640417CB924A00C315A5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F96640317CB924A00C315A5 /* Foundation.framework */; };
 		9F96640617CB925200C315A5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F96640517CB925200C315A5 /* CoreGraphics.framework */; };
 		9FA787A517CB6F5500F0BD40 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA787A417CB6F5500F0BD40 /* UIKit.framework */; };
 		9FA787A717CB6F5500F0BD40 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA787A617CB6F5500F0BD40 /* Foundation.framework */; };
@@ -75,6 +74,17 @@
 		9F16E46F17CD79C4002EEA3F /* SRWebSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
 		9F16E47017CD79C4002EEA3F /* SRWebSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
 		9F16E47117CD7C32002EEA3F /* SocketRocket-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-Prefix.pch"; sourceTree = "<group>"; };
+		9F23CBE5180B5EB300388D54 /* WhatAmIDoingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhatAmIDoingConstants.h; sourceTree = "<group>"; };
+		9F23CBE6180B5EB300388D54 /* WhatAmIDoingConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhatAmIDoingConstants.m; sourceTree = "<group>"; };
+		9F2719AA180B8C2100DA873E /* SendInvite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendInvite.h; sourceTree = "<group>"; };
+		9F2719AB180B8C2100DA873E /* SendInvite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendInvite.m; sourceTree = "<group>"; };
+		9F35E60C18082CB200AD4F79 /* ThisIsWhatIamDoing.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThisIsWhatIamDoing.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F35E60D18082CB200AD4F79 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		9F35E61318082CB200AD4F79 /* ThisIsWhatIamDoing-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ThisIsWhatIamDoing-Info.plist"; sourceTree = "<group>"; };
+		9F35E61518082CB200AD4F79 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9F35E61718082CB200AD4F79 /* ThisIsWhatIamDoing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThisIsWhatIamDoing.h; sourceTree = "<group>"; };
+		9F35E61818082CB200AD4F79 /* ThisIsWhatIamDoing.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThisIsWhatIamDoing.m; sourceTree = "<group>"; };
+		9F35E61A18082CB200AD4F79 /* ThisIsWhatIamDoing-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ThisIsWhatIamDoing-Prefix.pch"; sourceTree = "<group>"; };
 		9F52B01017CB946B009B497E /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		9F52B01217CB9472009B497E /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		9F52B01417CB9495009B497E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -134,6 +144,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9F35E60818082CB200AD4F79 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F35E60E18082CB200AD4F79 /* SenTestingKit.framework in Frameworks */,
+				9F35E60F18082CB200AD4F79 /* UIKit.framework in Frameworks */,
+				9F35E61018082CB200AD4F79 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9FA7879E17CB6F5500F0BD40 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -153,16 +173,8 @@
 				9FA787A517CB6F5500F0BD40 /* UIKit.framework in Frameworks */,
 				9FA787A717CB6F5500F0BD40 /* Foundation.framework in Frameworks */,
 				9F9663EE17CB8A2800C315A5 /* opencv2.framework in Frameworks */,
-				9F9663FA17CB921800C315A5 /* Accelerate.framework in Frameworks */,
 				9F9663FC17CB922300C315A5 /* QuartzCore.framework in Frameworks */,
-				9F9663FE17CB922C00C315A5 /* MobileCoreServices.framework in Frameworks */,
-				9F96640017CB923500C315A5 /* AVFoundation.framework in Frameworks */,
-				9F96640217CB923C00C315A5 /* AssetsLibrary.framework in Frameworks */,
-				9F96640417CB924A00C315A5 /* Foundation.framework in Frameworks */,
 				9F96640617CB925200C315A5 /* CoreGraphics.framework in Frameworks */,
-				9F52B01117CB946B009B497E /* CoreVideo.framework in Frameworks */,
-				9F52B01317CB9472009B497E /* CoreImage.framework in Frameworks */,
-				9F52B01717CB949E009B497E /* CoreMedia.framework in Frameworks */,
 				9F0ED70D17CD332700555D3C /* libssl.a in Frameworks */,
 				9F0ED71117CD335400555D3C /* libcrypto.a in Frameworks */,
 			);
@@ -171,6 +183,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F35E61118082CB200AD4F79 /* ThisIsWhatIamDoing */ = {
+			isa = PBXGroup;
+			children = (
+				9F35E61718082CB200AD4F79 /* ThisIsWhatIamDoing.h */,
+				9F35E61818082CB200AD4F79 /* ThisIsWhatIamDoing.m */,
+				9F35E61218082CB200AD4F79 /* Supporting Files */,
+			);
+			path = ThisIsWhatIamDoing;
+			sourceTree = "<group>";
+		};
+		9F35E61218082CB200AD4F79 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9F35E61318082CB200AD4F79 /* ThisIsWhatIamDoing-Info.plist */,
+				9F35E61418082CB200AD4F79 /* InfoPlist.strings */,
+				9F35E61A18082CB200AD4F79 /* ThisIsWhatIamDoing-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		9FA7879817CB6F5500F0BD40 = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +220,7 @@
 				9FA787CC17CB6FB800F0BD40 /* AVFoundation.framework */,
 				9FA787CA17CB6FB000F0BD40 /* AssetsLibrary.framework */,
 				9FA787AA17CB6F5500F0BD40 /* VideoPlayRecord */,
+				9F35E61118082CB200AD4F79 /* ThisIsWhatIamDoing */,
 				9FA787A317CB6F5500F0BD40 /* Frameworks */,
 				9FA787A217CB6F5500F0BD40 /* Products */,
 			);
@@ -197,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				9FA787A117CB6F5500F0BD40 /* VideoPlayRecord.app */,
+				9F35E60C18082CB200AD4F79 /* ThisIsWhatIamDoing.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -220,6 +254,7 @@
 				9FA787A417CB6F5500F0BD40 /* UIKit.framework */,
 				9FA787A617CB6F5500F0BD40 /* Foundation.framework */,
 				9FA787A817CB6F5500F0BD40 /* CoreGraphics.framework */,
+				9F35E60D18082CB200AD4F79 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -260,6 +295,10 @@
 				9F584680180276E700CA74DA /* whatAmIdoing.plist */,
 				9F5846821802B35300CA74DA /* PropertyAccessor.h */,
 				9F5846831802B35300CA74DA /* PropertyAccessor.m */,
+				9F23CBE5180B5EB300388D54 /* WhatAmIDoingConstants.h */,
+				9F23CBE6180B5EB300388D54 /* WhatAmIDoingConstants.m */,
+				9F2719AA180B8C2100DA873E /* SendInvite.h */,
+				9F2719AB180B8C2100DA873E /* SendInvite.m */,
 			);
 			path = VideoPlayRecord;
 			sourceTree = "<group>";
@@ -281,6 +320,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9F35E60B18082CB200AD4F79 /* ThisIsWhatIamDoing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F35E61D18082CB300AD4F79 /* Build configuration list for PBXNativeTarget "ThisIsWhatIamDoing" */;
+			buildPhases = (
+				9F35E60718082CB200AD4F79 /* Sources */,
+				9F35E60818082CB200AD4F79 /* Frameworks */,
+				9F35E60918082CB200AD4F79 /* Resources */,
+				9F35E60A18082CB200AD4F79 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ThisIsWhatIamDoing;
+			productName = ThisIsWhatIamDoing;
+			productReference = 9F35E60C18082CB200AD4F79 /* ThisIsWhatIamDoing.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		9FA787A017CB6F5500F0BD40 /* VideoPlayRecord */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9FA787C717CB6F5600F0BD40 /* Build configuration list for PBXNativeTarget "VideoPlayRecord" */;
@@ -305,7 +362,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = WhatAmIDoing;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "What am I doing";
 			};
 			buildConfigurationList = 9FA7879C17CB6F5500F0BD40 /* Build configuration list for PBXProject "VideoPlayRecord" */;
@@ -321,11 +378,20 @@
 			projectRoot = "";
 			targets = (
 				9FA787A017CB6F5500F0BD40 /* VideoPlayRecord */,
+				9F35E60B18082CB200AD4F79 /* ThisIsWhatIamDoing */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9F35E60918082CB200AD4F79 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F35E61618082CB200AD4F79 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9FA7879F17CB6F5500F0BD40 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -341,7 +407,31 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		9F35E60A18082CB200AD4F79 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		9F35E60718082CB200AD4F79 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F35E61918082CB200AD4F79 /* ThisIsWhatIamDoing.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9FA7879D17CB6F5500F0BD40 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -357,11 +447,13 @@
 				9FA787B517CB6F5500F0BD40 /* WhatAmIDoingAppDelegate.m in Sources */,
 				9FA787C417CB6F5600F0BD40 /* WhatAmIDoingViewController.m in Sources */,
 				9FA787DE17CB753C00F0BD40 /* MergeVideoViewController.m in Sources */,
+				9F2719AC180B8C2100DA873E /* SendInvite.m in Sources */,
 				9FA787E117CB755B00F0BD40 /* PlayVideoViewController.m in Sources */,
 				9FA787E417CB757700F0BD40 /* RecordVideoViewController.mm in Sources */,
 				9F0ED71317CD3A0F00555D3C /* fmemopen.c in Sources */,
 				9F619E5117CECB46008782BA /* NSData+Base64.m in Sources */,
 				9F619E5E17CFB95D008782BA /* theBase64.m in Sources */,
+				9F23CBE7180B5EB300388D54 /* WhatAmIDoingConstants.m in Sources */,
 				9FB1B8EE1801685000E3ACBA /* WhatAmIdoing.xcdatamodeld in Sources */,
 				9F58467F18016B8300CA74DA /* AuthenticationToken.m in Sources */,
 				9F5846841802B35400CA74DA /* PropertyAccessor.m in Sources */,
@@ -371,6 +463,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		9F35E61418082CB200AD4F79 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F35E61518082CB200AD4F79 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		9FA787AD17CB6F5500F0BD40 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -390,6 +490,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		9F35E61B18082CB200AD4F79 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ThisIsWhatIamDoing/ThisIsWhatIamDoing-Prefix.pch";
+				INFOPLIST_FILE = "ThisIsWhatIamDoing/ThisIsWhatIamDoing-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		9F35E61C18082CB200AD4F79 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ThisIsWhatIamDoing/ThisIsWhatIamDoing-Prefix.pch";
+				INFOPLIST_FILE = "ThisIsWhatIamDoing/ThisIsWhatIamDoing-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		9FA787C517CB6F5600F0BD40 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -455,6 +587,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: kodjo baah (298BH8F8HM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: kodjo baah (298BH8F8HM)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -489,6 +622,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: kodjo baah (298BH8F8HM)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -519,6 +653,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9F35E61D18082CB300AD4F79 /* Build configuration list for PBXNativeTarget "ThisIsWhatIamDoing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F35E61B18082CB200AD4F79 /* Debug */,
+				9F35E61C18082CB200AD4F79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9FA7879C17CB6F5500F0BD40 /* Build configuration list for PBXProject "VideoPlayRecord" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

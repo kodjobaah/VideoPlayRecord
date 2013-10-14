@@ -14,6 +14,7 @@
 #import "NSData+Base64.h"
 #import "WhatAmIDoingAppDelegate.h"
 #import "PropertyAccessor.h"
+#import "WhatAmIDoingViewController.h"
 
 using namespace cv;
 
@@ -25,6 +26,10 @@ using namespace cv;
 
 @implementation RecordVideoViewController
 
+@synthesize constants = _constants;
+@synthesize action = _action;
+@synthesize token = _token;
+@synthesize responseData = _responseData;
 @synthesize publishVideoUrl = _publishVideoUrl;
 @synthesize webSocket = _webSocket;
 @synthesize webSocketRequest = _webSocketRequest;
@@ -32,6 +37,7 @@ using namespace cv;
 @synthesize videoCamera = _videoCamera;
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize propertyAccessor = _propertyAccessor;
+@synthesize errorOccured = _errorOccured;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,18 +48,48 @@ using namespace cv;
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    
     self.propertyAccessor = [[PropertyAccessor alloc] init];
-    
-    _startVideoButton.enabled = NO;
+    self.constants = [[WhatAmIDoingConstants alloc] init];
+    self.action = [self.constants nothing];
+    self.errorOccured = NO;
+    _startVideoButton.enabled = YES;
     _stopVideoButton.enabled = NO;
-	
-    WhatAmIDoingAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    self.sendInvite = [[SendInvite alloc] initWithEmail: self.emal];
+
     
+    /*
+     * Getting the authentication token from core data
+     */
+    WhatAmIDoingAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:[self.constants authenticationToken]
+                                              inManagedObjectContext:appDelegate.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSError *error = nil;
+    NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    self.token  =  [fetchedObjects objectAtIndex: 0];
+    
+    /*
+     * Create the url used to publish videos
+     */
+    self.propertyAccessor = [[PropertyAccessor alloc] init];
+    NSString * url = [NSString stringWithFormat:@"http://5.79.24.141:9000/publishVideo?token=%@",self.token.playSession];
+    self.publishVideoUrl = url;
+    
+    /*
+     * Creating the websocket request used to publish the movie
+     */
+    NSURL *urlNew = [NSURL URLWithString:self.publishVideoUrl];
+    self.webSocketRequest = [NSMutableURLRequest requestWithURL:urlNew];
+    
+    /*
+     * Setting the video camera
+     */
     self.videoCamera = [[CvVideoCamera alloc] initWithParentView:_displayImage];
     self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionFront;
     self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset352x288;
@@ -62,55 +98,12 @@ using namespace cv;
     self.videoCamera.delegate = self;
     self.videoCamera.grayscaleMode = NO;
     
-    _startVideoButton.enabled = YES;
-    _stopVideoButton.enabled = NO;
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"AuthenticationToken"
-                                              inManagedObjectContext:appDelegate.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    NSError *error = nil;
-    NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    
-    AuthenticationToken *token =  [fetchedObjects objectAtIndex: 0];
-    
-    self.publishVideoUrl = [self.propertyAccessor getPropertyValue:@"WHAT_AM_I_DOING_PUBLISH_VIDEO"];
-    if (self.publishVideoUrl == nil) {
-        self.publishVideoUrl = @"http://5.79.24.141:9000/publishVideo";
-    }
-    
-    
-    NSURL *urlNew = [NSURL URLWithString:self.publishVideoUrl];
-    self.webSocketRequest = [NSMutableURLRequest requestWithURL:urlNew];
-
-    NSString *domain = [self.propertyAccessor getPropertyValue:@"WHAT_AM_I_DOING_DOMAIN"];
-    NSDictionary *cookieProperties = [NSDictionary dictionaryWithObjectsAndKeys:
-                                      domain, NSHTTPCookieDomain,
-                                      @"\\", NSHTTPCookiePath,
-                                      @"PLAY_SESSION", NSHTTPCookieName,
-                                      token.playSession, NSHTTPCookieValue,
-                                      nil];
-    
-    NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:cookieProperties];
-    NSArray* cookieArray = [NSArray arrayWithObjects: cookie, nil];
-    NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:cookieArray];
-   [self.webSocketRequest setAllHTTPHeaderFields:headers];
-    
-    _webSocket.delegate = nil;
-    [_webSocket close];
-    
-    _webSocket = [[SRWebSocket alloc] initWithURLRequest:self.webSocketRequest];
-    _webSocket.delegate = self;
-    
-    self.title = @"Opening Connection...";
-    [_webSocket open];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    NSLog(@"---------------------------- RECEIVED MEMORY WARNING ---------");
     // Dispose of any resources that can be recreated.
 }
 
@@ -119,22 +112,36 @@ using namespace cv;
 #ifdef __cplusplus
 - (void)processImage:(Mat&)image;
 {
-    Mat image_copy;
-    UIImage *resultUIImage = [self UIImageFromCVMat:image];
-    NSData *tempData = [NSData dataWithData:UIImageJPEGRepresentation(resultUIImage,1.0)];
-    NSString* ns = [tempData base64EncodedString];
-    [_webSocket send:ns];
+    if (self.startRecording == YES) {
+        Mat image_copy;
+        UIImage *resultUIImage = [self UIImageFromCVMat:image];
+        NSData *tempData = [NSData dataWithData:UIImageJPEGRepresentation(resultUIImage,1.0)];
+        NSString* ns = [tempData base64EncodedString];
+        
+        
+        NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+        [parameters setObject:ns forKey:@"frame"];
+        
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters  options:NSJSONWritingPrettyPrinted error:&error];
+        
+        NSString * converted =[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        //NSLog(@"Data =%@",converted);
+        [self.webSocket send:converted];
+        
+    }
     
 }
 #endif
 - (IBAction)invite:(id)sender {
     
     
-    NSString *hostUrlString = @"http://5.79.24.141:9000/invite?email=";
-    NSString *hostMessage = [hostUrlString stringByAppendingString:self.emal.text];
+    self.action = [self.constants inviteAction];
+    
+    NSString *hostMessage = [NSString stringWithFormat:@"http://5.79.24.141:9000/invite?email=%@&token=%@",self.emal.text,self.token.playSession];
     
     NSURL *url=[NSURL URLWithString:hostMessage];
-    NSString *post =[[NSString alloc] initWithFormat:@"email=%@",self.emal.text];
+    NSString *post =[[NSString alloc] initWithFormat:@"email=%@&token=%@",self.emal.text,self.token];
     NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
@@ -152,18 +159,18 @@ using namespace cv;
 
 - (IBAction)recordVideo:(id)sender {
     
-    if (_webSocket == nil) {
-        _webSocket = [[SRWebSocket alloc] initWithURLRequest:self.webSocketRequest];
-        _webSocket.delegate = self;
-    
+    if (self.webSocket == nil) {
+        self.webSocket = [[SRWebSocket alloc] initWithURLRequest:self.webSocketRequest];
+        self.webSocket.delegate = self;
+        
         self.title = @"Opening Connection...";
-        [_webSocket open];
+        [self.webSocket open];
         _stopVideoButton.enabled = NO;
         self.startRecording = YES;
     } else {
         [self.videoCamera start];
         _stopVideoButton.enabled = YES;
-
+        
     }
     _startVideoButton.enabled = NO;
 }
@@ -173,12 +180,41 @@ using namespace cv;
     _startVideoButton.enabled = YES;
     _stopVideoButton.enabled = NO;
     [self.videoCamera stop];
-    [_webSocket close];
-    _webSocket.delegate = nil;
-    _webSocket = nil;
- 
+    [self.webSocket close];
+    self.webSocket.delegate = nil;
+    self.webSocket = nil;
+    
     self.startRecording = NO;
-   ;
+    
+}
+- (IBAction)logout:(id)sender {
+    
+    [self.videoCamera stop];
+    [self.webSocket close];
+    self.webSocket.delegate = nil;
+    self.webSocket = nil;
+    _startVideoButton.enabled = NO;
+    _stopVideoButton.enabled = NO;
+    self.startRecording = NO;
+    
+    self.action = [self.constants logoutAction];
+    
+    NSString *hostMessage = [NSString stringWithFormat:@"http://5.79.24.141:9000/invalidateToken?token=%@",self.token.playSession];
+    
+    NSURL *url=[NSURL URLWithString:hostMessage];
+    NSString *post =[[NSString alloc] initWithFormat:@"invalidateToken=%@",self.token];
+    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:postData];
+    
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    
 }
 
 #pragma mark - SRWebSocketDelegate
@@ -198,20 +234,24 @@ using namespace cv;
     NSLog(@":( Websocket Failed With Error %@", error);
     
     self.title = @"Connection Failed! (see logs)";
-    _webSocket = nil;
+    self.webSocket = nil;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+    WhatAmIDoingViewController *viewController = (WhatAmIDoingViewController *)[storyboard instantiateViewControllerWithIdentifier:@"RegisterOrLogin"];
+    [self presentViewController:viewController animated:YES completion:nil];
+    
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message;
 {
     NSLog(@"Received \"%@\"", message);
-   
+    
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean;
 {
     NSLog(@"WebSocket closed");
     self.title = @"Connection Closed! (see logs)";
-    _webSocket = nil;
+    self.webSocket = nil;
     _startVideoButton.enabled = YES;
     _stopVideoButton.enabled = NO;
 }
@@ -219,7 +259,7 @@ using namespace cv;
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.emal resignFirstResponder];
- }
+}
 
 -(UIImage *)UIImageFromCVMat:(cv::Mat)cvMat
 {
@@ -236,19 +276,19 @@ using namespace cv;
     
     bool alpha = cvMat.channels() == 4;
     CGBitmapInfo bitMapInfo = (alpha ? kCGImageAlphaLast : kCGImageAlphaNone) | kCGBitmapByteOrderDefault;
-   
+    
     // Creating CGImage from cv::Mat
     CGImageRef imageRef = CGImageCreate(cvMat.cols,                                 //width
-                      cvMat.rows,                                 //height
-                      8,                                  //bits per component
-                      8 * cvMat.elemSize(),                       //bits per pixel
-                      cvMat.step[0],                            //bytesPerRow
-                      colorSpace,                                 //colorspace
-                      bitMapInfo,// bitmap info
-                      provider,                              // CGDataProviderRef
-                      NULL,                                       //decode
-                      false,                              //should interpolate
-                      kCGRenderingIntentDefault                   //intent
+                                        cvMat.rows,                                 //height
+                                        8,                                  //bits per component
+                                        8 * cvMat.elemSize(),                       //bits per pixel
+                                        cvMat.step[0],                            //bytesPerRow
+                                        colorSpace,                                 //colorspace
+                                        bitMapInfo,// bitmap info
+                                        provider,                              // CGDataProviderRef
+                                        NULL,                                       //decode
+                                        false,                              //should interpolate
+                                        kCGRenderingIntentDefault                   //intent
                                         );
     
     
@@ -270,12 +310,12 @@ using namespace cv;
     // also serves to clear it
     
     
-    _responseData = [[NSMutableData alloc] init];
+    self.responseData = [[NSMutableData alloc] init];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     // Append the new data to the instance variable you declared
-    [_responseData appendData:data];
+    [self.responseData appendData:data];
 }
 
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection
@@ -288,21 +328,29 @@ using namespace cv;
     // The request is complete and data has been received
     // You can parse the stuff in your instance variable now
     
+    if ([self.action isEqualToString:[self.constants inviteAction]]) {
+        NSString *sentEmailString = @"Email Sent to ";
+        NSString *message = [sentEmailString stringByAppendingString:self.emal.text];
+        
+        UIAlertView* mes=[[UIAlertView alloc]
+                          initWithTitle: message
+                          message: @""
+                          delegate:self
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles: nil];
+        [mes show];
+        self.emal.text = @"";
+        
+        
+    }
     
-    NSString *sentEmailString = @"Email Sent to ";
-    NSString *message = [sentEmailString stringByAppendingString:self.emal.text];
-    
-    UIAlertView* mes=[[UIAlertView alloc]
-                      initWithTitle: message
-                      message: @""
-                      delegate:self
-                      cancelButtonTitle:@"Ok"
-                      otherButtonTitles: nil];
-     [mes show];
-    
-    self.emal.text = @"";
-    
-    
+    if ([self.action isEqualToString:[self.constants logoutAction]]) {
+       
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+        WhatAmIDoingViewController *viewController = (WhatAmIDoingViewController *)[storyboard instantiateViewControllerWithIdentifier:[self.constants registerOrLoginId]];
+        [self presentViewController:viewController animated:YES completion:nil];
+
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {

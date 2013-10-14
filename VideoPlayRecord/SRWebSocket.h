@@ -36,10 +36,10 @@ extern NSString *const SRWebSocketErrorDomain;
 
 @interface SRWebSocket : NSObject <NSStreamDelegate>
 
-@property (nonatomic, assign) id <SRWebSocketDelegate> delegate;
+@property (nonatomic, weak) id <SRWebSocketDelegate> delegate;
 
 @property (nonatomic, readonly) SRReadyState readyState;
-@property (nonatomic, readonly, retain) NSURL *url;
+@property (nonatomic, readonly, strong) NSURL *url;
 
 // This returns the negotiated protocol.
 // It will be nil until after the handshake completes.

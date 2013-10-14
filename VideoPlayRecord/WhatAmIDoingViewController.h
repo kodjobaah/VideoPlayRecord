@@ -10,21 +10,21 @@
 #import "PropertyAccessor.h"
 
 @interface WhatAmIDoingViewController : UIViewController<NSURLConnectionDelegate> {
-    NSMutableData *_responseData;
+    NSMutableData *responseData;
     NSManagedObjectContext *managedObjectContext;
-    NSString *_playSession;
     NSString *whatAmIdoingUrl;
     NSString *registerUrl;
     PropertyAccessor *propertyAccessor;
-
+    NSString *playSession;
+    
 }
 
-
-@property (nonatomic, retain) PropertyAccessor *propertyAccessor;
-@property (nonatomic, retain) NSString *registerUrl;
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain) NSString *whatAmIdoingUrl;
-@property (nonatomic, retain) NSString *_playSession;
+@property (nonatomic, strong) NSMutableData *responseData;
+@property (nonatomic, strong) NSString *playSession;
+@property (nonatomic, strong) PropertyAccessor *propertyAccessor;
+@property (nonatomic, strong) NSString *registerUrl;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSString *whatAmIdoingUrl;
 
 @property (weak, nonatomic) IBOutlet UIButton *registerOrJoin;
 @property (weak, nonatomic) IBOutlet UITextField *email;

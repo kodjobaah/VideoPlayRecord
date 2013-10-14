@@ -7,8 +7,10 @@
 //
 
 #import "WhatAmIDoingViewController.h"
+#import "WhatAmIDoingAppDelegate.h"
 #import "AuthenticationToken.h"
 #import "PropertyAccessor.h"
+#import "RecordVideoViewController.h"
 
 @interface WhatAmIDoingViewController ()
 
@@ -16,15 +18,19 @@
 
 @implementation WhatAmIDoingViewController
 
+@synthesize playSession = _playSession;
 @synthesize whatAmIdoingUrl = _whatAmIdoingUrl;
 @synthesize propertyAccessor = _propertyAccessor;
-
+@synthesize registerUrl = _registerUrl;
 @synthesize managedObjectContext = __managedObjectContext;
+@synthesize responseData = _responseData;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    WhatAmIDoingAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    self.managedObjectContext = appDelegate.managedObjectContext;
     
     self.propertyAccessor = [[PropertyAccessor alloc] init];
     
@@ -84,7 +90,7 @@
     NSHTTPURLResponse *HTTPResponse = (NSHTTPURLResponse *)response;
     NSDictionary *fields = [HTTPResponse allHeaderFields];
     NSString *cookie = [fields objectForKey:@"Set-Cookie"];
-    
+    NSLog(@"this is the cookie: %@",cookie);
     NSRange range = [cookie rangeOfString:@"PLAY_SESSION="];
     int location = range.location;
     int length = range.length;
@@ -94,15 +100,23 @@
     int endOfPlaySessionLocation =  rangeEndOfPlaySession.location;
     
     NSString *newDes = [substring substringWithRange: NSMakeRange (0, endOfPlaySessionLocation)];
-    
  
-    _playSession = newDes;
-    _responseData = [[NSMutableData alloc] init];
+    NSRange rangeStartOfToken = [newDes rangeOfString:@"="];
+    int startOfTokenLocation =  rangeStartOfToken.location;
+ 
+    NSLog(@"this is the newDes: %@",newDes);
+    NSLog(@"this is the startLocation: %d",startOfTokenLocation);
+    NSLog(@"this is the lengh: %d",[newDes length]);
+    NSString *tok = [newDes substringWithRange: NSMakeRange (startOfTokenLocation+1, [newDes length]-startOfTokenLocation-1)];
+    NSLog(@"this is the tok: %@",tok);
+    self.playSession = tok;
+    self.responseData = [[NSMutableData alloc] init];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     // Append the new data to the instance variable you declared
-    [_responseData appendData:data];
+    NSLog(@"RESPONSE -DATA: %@",data);
+    [self.responseData appendData:data];
 }
 
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection
@@ -126,7 +140,7 @@
     [self deleteAllObjects:@"AuthenticationToken"];
     AuthenticationToken *authenticationToken = [NSEntityDescription insertNewObjectForEntityForName:@"AuthenticationToken" inManagedObjectContext:context];
     
-    authenticationToken.playSession = _playSession;
+    authenticationToken.playSession = self.playSession;
     
     // Save everything
     NSError *error = nil;
@@ -136,15 +150,28 @@
         NSLog(@"The save wasn't successful: %@", [error userInfo]);
     }
 
+    NSLog(@"Value of self.playSession : %@",self.playSession);
+    NSLog(@"This the response from request: %@",self.responseData);
+    if (self.playSession) {
+        [self performSegueWithIdentifier:@"thisIsWhatIAmDoing" sender:self];
+    }
     
-    [self performSegueWithIdentifier:@"thisIsWhatIAmDoing" sender:self];
-       
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     // The request has failed for some reason!
     // Check the error var
     
+    // open an alert with just an OK button
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection Problems"
+                                                    message: [error localizedDescription]
+                                                   delegate:self
+                                          cancelButtonTitle:@"Ok"
+                                          otherButtonTitles: nil];
+    [alert show];
+   
+    
+    NSLog(@"Failed-:%@",error);
     self.registerOrJoin.enabled = YES;
 }
 
@@ -174,5 +201,19 @@
     }
     
 }
+
+- (void)navigationController:(UINavigationController *)navigationController
+       didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    [viewController viewDidAppear:animated];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([[segue identifier] isEqualToString:@"thisIsWhatIAmDoing"]){
+        NSLog(@"-------- calling sague");
+        RecordVideoViewController *cvc = (RecordVideoViewController *)[segue destinationViewController];
+    }
+}
+
 
 @end

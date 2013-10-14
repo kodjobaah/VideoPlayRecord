@@ -11,29 +11,42 @@
 #import <opencv2/highgui/cap_ios.h>
 #import "AuthenticationToken.h"
 #import "PropertyAccessor.h"
+#import "WhatAmIDoingConstants.h"
+#import "SendInvite.h"
 
 
 @interface RecordVideoViewController : UIViewController<CvVideoCameraDelegate,SRWebSocketDelegate,NSURLConnectionDelegate> {
     SRWebSocket *webSocket;
     NSMutableArray *_messages;
     CvVideoCamera *videoCamera;
-    NSMutableData *_responseData;
+    NSMutableData *responseData;
     AuthenticationToken *authenticationToken;
     NSManagedObjectContext *managedObjectContext;
     NSMutableURLRequest *webSocketRequest;
     BOOL startRecording;
+    BOOL *errorOccurred;
     NSString *publishVideoUrl;
     PropertyAccessor *propertyAccessor;
+    AuthenticationToken *token;
+    NSString *action;
+    WhatAmIDoingConstants *constants;
+    
 }
 
-@property (nonatomic, retain) PropertyAccessor *propertyAccessor;
-@property (nonatomic, retain) NSString *publishVideoUrl;
-@property (nonatomic, retain) SRWebSocket *webSocket;
-@property (nonatomic) NSMutableURLRequest *webSocketRequest;
+@property (nonatomic, retain) SendInvite *sendInvite;
+@property (nonatomic, strong) WhatAmIDoingConstants *constants;
+@property (nonatomic, strong) NSString *action;
+@property (nonatomic, strong) AuthenticationToken *token;
+@property (nonatomic, strong) NSMutableData *responseData;
+@property (nonatomic) BOOL *errorOccured;
+@property (nonatomic, strong) PropertyAccessor *propertyAccessor;
+@property (nonatomic, strong) NSString *publishVideoUrl;
+@property (nonatomic, strong) SRWebSocket *webSocket;
+@property (weak, nonatomic) NSMutableURLRequest *webSocketRequest;
 @property (nonatomic) BOOL startRecording;
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain, readonly) NSString *message;
-@property (nonatomic, retain) CvVideoCamera* videoCamera;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong, readonly) NSString *message;
+@property (nonatomic, strong) CvVideoCamera* videoCamera;
 @property (weak, nonatomic) IBOutlet UIImageView *displayImage;
 @property (weak, nonatomic) IBOutlet UIButton *startVideoButton;
 @property (weak, nonatomic) IBOutlet UIButton *stopVideoButton;
@@ -41,5 +54,6 @@
 - (IBAction)stopVideo:(UIButton *)sender;
 - (IBAction)recordVideo:(id)sender;
 - (IBAction)invite:(id)sender;
+- (IBAction)logout:(id)sender;
 
 @end

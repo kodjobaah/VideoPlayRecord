@@ -116,7 +116,7 @@ static inline void SRFastLog(NSString *format, ...);
 
 @interface _SRRunLoopThread : NSThread
 
-@property (nonatomic, readonly) NSRunLoop *runLoop;
+@property (weak, nonatomic, readonly) NSRunLoop *runLoop;
 
 @end
 
@@ -222,8 +222,8 @@ typedef void (^data_callback)(SRWebSocket *webSocket,  NSData *data);
 
 @property (nonatomic) SRReadyState readyState;
 
-@property (nonatomic) NSOperationQueue *delegateOperationQueue;
-@property (nonatomic) dispatch_queue_t delegateDispatchQueue;
+@property (weak, nonatomic) NSOperationQueue *delegateOperationQueue;
+@property (weak, nonatomic) dispatch_queue_t delegateDispatchQueue;
 
 @end
 
@@ -231,8 +231,8 @@ typedef void (^data_callback)(SRWebSocket *webSocket,  NSData *data);
 @implementation SRWebSocket {
     NSInteger _webSocketVersion;
     
-    NSOperationQueue *_delegateOperationQueue;
-    dispatch_queue_t _delegateDispatchQueue;
+    NSOperationQueue *__weak _delegateOperationQueue;
+    dispatch_queue_t __weak _delegateDispatchQueue;
     
     dispatch_queue_t _workQueue;
     NSMutableArray *_consumers;

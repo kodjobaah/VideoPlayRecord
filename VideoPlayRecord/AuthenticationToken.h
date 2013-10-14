@@ -12,6 +12,6 @@
 
 @interface AuthenticationToken : NSManagedObject
 
-@property (nonatomic, retain) NSString * playSession;
+@property (nonatomic, strong) NSString * playSession;
 
 @end
