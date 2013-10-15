@@ -223,37 +223,7 @@
                                     <action selector="stopVideo:" destination="s7P-y2-8pO" eventType="touchUpInside" id="ogd-Ba-3aB"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tGC-A0-E36">
-                                <rect key="frame" x="217" y="80" width="73" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="73" id="o4D-f0-Uwa"/>
-                                    <constraint firstAttribute="height" constant="32" id="zuo-rb-d3e"/>
-                                </constraints>
-                                <state key="normal" title="Invite">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="invite:" destination="s7P-y2-8pO" eventType="touchDown" id="uWB-Wv-Rw6"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KCy-Zd-YwA">
-                                <rect key="frame" x="81" y="81" width="128" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="128" id="jNC-Ax-TCm"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqH-eO-Lr7">
-                                <rect key="frame" x="30" y="85" width="57" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="57" id="OLT-rY-h74"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter email and click invite to share what you video" translatesAutoresizingMaskIntoConstraints="NO" id="L3d-c2-XJt">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter email and click invite to share your video or click on find previous" translatesAutoresizingMaskIntoConstraints="NO" id="L3d-c2-XJt">
                                 <rect key="frame" x="40" y="17" width="240" height="45"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -284,29 +254,69 @@
                                     <action selector="logout:" destination="s7P-y2-8pO" eventType="touchUpInside" id="0fo-Vq-YO3"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MCu-sJ-o33">
+                                <rect key="frame" x="40" y="61" width="239" height="94"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqH-eO-Lr7">
+                                        <rect key="frame" x="4" y="48" width="57" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="57" id="OLT-rY-h74"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KCy-Zd-YwA">
+                                        <rect key="frame" x="64" y="44" width="175" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="128" id="jNC-Ax-TCm"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="APy-aZ-uP4">
+                                        <rect key="frame" x="4" y="8" width="125" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="find previous">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="displayInvitePicker:" destination="s7P-y2-8pO" eventType="touchUpInside" id="2i0-eA-1jK"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tGC-A0-E36">
+                                        <rect key="frame" x="152" y="8" width="73" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="73" id="o4D-f0-Uwa"/>
+                                            <constraint firstAttribute="height" constant="32" id="zuo-rb-d3e"/>
+                                        </constraints>
+                                        <state key="normal" title="Invite">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="invite:" destination="s7P-y2-8pO" eventType="touchDown" id="uWB-Wv-Rw6"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="tGC-A0-E36" firstAttribute="leading" secondItem="KCy-Zd-YwA" secondAttribute="trailing" constant="8" symbolic="YES" id="3yA-01-8MY"/>
                             <constraint firstItem="VbM-lB-Jm8" firstAttribute="top" secondItem="RJs-eF-4zx" secondAttribute="bottom" constant="8" symbolic="YES" id="ApQ-ZV-AaW"/>
                             <constraint firstItem="M8Z-Mo-u2M" firstAttribute="top" secondItem="2Kz-3b-lNe" secondAttribute="top" constant="254" id="FC3-mB-VLG"/>
                             <constraint firstItem="M8Z-Mo-u2M" firstAttribute="leading" secondItem="2Kz-3b-lNe" secondAttribute="leading" constant="-352" id="FIJ-bM-Da7"/>
                             <constraint firstItem="9am-uL-Fo1" firstAttribute="top" secondItem="vdo-pR-WZH" secondAttribute="top" id="KLV-1q-Jkd"/>
                             <constraint firstItem="vdo-pR-WZH" firstAttribute="centerX" secondItem="2Kz-3b-lNe" secondAttribute="centerX" id="LZc-Oq-FWF"/>
-                            <constraint firstItem="dqH-eO-Lr7" firstAttribute="baseline" secondItem="tGC-A0-E36" secondAttribute="baseline" id="MvQ-cJ-MNX"/>
                             <constraint firstItem="9am-uL-Fo1" firstAttribute="trailing" secondItem="L3d-c2-XJt" secondAttribute="trailing" id="QZw-RC-2wN"/>
                             <constraint firstItem="vdo-pR-WZH" firstAttribute="baseline" secondItem="VbM-lB-Jm8" secondAttribute="baseline" id="Sle-oq-UnA"/>
                             <constraint firstItem="RJs-eF-4zx" firstAttribute="leading" secondItem="VbM-lB-Jm8" secondAttribute="leading" id="Ufm-sp-P0t"/>
-                            <constraint firstItem="tGC-A0-E36" firstAttribute="trailing" secondItem="RJs-eF-4zx" secondAttribute="trailing" id="W35-Iz-Pab"/>
                             <constraint firstItem="L3d-c2-XJt" firstAttribute="top" secondItem="2Kz-3b-lNe" secondAttribute="top" constant="17" id="de6-Jh-pV5"/>
-                            <constraint firstItem="dqH-eO-Lr7" firstAttribute="top" secondItem="2Kz-3b-lNe" secondAttribute="top" constant="85" id="dv6-Sf-91l"/>
                             <constraint firstItem="RJs-eF-4zx" firstAttribute="top" secondItem="2Kz-3b-lNe" secondAttribute="top" constant="214" id="ewe-6r-UG5"/>
-                            <constraint firstItem="dqH-eO-Lr7" firstAttribute="leading" secondItem="RJs-eF-4zx" secondAttribute="leading" id="i6U-NY-Jjl"/>
                             <constraint firstItem="L3d-c2-XJt" firstAttribute="centerX" secondItem="RJs-eF-4zx" secondAttribute="centerX" id="iDh-Rp-R2P"/>
                             <constraint firstItem="vdo-pR-WZH" firstAttribute="centerX" secondItem="RJs-eF-4zx" secondAttribute="centerX" id="kgx-FA-sc3"/>
                             <constraint firstItem="vdo-pR-WZH" firstAttribute="bottom" secondItem="VbM-lB-Jm8" secondAttribute="bottom" id="pPL-un-eFR"/>
-                            <constraint firstItem="tGC-A0-E36" firstAttribute="top" secondItem="2Kz-3b-lNe" secondAttribute="top" constant="80" id="pyn-cL-RKf"/>
-                            <constraint firstItem="tGC-A0-E36" firstAttribute="centerY" secondItem="KCy-Zd-YwA" secondAttribute="centerY" id="uJO-qe-741"/>
                             <constraint firstItem="vdo-pR-WZH" firstAttribute="bottom" secondItem="9am-uL-Fo1" secondAttribute="bottom" id="urD-fU-ccT"/>
                         </constraints>
                     </view>

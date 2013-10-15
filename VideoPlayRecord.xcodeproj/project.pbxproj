@@ -50,6 +50,15 @@
 		9FA5384A180C1A3F00500272 /* SBJsonStreamWriterAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA5383D180C1A3F00500272 /* SBJsonStreamWriterAccumulator.m */; };
 		9FA5384B180C1A3F00500272 /* SBJsonStreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA53840180C1A3F00500272 /* SBJsonStreamParserState.m */; };
 		9FA5384C180C1A3F00500272 /* SBJsonStreamTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA53841180C1A3F00500272 /* SBJsonStreamTokeniser.m */; };
+		9FA5384F180C56D000500272 /* InviteEmailList.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA5384E180C56D000500272 /* InviteEmailList.m */; };
+		9FA53852180C743800500272 /* InvitePickerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA53851180C743800500272 /* InvitePickerDelegate.m */; };
+		9FA53858180C79D000500272 /* InvitePickerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA53857180C79D000500272 /* InvitePickerDataSource.m */; };
+		9FA53867180C9C2000500272 /* AbstractActionSheetPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA5385B180C9C2000500272 /* AbstractActionSheetPicker.m */; };
+		9FA53868180C9C2000500272 /* ActionSheetCustomPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA5385D180C9C2000500272 /* ActionSheetCustomPicker.m */; };
+		9FA53869180C9C2000500272 /* ActionSheetDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA53860180C9C2000500272 /* ActionSheetDatePicker.m */; };
+		9FA5386A180C9C2000500272 /* ActionSheetDistancePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA53862180C9C2000500272 /* ActionSheetDistancePicker.m */; };
+		9FA5386B180C9C2000500272 /* ActionSheetStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA53864180C9C2000500272 /* ActionSheetStringPicker.m */; };
+		9FA5386C180C9C2000500272 /* DistancePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA53866180C9C2000500272 /* DistancePickerView.m */; };
 		9FA787A517CB6F5500F0BD40 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA787A417CB6F5500F0BD40 /* UIKit.framework */; };
 		9FA787A717CB6F5500F0BD40 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA787A617CB6F5500F0BD40 /* Foundation.framework */; };
 		9FA787AF17CB6F5500F0BD40 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9FA787AD17CB6F5500F0BD40 /* InfoPlist.strings */; };
@@ -146,6 +155,26 @@
 		9FA53840180C1A3F00500272 /* SBJsonStreamParserState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserState.m; sourceTree = "<group>"; };
 		9FA53841180C1A3F00500272 /* SBJsonStreamTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamTokeniser.m; sourceTree = "<group>"; };
 		9FA53842180C1A3F00500272 /* SBJsonStreamTokeniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamTokeniser.h; sourceTree = "<group>"; };
+		9FA5384D180C56D000500272 /* InviteEmailList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteEmailList.h; sourceTree = "<group>"; };
+		9FA5384E180C56D000500272 /* InviteEmailList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteEmailList.m; sourceTree = "<group>"; };
+		9FA53850180C743800500272 /* InvitePickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitePickerDelegate.h; sourceTree = "<group>"; };
+		9FA53851180C743800500272 /* InvitePickerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitePickerDelegate.m; sourceTree = "<group>"; };
+		9FA53856180C79D000500272 /* InvitePickerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitePickerDataSource.h; sourceTree = "<group>"; };
+		9FA53857180C79D000500272 /* InvitePickerDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitePickerDataSource.m; sourceTree = "<group>"; };
+		9FA5385A180C9C2000500272 /* AbstractActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractActionSheetPicker.h; sourceTree = "<group>"; };
+		9FA5385B180C9C2000500272 /* AbstractActionSheetPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractActionSheetPicker.m; sourceTree = "<group>"; };
+		9FA5385C180C9C2000500272 /* ActionSheetCustomPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPicker.h; sourceTree = "<group>"; };
+		9FA5385D180C9C2000500272 /* ActionSheetCustomPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetCustomPicker.m; sourceTree = "<group>"; };
+		9FA5385E180C9C2000500272 /* ActionSheetCustomPickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPickerDelegate.h; sourceTree = "<group>"; };
+		9FA5385F180C9C2000500272 /* ActionSheetDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDatePicker.h; sourceTree = "<group>"; };
+		9FA53860180C9C2000500272 /* ActionSheetDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDatePicker.m; sourceTree = "<group>"; };
+		9FA53861180C9C2000500272 /* ActionSheetDistancePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDistancePicker.h; sourceTree = "<group>"; };
+		9FA53862180C9C2000500272 /* ActionSheetDistancePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDistancePicker.m; sourceTree = "<group>"; };
+		9FA53863180C9C2000500272 /* ActionSheetStringPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetStringPicker.h; sourceTree = "<group>"; };
+		9FA53864180C9C2000500272 /* ActionSheetStringPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetStringPicker.m; sourceTree = "<group>"; };
+		9FA53865180C9C2000500272 /* DistancePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistancePickerView.h; sourceTree = "<group>"; };
+		9FA53866180C9C2000500272 /* DistancePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistancePickerView.m; sourceTree = "<group>"; };
+		9FA5386D180C9C3400500272 /* ActionSheetPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActionSheetPicker.h; sourceTree = "<group>"; };
 		9FA787A117CB6F5500F0BD40 /* VideoPlayRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoPlayRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FA787A417CB6F5500F0BD40 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9FA787A617CB6F5500F0BD40 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -237,6 +266,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		9FA53859180C9C2000500272 /* Pickers */ = {
+			isa = PBXGroup;
+			children = (
+				9FA5385A180C9C2000500272 /* AbstractActionSheetPicker.h */,
+				9FA5385B180C9C2000500272 /* AbstractActionSheetPicker.m */,
+				9FA5385C180C9C2000500272 /* ActionSheetCustomPicker.h */,
+				9FA5385D180C9C2000500272 /* ActionSheetCustomPicker.m */,
+				9FA5385E180C9C2000500272 /* ActionSheetCustomPickerDelegate.h */,
+				9FA5385F180C9C2000500272 /* ActionSheetDatePicker.h */,
+				9FA53860180C9C2000500272 /* ActionSheetDatePicker.m */,
+				9FA53861180C9C2000500272 /* ActionSheetDistancePicker.h */,
+				9FA53862180C9C2000500272 /* ActionSheetDistancePicker.m */,
+				9FA53863180C9C2000500272 /* ActionSheetStringPicker.h */,
+				9FA53864180C9C2000500272 /* ActionSheetStringPicker.m */,
+				9FA53865180C9C2000500272 /* DistancePickerView.h */,
+				9FA53866180C9C2000500272 /* DistancePickerView.m */,
+			);
+			path = Pickers;
+			sourceTree = "<group>";
+		};
 		9FA7879817CB6F5500F0BD40 = {
 			isa = PBXGroup;
 			children = (
@@ -296,6 +345,8 @@
 		9FA787AA17CB6F5500F0BD40 /* VideoPlayRecord */ = {
 			isa = PBXGroup;
 			children = (
+				9FA5386D180C9C3400500272 /* ActionSheetPicker.h */,
+				9FA53859180C9C2000500272 /* Pickers */,
 				9FA5382E180C1A3F00500272 /* SBJson.h */,
 				9FA5382F180C1A3F00500272 /* SBJsonStreamWriterState.m */,
 				9FA53830180C1A3F00500272 /* SBJsonStreamWriterState.h */,
@@ -356,6 +407,12 @@
 				9F23CBE6180B5EB300388D54 /* WhatAmIDoingConstants.m */,
 				9F2719AA180B8C2100DA873E /* SendInvite.h */,
 				9F2719AB180B8C2100DA873E /* SendInvite.m */,
+				9FA5384D180C56D000500272 /* InviteEmailList.h */,
+				9FA5384E180C56D000500272 /* InviteEmailList.m */,
+				9FA53850180C743800500272 /* InvitePickerDelegate.h */,
+				9FA53851180C743800500272 /* InvitePickerDelegate.m */,
+				9FA53856180C79D000500272 /* InvitePickerDataSource.h */,
+				9FA53857180C79D000500272 /* InvitePickerDataSource.m */,
 			);
 			path = VideoPlayRecord;
 			sourceTree = "<group>";
@@ -497,6 +554,7 @@
 				9FA5384C180C1A3F00500272 /* SBJsonStreamTokeniser.m in Sources */,
 				9FA5382D180C183700500272 /* Logout.m in Sources */,
 				9F16E47317CD7ECF002EEA3F /* base64.h in Sources */,
+				9FA5384F180C56D000500272 /* InviteEmailList.m in Sources */,
 				9F16E47417CD7ECF002EEA3F /* NSData+SRB64Additions.h in Sources */,
 				9F16E47517CD7ECF002EEA3F /* NSData+SRB64Additions.m in Sources */,
 				9F16E47617CD7ECF002EEA3F /* SocketRocket-Prefix.pch in Sources */,
@@ -508,6 +566,7 @@
 				9FA53846180C1A3F00500272 /* SBJsonStreamParserAccumulator.m in Sources */,
 				9FA787B517CB6F5500F0BD40 /* WhatAmIDoingAppDelegate.m in Sources */,
 				9FA5384B180C1A3F00500272 /* SBJsonStreamParserState.m in Sources */,
+				9FA5386B180C9C2000500272 /* ActionSheetStringPicker.m in Sources */,
 				9FA787C417CB6F5600F0BD40 /* WhatAmIDoingViewController.m in Sources */,
 				9FA53843180C1A3F00500272 /* SBJsonStreamWriterState.m in Sources */,
 				9FA53848180C1A3F00500272 /* SBJsonStreamParserAdapter.m in Sources */,
@@ -516,15 +575,22 @@
 				9FA787E117CB755B00F0BD40 /* PlayVideoViewController.m in Sources */,
 				9FA787E417CB757700F0BD40 /* RecordVideoViewController.mm in Sources */,
 				9F0ED71317CD3A0F00555D3C /* fmemopen.c in Sources */,
+				9FA5386A180C9C2000500272 /* ActionSheetDistancePicker.m in Sources */,
 				9F619E5117CECB46008782BA /* NSData+Base64.m in Sources */,
 				9F619E5E17CFB95D008782BA /* theBase64.m in Sources */,
 				9F23CBE7180B5EB300388D54 /* WhatAmIDoingConstants.m in Sources */,
+				9FA53869180C9C2000500272 /* ActionSheetDatePicker.m in Sources */,
+				9FA5386C180C9C2000500272 /* DistancePickerView.m in Sources */,
+				9FA53867180C9C2000500272 /* AbstractActionSheetPicker.m in Sources */,
+				9FA53852180C743800500272 /* InvitePickerDelegate.m in Sources */,
 				9FB1B8EE1801685000E3ACBA /* WhatAmIdoing.xcdatamodeld in Sources */,
 				9FA53844180C1A3F00500272 /* SBJsonParser.m in Sources */,
 				9FA5384A180C1A3F00500272 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				9F58467F18016B8300CA74DA /* AuthenticationToken.m in Sources */,
 				9F5846841802B35400CA74DA /* PropertyAccessor.m in Sources */,
+				9FA53868180C9C2000500272 /* ActionSheetCustomPicker.m in Sources */,
 				9FA53849180C1A3F00500272 /* SBJsonWriter.m in Sources */,
+				9FA53858180C79D000500272 /* InvitePickerDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,6 +16,7 @@
 #import "PropertyAccessor.h"
 #import "WhatAmIDoingViewController.h"
 #import "SBJson.h"
+#import "InviteEmailList.h"
 
 using namespace cv;
 
@@ -40,6 +41,9 @@ using namespace cv;
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize propertyAccessor = _propertyAccessor;
 @synthesize errorOccured = _errorOccured;
+@synthesize logout = _logout;
+@synthesize actionSheet = _actionSheet;
+@synthesize pickerView = _pickerView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,6 +52,23 @@ using namespace cv;
         // Custom initialization
     }
     return self;
+}
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"bfore 1");
+    [self.emal resignFirstResponder];
+    NSLog(@"bfore 2");
+    [self.pickerView removeFromSuperview];
+    NSLog(@"bfore 3");
+    [self.actionSheet removeFromSuperview];
+    NSLog(@"bfore 4");
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
 }
 
 
@@ -61,8 +82,6 @@ using namespace cv;
     _startVideoButton.enabled = YES;
     _stopVideoButton.enabled = NO;
     self.sendInvite = [[SendInvite alloc] initWithEmail: self.emal];
-    self.logout = [[Logout alloc] initWithController:self];
-
     
     /*
      * Getting the authentication token from core data
@@ -83,14 +102,12 @@ using namespace cv;
     self.propertyAccessor = [[PropertyAccessor alloc] init];
     NSString * url = [NSString stringWithFormat:@"ws://5.79.24.141:9000/publishVideo?token=%@",self.token.playSession];
     self.publishVideoUrl = url;
-   
-    NSLog(@"---------publishurl-%@--",self.publishVideoUrl);
+    
     /*
      * Creating the websocket request used to publish the movie
      */
     NSURL *urlNew = [NSURL URLWithString:self.publishVideoUrl];
     self.webSocketRequest = [NSMutableURLRequest requestWithURL:urlNew];
-    NSLog(@"---------prequest url-%@--",self.webSocketRequest.URL);
     
     /*
      * Setting the video camera
@@ -122,33 +139,58 @@ using namespace cv;
         UIImage *resultUIImage = [self UIImageFromCVMat:image];
         NSData *tempData = [NSData dataWithData:UIImageJPEGRepresentation(resultUIImage,1.0)];
         NSString* ns = [tempData base64EncodedString];
+        tempData = nil;
+        resultUIImage = nil;
         
         
-        NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-        [parameters setObject:ns forKey:@"frame"];
+       // NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+        //[parameters setObject:ns forKey:@"frame"];
         /*
-        SBJsonWriter *writer = [[SBJsonWriter alloc] init];
-        NSString *jsonCommand = [writer stringWithObject:parameters];
-        
-        //NSLog(@"Data =%@",converted);
-        [self.webSocket send:jsonCommand];
+         SBJsonWriter *writer = [[SBJsonWriter alloc] init];
+         NSString *jsonCommand = [writer stringWithObject:parameters];
+         
+         //NSLog(@"Data =%@",converted);
+         [self.webSocket send:jsonCommand];
          */
-        NSError *error;
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters  options:NSJSONWritingPrettyPrinted error:&error];
-        
-        NSString * converted =[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+       // NSError *error;
+       // NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters  options:NSJSONWritingPrettyPrinted error:&error];
+       // parameters = nil;
+       // NSString * converted =[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         //NSLog(@"Data =%@",converted);
-        [self.webSocket send:converted];
-
+        //[self.webSocket send:converted];
+         [self.webSocket send:ns];
+        
         
     }
     
 }
 #endif
 - (IBAction)invite:(id)sender {
-    self.action = [self.constants inviteAction];
-    [self.sendInvite sendInvitation:self.token.playSession];
     
+    if([[self.emal.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]length] == 0) {
+        NSString *title = @"Invite";
+        NSString *message = @"Please enter an Email";
+        UIAlertView* mes=[[UIAlertView alloc]
+                          initWithTitle: title
+                          message: message
+                          delegate:self
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles: nil];
+        [mes show];
+    }else if(self.startRecording) {
+        self.action = [self.constants inviteAction];
+        [self.sendInvite sendInvitation:self.token.playSession];
+    } else {
+        NSString *title = @"Invite";
+        NSString *message = @"You need start recording..before you can invite someone to watch";
+        UIAlertView* mes=[[UIAlertView alloc]
+                          initWithTitle: title
+                          message: message
+                          delegate:self
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles: nil];
+        [mes show];
+    }
 }
 
 - (IBAction)recordVideo:(id)sender {
@@ -237,10 +279,6 @@ using namespace cv;
     _stopVideoButton.enabled = NO;
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [self.emal resignFirstResponder];
-}
 
 -(UIImage *)UIImageFromCVMat:(cv::Mat)cvMat
 {
@@ -283,4 +321,13 @@ using namespace cv;
 }
 
 
+
+- (IBAction)displayInvitePicker:(id)sender {
+    
+    InviteEmailList *inviteEmailList = [[InviteEmailList alloc] initWithData:self.emal];
+    
+    [inviteEmailList displayInvites:sender theToken:self.token.playSession];
+    
+    
+}
 @end

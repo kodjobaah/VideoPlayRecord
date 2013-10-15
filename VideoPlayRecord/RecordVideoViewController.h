@@ -14,6 +14,8 @@
 #import "WhatAmIDoingConstants.h"
 #import "SendInvite.h"
 #import "Logout.h"
+#import "InvitePickerDelegate.h"
+#import "InvitePickerDataSource.h"
 
 
 
@@ -34,9 +36,13 @@
     WhatAmIDoingConstants *constants;
     SendInvite *sendInvite;
     Logout *logout;
+    UIActionSheet *actionSheet; // in which we open picker dynamically
+    UIPickerView *pickerView;
     
 }
 
+@property (nonatomic, retain) UIPickerView *pickerView;
+@property (nonatomic,retain) IBOutlet UIActionSheet *actionSheet;
 @property (nonatomic, strong) Logout *logout;
 @property (nonatomic, strong) SendInvite *sendInvite;
 @property (nonatomic, strong) WhatAmIDoingConstants *constants;
@@ -60,5 +66,6 @@
 - (IBAction)recordVideo:(id)sender;
 - (IBAction)invite:(id)sender;
 - (IBAction)logout:(id)sender;
+- (IBAction)displayInvitePicker:(id)sender;
 
 @end
