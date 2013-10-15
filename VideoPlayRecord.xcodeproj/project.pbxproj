@@ -59,6 +59,7 @@
 		9FA5386A180C9C2000500272 /* ActionSheetDistancePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA53862180C9C2000500272 /* ActionSheetDistancePicker.m */; };
 		9FA5386B180C9C2000500272 /* ActionSheetStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA53864180C9C2000500272 /* ActionSheetStringPicker.m */; };
 		9FA5386C180C9C2000500272 /* DistancePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA53866180C9C2000500272 /* DistancePickerView.m */; };
+		9FA53884180D59B600500272 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FB1B8A51800E20200E3ACBA /* CoreData.framework */; };
 		9FA787A517CB6F5500F0BD40 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA787A417CB6F5500F0BD40 /* UIKit.framework */; };
 		9FA787A717CB6F5500F0BD40 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA787A617CB6F5500F0BD40 /* Foundation.framework */; };
 		9FA787AF17CB6F5500F0BD40 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9FA787AD17CB6F5500F0BD40 /* InfoPlist.strings */; };
@@ -76,7 +77,6 @@
 		9FA787DE17CB753C00F0BD40 /* MergeVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA787DD17CB753C00F0BD40 /* MergeVideoViewController.m */; };
 		9FA787E117CB755B00F0BD40 /* PlayVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA787E017CB755B00F0BD40 /* PlayVideoViewController.m */; };
 		9FA787E417CB757700F0BD40 /* RecordVideoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FA787E317CB757700F0BD40 /* RecordVideoViewController.mm */; };
-		9FB1B8A61800E20200E3ACBA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FB1B8A51800E20200E3ACBA /* CoreData.framework */; };
 		9FB1B8EE1801685000E3ACBA /* WhatAmIdoing.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9FB1B8EC1801685000E3ACBA /* WhatAmIdoing.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -175,6 +175,20 @@
 		9FA53865180C9C2000500272 /* DistancePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistancePickerView.h; sourceTree = "<group>"; };
 		9FA53866180C9C2000500272 /* DistancePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistancePickerView.m; sourceTree = "<group>"; };
 		9FA5386D180C9C3400500272 /* ActionSheetPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActionSheetPicker.h; sourceTree = "<group>"; };
+		9FA53871180D4EDF00500272 /* libUnittWebSocketClient.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUnittWebSocketClient.a; path = lib/libUnittWebSocketClient.a; sourceTree = "<group>"; };
+		9FA53874180D4F3700500272 /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
+		9FA53875180D4F3700500272 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		9FA53876180D4F3700500272 /* HandshakeHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandshakeHeader.h; sourceTree = "<group>"; };
+		9FA53877180D4F3700500272 /* MutableQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MutableQueue.h; sourceTree = "<group>"; };
+		9FA53878180D4F3700500272 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		9FA53879180D4F3700500272 /* WebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocket.h; sourceTree = "<group>"; };
+		9FA5387A180D4F3700500272 /* WebSocket00.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocket00.h; sourceTree = "<group>"; };
+		9FA5387B180D4F3700500272 /* WebSocket07.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocket07.h; sourceTree = "<group>"; };
+		9FA5387C180D4F3700500272 /* WebSocket08.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocket08.h; sourceTree = "<group>"; };
+		9FA5387D180D4F3700500272 /* WebSocket10.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocket10.h; sourceTree = "<group>"; };
+		9FA5387E180D4F3700500272 /* WebSocketConnectConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocketConnectConfig.h; sourceTree = "<group>"; };
+		9FA5387F180D4F3700500272 /* WebSocketFragment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocketFragment.h; sourceTree = "<group>"; };
+		9FA53880180D4F3700500272 /* WebSocketMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocketMessage.h; sourceTree = "<group>"; };
 		9FA787A117CB6F5500F0BD40 /* VideoPlayRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoPlayRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FA787A417CB6F5500F0BD40 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9FA787A617CB6F5500F0BD40 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -221,7 +235,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FB1B8A61800E20200E3ACBA /* CoreData.framework in Frameworks */,
+				9FA53884180D59B600500272 /* CoreData.framework in Frameworks */,
 				9F6D973717CB9C43003F0703 /* libicucore.dylib in Frameworks */,
 				9F6D973517CB9C27003F0703 /* Security.framework in Frameworks */,
 				9F6D973317CB9BEF003F0703 /* CFNetwork.framework in Frameworks */,
@@ -286,6 +300,26 @@
 			path = Pickers;
 			sourceTree = "<group>";
 		};
+		9FA53873180D4F3700500272 /* unitsocket */ = {
+			isa = PBXGroup;
+			children = (
+				9FA53874180D4F3700500272 /* AsyncSocket.h */,
+				9FA53875180D4F3700500272 /* GCDAsyncSocket.h */,
+				9FA53876180D4F3700500272 /* HandshakeHeader.h */,
+				9FA53877180D4F3700500272 /* MutableQueue.h */,
+				9FA53878180D4F3700500272 /* NSData+Base64.h */,
+				9FA53879180D4F3700500272 /* WebSocket.h */,
+				9FA5387A180D4F3700500272 /* WebSocket00.h */,
+				9FA5387B180D4F3700500272 /* WebSocket07.h */,
+				9FA5387C180D4F3700500272 /* WebSocket08.h */,
+				9FA5387D180D4F3700500272 /* WebSocket10.h */,
+				9FA5387E180D4F3700500272 /* WebSocketConnectConfig.h */,
+				9FA5387F180D4F3700500272 /* WebSocketFragment.h */,
+				9FA53880180D4F3700500272 /* WebSocketMessage.h */,
+			);
+			path = unitsocket;
+			sourceTree = "<group>";
+		};
 		9FA7879817CB6F5500F0BD40 = {
 			isa = PBXGroup;
 			children = (
@@ -321,6 +355,7 @@
 		9FA787A317CB6F5500F0BD40 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9FA53871180D4EDF00500272 /* libUnittWebSocketClient.a */,
 				9F0ED71017CD335400555D3C /* libcrypto.a */,
 				9F0ED70C17CD332700555D3C /* libssl.a */,
 				9F52B01617CB949E009B497E /* CoreMedia.framework */,
@@ -345,6 +380,7 @@
 		9FA787AA17CB6F5500F0BD40 /* VideoPlayRecord */ = {
 			isa = PBXGroup;
 			children = (
+				9FA53873180D4F3700500272 /* unitsocket */,
 				9FA5386D180C9C3400500272 /* ActionSheetPicker.h */,
 				9FA53859180C9C2000500272 /* Pickers */,
 				9FA5382E180C1A3F00500272 /* SBJson.h */,
@@ -737,8 +773,9 @@
 				INFOPLIST_FILE = "VideoPlayRecord/VideoPlayRecord-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/lib\"",
+					"$(SRCROOT)",
+					"\\\"$(SRCROOT)/lib\\\"",
+					/Users/valtechuk/pract/ios/VideoPlayRecord/lib,
 				);
 				New_Setting = "";
 				OTHER_LDFLAGS = "-ObjC";
@@ -771,8 +808,9 @@
 				INFOPLIST_FILE = "VideoPlayRecord/VideoPlayRecord-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/lib\"",
+					"$(SRCROOT)",
+					"\\\"$(SRCROOT)/lib\\\"",
+					/Users/valtechuk/pract/ios/VideoPlayRecord/lib,
 				);
 				New_Setting = "";
 				OTHER_LDFLAGS = "-ObjC";
