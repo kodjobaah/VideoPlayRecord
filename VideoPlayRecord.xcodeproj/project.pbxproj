@@ -24,6 +24,23 @@
 		9F35E61018082CB200AD4F79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F96640317CB924A00C315A5 /* Foundation.framework */; };
 		9F35E61618082CB200AD4F79 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F35E61418082CB200AD4F79 /* InfoPlist.strings */; };
 		9F35E61918082CB200AD4F79 /* ThisIsWhatIamDoing.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F35E61818082CB200AD4F79 /* ThisIsWhatIamDoing.m */; };
+		9F46FD1C1810092400382777 /* base64-decode.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F46FD051810092400382777 /* base64-decode.c */; };
+		9F46FD1D1810092400382777 /* BLAsyncMessageQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F46FD071810092400382777 /* BLAsyncMessageQueue.m */; };
+		9F46FD1E1810092400382777 /* client-handshake.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F46FD081810092400382777 /* client-handshake.c */; };
+		9F46FD1F1810092400382777 /* client-parser.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F46FD091810092400382777 /* client-parser.c */; };
+		9F46FD201810092400382777 /* client.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F46FD0A1810092400382777 /* client.c */; };
+		9F46FD211810092400382777 /* daemonize.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F46FD0B1810092400382777 /* daemonize.c */; };
+		9F46FD221810092400382777 /* extension-deflate-frame.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F46FD0C1810092400382777 /* extension-deflate-frame.c */; };
+		9F46FD231810092400382777 /* extension-deflate-stream.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F46FD0E1810092400382777 /* extension-deflate-stream.c */; };
+		9F46FD241810092400382777 /* extension.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F46FD101810092400382777 /* extension.c */; };
+		9F46FD251810092400382777 /* getifaddrs.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F46FD111810092400382777 /* getifaddrs.c */; };
+		9F46FD261810092400382777 /* handshake.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F46FD131810092400382777 /* handshake.c */; };
+		9F46FD271810092400382777 /* libwebsockets.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F46FD141810092400382777 /* libwebsockets.c */; };
+		9F46FD281810092400382777 /* output.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F46FD161810092400382777 /* output.c */; };
+		9F46FD291810092400382777 /* parsers.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F46FD171810092400382777 /* parsers.c */; };
+		9F46FD2A1810092400382777 /* server-handshake.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F46FD191810092400382777 /* server-handshake.c */; };
+		9F46FD2B1810092400382777 /* server.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F46FD1A1810092400382777 /* server.c */; };
+		9F46FD2C1810092400382777 /* sha-1.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F46FD1B1810092400382777 /* sha-1.c */; };
 		9F52B00E17CB9449009B497E /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9663F117CB8EAE00C315A5 /* CoreImage.framework */; };
 		9F52B00F17CB9462009B497E /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F9663F317CB8EB700C315A5 /* CoreVideo.framework */; };
 		9F52B01517CB9495009B497E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F52B01417CB9495009B497E /* CoreMedia.framework */; };
@@ -78,6 +95,8 @@
 		9FA787E117CB755B00F0BD40 /* PlayVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA787E017CB755B00F0BD40 /* PlayVideoViewController.m */; };
 		9FA787E417CB757700F0BD40 /* RecordVideoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FA787E317CB757700F0BD40 /* RecordVideoViewController.mm */; };
 		9FB1B8EE1801685000E3ACBA /* WhatAmIdoing.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9FB1B8EC1801685000E3ACBA /* WhatAmIdoing.xcdatamodeld */; };
+		9FDED6E8181025DF00916FC1 /* WhatAmIDoingWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FDED6E7181025DF00916FC1 /* WhatAmIDoingWebSocket.m */; };
+		9FFAE8671810579A0077EBFB /* LinkedList.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FFAE8661810579A0077EBFB /* LinkedList.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +124,30 @@
 		9F35E61718082CB200AD4F79 /* ThisIsWhatIamDoing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThisIsWhatIamDoing.h; sourceTree = "<group>"; };
 		9F35E61818082CB200AD4F79 /* ThisIsWhatIamDoing.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThisIsWhatIamDoing.m; sourceTree = "<group>"; };
 		9F35E61A18082CB200AD4F79 /* ThisIsWhatIamDoing-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ThisIsWhatIamDoing-Prefix.pch"; sourceTree = "<group>"; };
+		9F46FD021810054200382777 /* libwebsockets.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebsockets.a; path = lib/libwebsockets.a; sourceTree = "<group>"; };
+		9F46FD051810092400382777 /* base64-decode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "base64-decode.c"; sourceTree = "<group>"; };
+		9F46FD061810092400382777 /* BLAsyncMessageQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLAsyncMessageQueue.h; sourceTree = "<group>"; };
+		9F46FD071810092400382777 /* BLAsyncMessageQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLAsyncMessageQueue.m; sourceTree = "<group>"; };
+		9F46FD081810092400382777 /* client-handshake.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "client-handshake.c"; sourceTree = "<group>"; };
+		9F46FD091810092400382777 /* client-parser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "client-parser.c"; sourceTree = "<group>"; };
+		9F46FD0A1810092400382777 /* client.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = client.c; sourceTree = "<group>"; };
+		9F46FD0B1810092400382777 /* daemonize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = daemonize.c; sourceTree = "<group>"; };
+		9F46FD0C1810092400382777 /* extension-deflate-frame.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "extension-deflate-frame.c"; sourceTree = "<group>"; };
+		9F46FD0D1810092400382777 /* extension-deflate-frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "extension-deflate-frame.h"; sourceTree = "<group>"; };
+		9F46FD0E1810092400382777 /* extension-deflate-stream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "extension-deflate-stream.c"; sourceTree = "<group>"; };
+		9F46FD0F1810092400382777 /* extension-deflate-stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "extension-deflate-stream.h"; sourceTree = "<group>"; };
+		9F46FD101810092400382777 /* extension.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = extension.c; sourceTree = "<group>"; };
+		9F46FD111810092400382777 /* getifaddrs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = getifaddrs.c; sourceTree = "<group>"; };
+		9F46FD121810092400382777 /* getifaddrs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = getifaddrs.h; sourceTree = "<group>"; };
+		9F46FD131810092400382777 /* handshake.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = handshake.c; sourceTree = "<group>"; };
+		9F46FD141810092400382777 /* libwebsockets.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = libwebsockets.c; sourceTree = "<group>"; };
+		9F46FD151810092400382777 /* libwebsockets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libwebsockets.h; sourceTree = "<group>"; };
+		9F46FD161810092400382777 /* output.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = output.c; sourceTree = "<group>"; };
+		9F46FD171810092400382777 /* parsers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = parsers.c; sourceTree = "<group>"; };
+		9F46FD181810092400382777 /* private-libwebsockets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "private-libwebsockets.h"; sourceTree = "<group>"; };
+		9F46FD191810092400382777 /* server-handshake.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "server-handshake.c"; sourceTree = "<group>"; };
+		9F46FD1A1810092400382777 /* server.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = server.c; sourceTree = "<group>"; };
+		9F46FD1B1810092400382777 /* sha-1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "sha-1.c"; sourceTree = "<group>"; };
 		9F52B01017CB946B009B497E /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		9F52B01217CB9472009B497E /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		9F52B01417CB9495009B497E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -176,19 +219,6 @@
 		9FA53866180C9C2000500272 /* DistancePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistancePickerView.m; sourceTree = "<group>"; };
 		9FA5386D180C9C3400500272 /* ActionSheetPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActionSheetPicker.h; sourceTree = "<group>"; };
 		9FA53871180D4EDF00500272 /* libUnittWebSocketClient.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUnittWebSocketClient.a; path = lib/libUnittWebSocketClient.a; sourceTree = "<group>"; };
-		9FA53874180D4F3700500272 /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
-		9FA53875180D4F3700500272 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
-		9FA53876180D4F3700500272 /* HandshakeHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandshakeHeader.h; sourceTree = "<group>"; };
-		9FA53877180D4F3700500272 /* MutableQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MutableQueue.h; sourceTree = "<group>"; };
-		9FA53878180D4F3700500272 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
-		9FA53879180D4F3700500272 /* WebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocket.h; sourceTree = "<group>"; };
-		9FA5387A180D4F3700500272 /* WebSocket00.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocket00.h; sourceTree = "<group>"; };
-		9FA5387B180D4F3700500272 /* WebSocket07.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocket07.h; sourceTree = "<group>"; };
-		9FA5387C180D4F3700500272 /* WebSocket08.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocket08.h; sourceTree = "<group>"; };
-		9FA5387D180D4F3700500272 /* WebSocket10.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocket10.h; sourceTree = "<group>"; };
-		9FA5387E180D4F3700500272 /* WebSocketConnectConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocketConnectConfig.h; sourceTree = "<group>"; };
-		9FA5387F180D4F3700500272 /* WebSocketFragment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocketFragment.h; sourceTree = "<group>"; };
-		9FA53880180D4F3700500272 /* WebSocketMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSocketMessage.h; sourceTree = "<group>"; };
 		9FA787A117CB6F5500F0BD40 /* VideoPlayRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoPlayRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FA787A417CB6F5500F0BD40 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9FA787A617CB6F5500F0BD40 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -218,6 +248,11 @@
 		9FA787E317CB757700F0BD40 /* RecordVideoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RecordVideoViewController.mm; sourceTree = "<group>"; };
 		9FB1B8A51800E20200E3ACBA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9FB1B8ED1801685000E3ACBA /* WhatAmIdoing.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WhatAmIdoing.xcdatamodel; sourceTree = "<group>"; };
+		9FDED6E6181025DF00916FC1 /* WhatAmIDoingWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhatAmIDoingWebSocket.h; sourceTree = "<group>"; };
+		9FDED6E7181025DF00916FC1 /* WhatAmIDoingWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhatAmIDoingWebSocket.m; sourceTree = "<group>"; };
+		9FFAE8651810579A0077EBFB /* LinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkedList.h; sourceTree = "<group>"; };
+		9FFAE8661810579A0077EBFB /* LinkedList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkedList.m; sourceTree = "<group>"; };
+		9FFAE868181058F80077EBFB /* DynamicSizedArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DynamicSizedArray.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +315,36 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		9F46FD041810092400382777 /* libwebsockets */ = {
+			isa = PBXGroup;
+			children = (
+				9F46FD051810092400382777 /* base64-decode.c */,
+				9F46FD061810092400382777 /* BLAsyncMessageQueue.h */,
+				9F46FD071810092400382777 /* BLAsyncMessageQueue.m */,
+				9F46FD081810092400382777 /* client-handshake.c */,
+				9F46FD091810092400382777 /* client-parser.c */,
+				9F46FD0A1810092400382777 /* client.c */,
+				9F46FD0B1810092400382777 /* daemonize.c */,
+				9F46FD0C1810092400382777 /* extension-deflate-frame.c */,
+				9F46FD0D1810092400382777 /* extension-deflate-frame.h */,
+				9F46FD0E1810092400382777 /* extension-deflate-stream.c */,
+				9F46FD0F1810092400382777 /* extension-deflate-stream.h */,
+				9F46FD101810092400382777 /* extension.c */,
+				9F46FD111810092400382777 /* getifaddrs.c */,
+				9F46FD121810092400382777 /* getifaddrs.h */,
+				9F46FD131810092400382777 /* handshake.c */,
+				9F46FD141810092400382777 /* libwebsockets.c */,
+				9F46FD151810092400382777 /* libwebsockets.h */,
+				9F46FD161810092400382777 /* output.c */,
+				9F46FD171810092400382777 /* parsers.c */,
+				9F46FD181810092400382777 /* private-libwebsockets.h */,
+				9F46FD191810092400382777 /* server-handshake.c */,
+				9F46FD1A1810092400382777 /* server.c */,
+				9F46FD1B1810092400382777 /* sha-1.c */,
+			);
+			path = libwebsockets;
+			sourceTree = "<group>";
+		};
 		9FA53859180C9C2000500272 /* Pickers */ = {
 			isa = PBXGroup;
 			children = (
@@ -298,26 +363,6 @@
 				9FA53866180C9C2000500272 /* DistancePickerView.m */,
 			);
 			path = Pickers;
-			sourceTree = "<group>";
-		};
-		9FA53873180D4F3700500272 /* unitsocket */ = {
-			isa = PBXGroup;
-			children = (
-				9FA53874180D4F3700500272 /* AsyncSocket.h */,
-				9FA53875180D4F3700500272 /* GCDAsyncSocket.h */,
-				9FA53876180D4F3700500272 /* HandshakeHeader.h */,
-				9FA53877180D4F3700500272 /* MutableQueue.h */,
-				9FA53878180D4F3700500272 /* NSData+Base64.h */,
-				9FA53879180D4F3700500272 /* WebSocket.h */,
-				9FA5387A180D4F3700500272 /* WebSocket00.h */,
-				9FA5387B180D4F3700500272 /* WebSocket07.h */,
-				9FA5387C180D4F3700500272 /* WebSocket08.h */,
-				9FA5387D180D4F3700500272 /* WebSocket10.h */,
-				9FA5387E180D4F3700500272 /* WebSocketConnectConfig.h */,
-				9FA5387F180D4F3700500272 /* WebSocketFragment.h */,
-				9FA53880180D4F3700500272 /* WebSocketMessage.h */,
-			);
-			path = unitsocket;
 			sourceTree = "<group>";
 		};
 		9FA7879817CB6F5500F0BD40 = {
@@ -355,6 +400,7 @@
 		9FA787A317CB6F5500F0BD40 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9F46FD021810054200382777 /* libwebsockets.a */,
 				9FA53871180D4EDF00500272 /* libUnittWebSocketClient.a */,
 				9F0ED71017CD335400555D3C /* libcrypto.a */,
 				9F0ED70C17CD332700555D3C /* libssl.a */,
@@ -380,7 +426,10 @@
 		9FA787AA17CB6F5500F0BD40 /* VideoPlayRecord */ = {
 			isa = PBXGroup;
 			children = (
-				9FA53873180D4F3700500272 /* unitsocket */,
+				9FFAE868181058F80077EBFB /* DynamicSizedArray.h */,
+				9FFAE8651810579A0077EBFB /* LinkedList.h */,
+				9FFAE8661810579A0077EBFB /* LinkedList.m */,
+				9F46FD041810092400382777 /* libwebsockets */,
 				9FA5386D180C9C3400500272 /* ActionSheetPicker.h */,
 				9FA53859180C9C2000500272 /* Pickers */,
 				9FA5382E180C1A3F00500272 /* SBJson.h */,
@@ -449,6 +498,8 @@
 				9FA53851180C743800500272 /* InvitePickerDelegate.m */,
 				9FA53856180C79D000500272 /* InvitePickerDataSource.h */,
 				9FA53857180C79D000500272 /* InvitePickerDataSource.m */,
+				9FDED6E6181025DF00916FC1 /* WhatAmIDoingWebSocket.h */,
+				9FDED6E7181025DF00916FC1 /* WhatAmIDoingWebSocket.m */,
 			);
 			path = VideoPlayRecord;
 			sourceTree = "<group>";
@@ -514,6 +565,11 @@
 				CLASSPREFIX = WhatAmIDoing;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "What am I doing";
+				TargetAttributes = {
+					9FA787A017CB6F5500F0BD40 = {
+						DevelopmentTeam = VG3ZD9AV4F;
+					};
+				};
 			};
 			buildConfigurationList = 9FA7879C17CB6F5500F0BD40 /* Build configuration list for PBXProject "VideoPlayRecord" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -588,6 +644,7 @@
 			files = (
 				9F16E47217CD7ECF002EEA3F /* base64.c in Sources */,
 				9FA5384C180C1A3F00500272 /* SBJsonStreamTokeniser.m in Sources */,
+				9F46FD1E1810092400382777 /* client-handshake.c in Sources */,
 				9FA5382D180C183700500272 /* Logout.m in Sources */,
 				9F16E47317CD7ECF002EEA3F /* base64.h in Sources */,
 				9FA5384F180C56D000500272 /* InviteEmailList.m in Sources */,
@@ -596,36 +653,54 @@
 				9F16E47617CD7ECF002EEA3F /* SocketRocket-Prefix.pch in Sources */,
 				9FA53847180C1A3F00500272 /* SBJsonStreamParser.m in Sources */,
 				9F16E47717CD7ECF002EEA3F /* SRWebSocket.h in Sources */,
+				9F46FD1C1810092400382777 /* base64-decode.c in Sources */,
 				9F16E47817CD7ECF002EEA3F /* SRWebSocket.m in Sources */,
 				9FA53845180C1A3F00500272 /* SBJsonStreamWriter.m in Sources */,
 				9FA787B117CB6F5500F0BD40 /* main.m in Sources */,
+				9F46FD271810092400382777 /* libwebsockets.c in Sources */,
+				9F46FD2C1810092400382777 /* sha-1.c in Sources */,
 				9FA53846180C1A3F00500272 /* SBJsonStreamParserAccumulator.m in Sources */,
+				9FFAE8671810579A0077EBFB /* LinkedList.m in Sources */,
 				9FA787B517CB6F5500F0BD40 /* WhatAmIDoingAppDelegate.m in Sources */,
 				9FA5384B180C1A3F00500272 /* SBJsonStreamParserState.m in Sources */,
 				9FA5386B180C9C2000500272 /* ActionSheetStringPicker.m in Sources */,
 				9FA787C417CB6F5600F0BD40 /* WhatAmIDoingViewController.m in Sources */,
 				9FA53843180C1A3F00500272 /* SBJsonStreamWriterState.m in Sources */,
 				9FA53848180C1A3F00500272 /* SBJsonStreamParserAdapter.m in Sources */,
+				9F46FD231810092400382777 /* extension-deflate-stream.c in Sources */,
+				9F46FD261810092400382777 /* handshake.c in Sources */,
+				9F46FD2B1810092400382777 /* server.c in Sources */,
 				9FA787DE17CB753C00F0BD40 /* MergeVideoViewController.m in Sources */,
 				9F2719AC180B8C2100DA873E /* SendInvite.m in Sources */,
 				9FA787E117CB755B00F0BD40 /* PlayVideoViewController.m in Sources */,
 				9FA787E417CB757700F0BD40 /* RecordVideoViewController.mm in Sources */,
+				9F46FD201810092400382777 /* client.c in Sources */,
+				9F46FD1F1810092400382777 /* client-parser.c in Sources */,
 				9F0ED71317CD3A0F00555D3C /* fmemopen.c in Sources */,
 				9FA5386A180C9C2000500272 /* ActionSheetDistancePicker.m in Sources */,
 				9F619E5117CECB46008782BA /* NSData+Base64.m in Sources */,
 				9F619E5E17CFB95D008782BA /* theBase64.m in Sources */,
+				9F46FD1D1810092400382777 /* BLAsyncMessageQueue.m in Sources */,
+				9F46FD221810092400382777 /* extension-deflate-frame.c in Sources */,
 				9F23CBE7180B5EB300388D54 /* WhatAmIDoingConstants.m in Sources */,
 				9FA53869180C9C2000500272 /* ActionSheetDatePicker.m in Sources */,
+				9F46FD211810092400382777 /* daemonize.c in Sources */,
 				9FA5386C180C9C2000500272 /* DistancePickerView.m in Sources */,
 				9FA53867180C9C2000500272 /* AbstractActionSheetPicker.m in Sources */,
 				9FA53852180C743800500272 /* InvitePickerDelegate.m in Sources */,
+				9F46FD241810092400382777 /* extension.c in Sources */,
 				9FB1B8EE1801685000E3ACBA /* WhatAmIdoing.xcdatamodeld in Sources */,
 				9FA53844180C1A3F00500272 /* SBJsonParser.m in Sources */,
 				9FA5384A180C1A3F00500272 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				9F58467F18016B8300CA74DA /* AuthenticationToken.m in Sources */,
+				9F46FD281810092400382777 /* output.c in Sources */,
+				9F46FD291810092400382777 /* parsers.c in Sources */,
+				9F46FD251810092400382777 /* getifaddrs.c in Sources */,
 				9F5846841802B35400CA74DA /* PropertyAccessor.m in Sources */,
 				9FA53868180C9C2000500272 /* ActionSheetCustomPicker.m in Sources */,
 				9FA53849180C1A3F00500272 /* SBJsonWriter.m in Sources */,
+				9F46FD2A1810092400382777 /* server-handshake.c in Sources */,
+				9FDED6E8181025DF00916FC1 /* WhatAmIDoingWebSocket.m in Sources */,
 				9FA53858180C79D000500272 /* InvitePickerDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -758,8 +833,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: kodjo baah (298BH8F8HM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: kodjo baah (298BH8F8HM)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../software/opencvframework\"",
@@ -780,8 +855,8 @@
 				New_Setting = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "49790FC2-C2CA-4278-805E-D9DAC2AA1125";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "49790FC2-C2CA-4278-805E-D9DAC2AA1125";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(TARGET_NAME)";
 				"PUBLIC_HEADERS_FOLDER_PATH[sdk=*]" = "$(CONTENTS_FOLDER_PATH)/include";
 				USER_HEADER_SEARCH_PATHS = "\"$(TARGET_BUILD_DIR)/usr/local/lib/include\" \"$(OBJROOT)/include\" $(SRCROOT)/include";
@@ -794,7 +869,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: kodjo baah (298BH8F8HM)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../software/opencvframework\"",
@@ -815,7 +891,7 @@
 				New_Setting = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "49790FC2-C2CA-4278-805E-D9DAC2AA1125";
+				PROVISIONING_PROFILE = "";
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "\"$(TARGET_BUILD_DIR)/usr/local/lib/include\" \"$(OBJROOT)/include\" $(SRCROOT)/include";
 				WRAPPER_EXTENSION = app;

@@ -15,6 +15,7 @@
 #import "SendInvite.h"
 #import "Logout.h"
 #import "InvitePickerDelegate.h"
+#import "WhatAmIDoingWebSocket.h"
 #import "InvitePickerDataSource.h"
 
 
@@ -38,9 +39,11 @@
     Logout *logout;
     UIActionSheet *actionSheet; // in which we open picker dynamically
     UIPickerView *pickerView;
+    WhatAmIDoingWebSocket *whatAmIdoingWebSocket;
     
 }
 
+@property (nonatomic, strong) WhatAmIDoingWebSocket *whatAmIdoingWebSocket;
 @property (nonatomic, retain) UIPickerView *pickerView;
 @property (nonatomic,retain) IBOutlet UIActionSheet *actionSheet;
 @property (nonatomic, strong) Logout *logout;

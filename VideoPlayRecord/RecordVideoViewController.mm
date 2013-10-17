@@ -18,7 +18,10 @@
 #import "SBJson.h"
 #import "InviteEmailList.h"
 
+
 using namespace cv;
+
+
 
 @interface RecordVideoViewController ()
 
@@ -28,6 +31,7 @@ using namespace cv;
 
 @implementation RecordVideoViewController
 
+@synthesize whatAmIdoingWebSocket = _whatAmIdoingWebSocket;
 @synthesize sendInvite = _sendInvite;
 @synthesize constants = _constants;
 @synthesize action = _action;
@@ -55,13 +59,8 @@ using namespace cv;
 }
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"bfore 1");
     [self.emal resignFirstResponder];
-    NSLog(@"bfore 2");
-    [self.pickerView removeFromSuperview];
-    NSLog(@"bfore 3");
-    [self.actionSheet removeFromSuperview];
-    NSLog(@"bfore 4");
+   
 }
 
 - (void)viewDidUnload
@@ -109,6 +108,9 @@ using namespace cv;
     NSURL *urlNew = [NSURL URLWithString:self.publishVideoUrl];
     self.webSocketRequest = [NSMutableURLRequest requestWithURL:urlNew];
     
+    NSLog(@"Just before");
+    self.whatAmIdoingWebSocket = [[WhatAmIDoingWebSocket alloc] init];
+    
     /*
      * Setting the video camera
      */
@@ -138,11 +140,11 @@ using namespace cv;
         Mat image_copy;
         UIImage *resultUIImage = [self UIImageFromCVMat:image];
         NSData *tempData = [NSData dataWithData:UIImageJPEGRepresentation(resultUIImage,1.0)];
-        NSString* ns = [tempData base64EncodedString];
-        tempData = nil;
-        resultUIImage = nil;
+        //NSString* ns = [tempData base64EncodedString];
+        //tempData = nil;
+        //resultUIImage = nil;
         
-        
+        [self.whatAmIdoingWebSocket send:tempData];
        // NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
         //[parameters setObject:ns forKey:@"frame"];
         /*
@@ -158,7 +160,7 @@ using namespace cv;
        // NSString * converted =[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         //NSLog(@"Data =%@",converted);
         //[self.webSocket send:converted];
-         [self.webSocket send:ns];
+         //[self.webSocket send:ns];
         
         
     }
@@ -195,6 +197,12 @@ using namespace cv;
 
 - (IBAction)recordVideo:(id)sender {
     
+    NSLog(@"***********---- should be seeing stuff");
+    
+    [self.whatAmIdoingWebSocket open:self.token.playSession];
+      [self.videoCamera start];
+    /*
+    
     if (self.webSocket == nil) {
         NSLog(@"---request-url:%@:",self.webSocketRequest.URL);
         self.webSocket = [[SRWebSocket alloc]  initWithURLRequest:self.webSocketRequest];
@@ -210,6 +218,7 @@ using namespace cv;
         
     }
     _startVideoButton.enabled = NO;
+     */
 }
 
 -(IBAction) stopVideo:(id)sender
@@ -319,6 +328,9 @@ using namespace cv;
     
     return finalImage;
 }
+
+
+
 
 
 
