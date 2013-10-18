@@ -44,18 +44,16 @@
 - (void)pushFront:(char *)p
 {
     
-    
-   
-        
     Node *node = [self getNextFreeNode];
         // and the length of the input string.
         size_t len = strlen(p);
         
         //allocate space for the result (including NUL terminator).
-        node->value = malloc(len+1);
-       memcpy(node->value,p,len);
-    node->value[len] = '\0';
-    
+       node->value = malloc(len+1);
+     //  memcpy(node->value,p,len);
+   // NSLog(@"--%s",p);
+    //node->value[len] = '\0';
+    node->value = p;
     //bcopy(p,&node->value,len);
     //node->value = p;
     node->nextNodeOffset = topNodeOffset;
@@ -83,10 +81,10 @@
     }
 }
 
-- (const char *)popFront
+- (char *)popFront
 {
     if(topNodeOffset == FINAL_NODE_OFFSET) {
-        return "-1";
+        return "";
     }
     
     Node *node = [self nodeAtOffset:topNodeOffset];
@@ -133,10 +131,10 @@
 
     // Make this node available again
     searchNode->nextNodeOffset = freeNodeOffset;
-    searchNode->value = 0;
+    searchNode->value = NULL;
     freeNodeOffset = [self offsetOfNode:searchNode];
     
-    return value;
+    return (char *)value;
 }
 
 #pragma mark - utility functions
@@ -172,11 +170,11 @@
 {
     Node *node = (Node *)nodeCache.mutableBytes + offset;
     for (int i=0; i<count - 1; i++) {
-        node->value = 0;
+        node->value = NULL;
         node->nextNodeOffset = offset + i + 1;
         node++;
     }
-    node->value = 0;
+    node->value = NULL;
     // Set the next node offset to make sure we don't continue
     node->nextNodeOffset = FINAL_NODE_OFFSET;
 }
