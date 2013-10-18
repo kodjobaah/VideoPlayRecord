@@ -12,6 +12,10 @@
 
 @synthesize wsi=_wsi;
 @synthesize context = _context;
+@synthesize camera = _camera;
+@synthesize recordingStatus = _recordingStatus;
+@synthesize startVideoButton = _startVideoButton;
+@synthesize stopVideoButton = _stopVideoButton;
 
 
 static  LinkedList *theQueue;
@@ -19,7 +23,29 @@ int force_exit = 0;
 
 static int pollingInterval = 20000;
 
-static int callback_http(struct libwebsocket_context *context,
+static int status = 0;
+
+-(WhatAmIDoingWebSocket *) initWithCamera:(CvVideoCamera *)theCamera {
+    self = [super init];
+    
+    if(self) {
+        _camera = theCamera;
+    }
+    return self;
+}
+
+-(int) connectionStatus {
+    
+    if (status == 1)
+        return YES;
+    
+    return NO;
+    
+}
+-(void) close {
+    libwebsocket_context_destroy(self.context);
+}
+ static int callback_http(struct libwebsocket_context *context,
                          struct libwebsocket *wsi,
                          enum libwebsocket_callback_reasons reason, void *user,
                          void *in, size_t len)
@@ -30,10 +56,12 @@ static int callback_http(struct libwebsocket_context *context,
             
         case LWS_CALLBACK_CLOSED:
             NSLog(@"--- libwebsocket close");
+            status =0;
             break;
             
         case LWS_CALLBACK_CLIENT_ESTABLISHED:
-            
+           
+            status = 1;
             NSLog(@"--- libwebsocket client established");
             /*
              * start the ball rolling,
@@ -170,6 +198,11 @@ void sighandler(int sig)
             
             /* For now infinite loop which proceses events and wait for n ms. */
             
+            [self.camera start];
+            self.stopVideoButton.enabled = YES;
+            self.startVideoButton.enabled = NO;
+            self.recordingStatus = 1;
+            
             while (true) {
                 @autoreleasepool {
                     libwebsocket_service(self.context, 0);
@@ -178,12 +211,13 @@ void sighandler(int sig)
                     usleep(pollingInterval);
                 }
                 
-                /*
                  dispatch_async(dispatch_get_main_queue(), ^{
-                 self.serverStoppedCompletionBlock();
-                 self.serverStoppedCompletionBlock = nil;
+                     [self.camera stop];
+                     self.recordingStatus = 1;
+                     self.stopVideoButton.enabled = NO;
+                     self.startVideoButton.enabled = YES;
                  });
-                 */
+                
             }
         }
         
@@ -212,12 +246,12 @@ callback_what_am_i_doing(struct libwebsocket_context *context,
     switch (reason) {
             
         case LWS_CALLBACK_CLOSED:
-            NSLog(@"--- libwebsocket close");
+            NSLog(@"****************** libwebsocket close");
             break;
             
         case LWS_CALLBACK_CLIENT_ESTABLISHED:
             
-            NSLog(@"--- libwebsocket client established");
+            NSLog(@"******************* libwebsocket client established");
             /*
              * start the ball rolling,
              * LWS_CALLBACK_CLIENT_WRITEABLE will come next service
@@ -227,7 +261,7 @@ callback_what_am_i_doing(struct libwebsocket_context *context,
             break;
             
         case LWS_CALLBACK_CLIENT_RECEIVE:
-            NSLog(@"--libwebsocket client receive--");
+            NSLog(@"******************* libwebsocket client receive--");
             break;
             
         case LWS_CALLBACK_CLIENT_WRITEABLE:

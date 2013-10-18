@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SRWebSocket.h"
 #import <opencv2/highgui/cap_ios.h>
 #import "AuthenticationToken.h"
 #import "PropertyAccessor.h"
@@ -20,15 +19,13 @@
 
 
 
-@interface RecordVideoViewController : UIViewController<CvVideoCameraDelegate,SRWebSocketDelegate,NSURLConnectionDelegate> {
-    SRWebSocket *webSocket;
+@interface RecordVideoViewController : UIViewController<CvVideoCameraDelegate> {
     NSMutableArray *_messages;
     CvVideoCamera *videoCamera;
     NSMutableData *responseData;
     AuthenticationToken *authenticationToken;
     NSManagedObjectContext *managedObjectContext;
-    NSMutableURLRequest *webSocketRequest;
-    BOOL startRecording;
+    NSInteger *startRecording;
     BOOL *errorOccurred;
     NSString *publishVideoUrl;
     PropertyAccessor *propertyAccessor;
@@ -40,9 +37,11 @@
     UIActionSheet *actionSheet; // in which we open picker dynamically
     UIPickerView *pickerView;
     WhatAmIDoingWebSocket *whatAmIdoingWebSocket;
+    int whatAmIdoingPort;
     
 }
 
+@property int whatAmIdoingPort;
 @property (nonatomic, strong) WhatAmIDoingWebSocket *whatAmIdoingWebSocket;
 @property (nonatomic, retain) UIPickerView *pickerView;
 @property (nonatomic,retain) IBOutlet UIActionSheet *actionSheet;
@@ -55,9 +54,7 @@
 @property (nonatomic) BOOL *errorOccured;
 @property (nonatomic, strong) PropertyAccessor *propertyAccessor;
 @property (nonatomic, strong) NSString *publishVideoUrl;
-@property (nonatomic, strong) SRWebSocket *webSocket;
-@property (strong, nonatomic) NSMutableURLRequest *webSocketRequest;
-@property (nonatomic) BOOL startRecording;
+@property (nonatomic) NSInteger *startRecording;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong, readonly) NSString *message;
 @property (nonatomic, strong) CvVideoCamera* videoCamera;
