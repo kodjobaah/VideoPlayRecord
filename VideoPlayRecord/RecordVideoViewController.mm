@@ -14,6 +14,7 @@
 #import "PropertyAccessor.h"
 #import "WhatAmIDoingViewController.h"
 #import "InviteEmailList.h"
+#import "NSData+Base64.h"
 
 
 using namespace cv;
@@ -73,6 +74,7 @@ using namespace cv;
     _startVideoButton.enabled = YES;
     _stopVideoButton.enabled = NO;
     self.sendInvite = [[SendInvite alloc] initWithEmail: self.emal];
+    self.logout = [[Logout alloc] initWithController:self];
     
     /*
      * Getting the authentication token from core data
@@ -96,13 +98,6 @@ using namespace cv;
     self.publishVideoUrl = url;
     self.whatAmIdoingPort= [[self.propertyAccessor getPropertyValue:@"WHAT_AM_I_DOING_PORT"] intValue];
     
-    /*
-     * Creating the websocket request used to publish the movie
-     */
-    self.whatAmIdoingWebSocket = [[WhatAmIDoingWebSocket alloc] initWithCamera:self.videoCamera];
-    self.whatAmIdoingWebSocket.recordingStatus = 0;
-    self.whatAmIdoingWebSocket.startVideoButton = self.startVideoButton;
-    self.whatAmIdoingWebSocket.stopVideoButton = self.stopVideoButton;
     
     /*
      * Setting the video camera
@@ -114,6 +109,14 @@ using namespace cv;
     self.videoCamera.defaultFPS = 30;
     self.videoCamera.delegate = self;
     self.videoCamera.grayscaleMode = NO;
+  
+    /*
+     * Creating the websocket request used to publish the movie
+     */
+    self.whatAmIdoingWebSocket = [[WhatAmIDoingWebSocket alloc] initWithCamera:self.videoCamera];
+    self.whatAmIdoingWebSocket.recordingStatus = 0;
+    self.whatAmIdoingWebSocket.startVideoButton = self.startVideoButton;
+    self.whatAmIdoingWebSocket.stopVideoButton = self.stopVideoButton;
     
 }
 
@@ -129,11 +132,16 @@ using namespace cv;
 #ifdef __cplusplus
 - (void)processImage:(Mat&)image;
 {
-    if ((int)self.startRecording == 1) {
+   // NSLog(@"PROCED IAMGE 1");
+    if ([self.whatAmIdoingWebSocket connectionStatus]) {
         Mat image_copy;
         UIImage *resultUIImage = [self UIImageFromCVMat:image];
         NSData *tempData = [NSData dataWithData:UIImageJPEGRepresentation(resultUIImage,1.0)];
-        [self.whatAmIdoingWebSocket send:tempData];
+        NSString* ns = [tempData base64EncodedString];
+       // tempData = nil;
+        //resultUIImage = nil;
+        [self.whatAmIdoingWebSocket send:ns];
+        
     }
     
 }
@@ -150,7 +158,7 @@ using namespace cv;
                           cancelButtonTitle:@"Ok"
                           otherButtonTitles: nil];
         [mes show];
-    }else if(self.whatAmIdoingWebSocket.recordingStatus == 1) {
+    }else if([self.whatAmIdoingWebSocket connectionStatus] == 1) {
         self.action = [self.constants inviteAction];
         [self.sendInvite sendInvitation:self.token.playSession];
     } else {
@@ -167,32 +175,39 @@ using namespace cv;
 }
 
 - (IBAction)recordVideo:(id)sender {
-    
+
+    [self.videoCamera start];
     [self.whatAmIdoingWebSocket open:self.token.playSession];
-   
+
     
 }
 
 -(IBAction) stopVideo:(id)sender
 {
-    _startVideoButton.enabled = YES;
-    _stopVideoButton.enabled = NO;
-    [self.videoCamera stop];
-    [self.whatAmIdoingWebSocket close];
-    self.startRecording = NO;
+    if (self.whatAmIdoingWebSocket.connectionStatus == 1) {
+        _startVideoButton.enabled = YES;
+        _stopVideoButton.enabled = NO;
+        [self.videoCamera stop];
+        [self.whatAmIdoingWebSocket close];
+        self.startRecording = NO;
+    }
     
 }
 - (IBAction)logout:(id)sender {
     
-    [self.whatAmIdoingWebSocket close];
-    _startVideoButton.enabled = NO;
-    _stopVideoButton.enabled = NO;
-    self.startRecording = NO;
     
+    if (self.whatAmIdoingWebSocket.connectionStatus == 1) {
+        [self.videoCamera stop];
+        [self.whatAmIdoingWebSocket close];
+        
+        _startVideoButton.enabled = NO;
+        _stopVideoButton.enabled = NO;
+        self.startRecording = NO;
+    }
+
     self.action = [self.constants logoutAction];
-    
     [self.logout logout:self.token.playSession];
-    
+        
 }
 
 -(UIImage *)UIImageFromCVMat:(cv::Mat)cvMat

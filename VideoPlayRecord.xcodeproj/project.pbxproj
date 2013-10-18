@@ -82,6 +82,7 @@
 		9FAB64131810C3C40094A628 /* SBJsonStreamWriterAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FAB64071810C3C40094A628 /* SBJsonStreamWriterAccumulator.m */; };
 		9FAB64141810C3C40094A628 /* SBJsonStreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FAB64091810C3C40094A628 /* SBJsonStreamWriterState.m */; };
 		9FAB64151810C3C40094A628 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FAB640B1810C3C40094A628 /* SBJsonWriter.m */; };
+		9FAB64181810E13A0094A628 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FAB64171810E13A0094A628 /* NSData+Base64.m */; };
 		9FB1B8EE1801685000E3ACBA /* WhatAmIdoing.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9FB1B8EC1801685000E3ACBA /* WhatAmIdoing.xcdatamodeld */; };
 		9FDED6E8181025DF00916FC1 /* WhatAmIDoingWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FDED6E7181025DF00916FC1 /* WhatAmIDoingWebSocket.m */; };
 		9FFAE8671810579A0077EBFB /* LinkedList.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FFAE8661810579A0077EBFB /* LinkedList.m */; };
@@ -215,6 +216,8 @@
 		9FAB64091810C3C40094A628 /* SBJsonStreamWriterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriterState.m; sourceTree = "<group>"; };
 		9FAB640A1810C3C40094A628 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		9FAB640B1810C3C40094A628 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		9FAB64161810E13A0094A628 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		9FAB64171810E13A0094A628 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		9FB1B8A51800E20200E3ACBA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9FB1B8ED1801685000E3ACBA /* WhatAmIdoing.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WhatAmIdoing.xcdatamodel; sourceTree = "<group>"; };
 		9FDED6E6181025DF00916FC1 /* WhatAmIDoingWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhatAmIDoingWebSocket.h; sourceTree = "<group>"; };
@@ -395,6 +398,8 @@
 		9FA787AA17CB6F5500F0BD40 /* VideoPlayRecord */ = {
 			isa = PBXGroup;
 			children = (
+				9FAB64161810E13A0094A628 /* NSData+Base64.h */,
+				9FAB64171810E13A0094A628 /* NSData+Base64.m */,
 				9FD6F1BB1810BCC5000C28AA /* SBJson */,
 				9FFAE868181058F80077EBFB /* DynamicSizedArray.h */,
 				9FFAE8651810579A0077EBFB /* LinkedList.h */,
@@ -617,6 +622,7 @@
 				9F46FD2B1810092400382777 /* server.c in Sources */,
 				9F2719AC180B8C2100DA873E /* SendInvite.m in Sources */,
 				9FAB64141810C3C40094A628 /* SBJsonStreamWriterState.m in Sources */,
+				9FAB64181810E13A0094A628 /* NSData+Base64.m in Sources */,
 				9FA787E417CB757700F0BD40 /* RecordVideoViewController.mm in Sources */,
 				9F46FD201810092400382777 /* client.c in Sources */,
 				9F46FD1F1810092400382777 /* client-parser.c in Sources */,

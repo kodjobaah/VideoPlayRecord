@@ -41,15 +41,28 @@
 }
 
 #pragma mark - DynamicSizedArray Protocol methods
-- (void)pushFront:(const char *)p
+- (void)pushFront:(char *)p
 {
+    
+    
+   
+        
     Node *node = [self getNextFreeNode];
-    node->value = p;
+        // and the length of the input string.
+        size_t len = strlen(p);
+        
+        //allocate space for the result (including NUL terminator).
+        node->value = malloc(len+1);
+       memcpy(node->value,p,len);
+    node->value[len] = '\0';
+    
+    //bcopy(p,&node->value,len);
+    //node->value = p;
     node->nextNodeOffset = topNodeOffset;
     topNodeOffset = [self offsetOfNode:node];
 }
 
-- (void)pushBack:(const char *)p
+- (void)pushBack:(char *)p
 {
     // Prepare the new node
     Node *node = [self getNextFreeNode];
@@ -70,7 +83,7 @@
     }
 }
 
-- (const char*)popFront
+- (const char *)popFront
 {
     if(topNodeOffset == FINAL_NODE_OFFSET) {
         return "-1";
@@ -91,12 +104,12 @@
     return value;
 }
 
-- (const char *)popBack
+- (char *)popBack
 {
     // Find the penultimate node
     if(topNodeOffset == FINAL_NODE_OFFSET) {
         // The queue is empty
-        return "-1";
+        return "";
     }
     
     Node *searchNode = [self nodeAtOffset:topNodeOffset];

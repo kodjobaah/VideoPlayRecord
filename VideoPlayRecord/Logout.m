@@ -23,6 +23,7 @@
 }
 
 -(void) logout:(NSString *) token {
+    NSLog(@"Logging out");
     NSString *hostMessage = [NSString stringWithFormat:@"http://5.79.24.141:9000/invalidateToken?token=%@",token];
     
     NSURL *url=[NSURL URLWithString:hostMessage];

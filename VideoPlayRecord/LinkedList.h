@@ -14,7 +14,7 @@
 typedef struct Node
 {
     int nextNodeOffset;
-    const char *value;
+    char *value;
 } Node;
 
 @interface LinkedList : NSObject<DynamicSizedArray> {

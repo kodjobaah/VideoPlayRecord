@@ -41,11 +41,11 @@
         self.whatAmIdoingUrl = @"http://5.79.24.141:9000/";
     }
     
-    self.registerUrl = [self.propertyAccessor getPropertyValue:@"WHAT_AM_I_DOING_REGISTER_URL"];
+   // self.registerUrl = [self.propertyAccessor getPropertyValue:@"WHAT_AM_I_DOING_REGISTER_URL"];
     
-    if (self.registerUrl == nil) {
+    //if (self.registerUrl == nil) {
         self.registerUrl = @"http://5.79.24.141:9000/registerLogin?";
-    }
+    ///}
     
 
 }
