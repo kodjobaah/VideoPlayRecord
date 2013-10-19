@@ -330,8 +330,6 @@ callback_what_am_i_doing(struct libwebsocket_context *context,
     return 0;
 }
 
-
-
 - (NSString *)base64EncodedString: data
 {
     // Construct an OpenSSL context
