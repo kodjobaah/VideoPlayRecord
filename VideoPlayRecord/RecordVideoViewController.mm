@@ -141,7 +141,7 @@ using namespace cv;
             UIImage *resultUIImage = [self UIImageFromCVMat:image];
             NSData *tempData = [NSData dataWithData:UIImageJPEGRepresentation(resultUIImage,1.0)];
             //NSString* ns = [tempData base64EncodedString];
-            NSString *ns = [self base64EncodedString:tempData];
+            NSString *ns = [self.whatAmIdoingWebSocket base64EncodedString:tempData];
             [self.whatAmIdoingWebSocket send:ns];
             ns = nil;
             tempData = nil;
@@ -267,33 +267,4 @@ using namespace cv;
     
 }
 
-- (NSString *)base64EncodedString: data
-{
-    // Construct an OpenSSL context
-    BIO *context = BIO_new(BIO_s_mem());
-    
-    // Tell the context to encode base64
-    BIO *command = BIO_new(BIO_f_base64());
-    context = BIO_push(command, context);
-    
-    // Encode all the data
-    BIO_write(context, [data bytes], [data length]);
-    BIO_flush(context);
-    
-    // Get the data out of the context
-    char *outputBuffer;
-    long outputLength = BIO_get_mem_data(context, &outputBuffer);
-    
-    NSString *encodedString = [[NSString alloc] initWithUTF8String:outputBuffer];
-    /*
-    NSString *encodedString = [NSString
-                               stringWithCString:outputBuffer
-                               length:outputLength];
-    
-     */
-    //free(outputBuffer);
-    BIO_free_all(context);
-    
-    return encodedString;
-}
 @end

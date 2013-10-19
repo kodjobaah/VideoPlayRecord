@@ -262,7 +262,7 @@ static void lwsl_emit_stderr(int level, const char *line)
         
         //  size_t len = strlen(data);
         NSLog(@"1:%zu",(unsigned long)data.length);
-        [theQueue pushFront:[data copy]] ;
+        [theQueue pushFront:data] ;
         data = nil;
     }
     }
@@ -330,5 +330,38 @@ callback_what_am_i_doing(struct libwebsocket_context *context,
     return 0;
 }
 
+
+
+- (NSString *)base64EncodedString: data
+{
+    // Construct an OpenSSL context
+    BIO *context = BIO_new(BIO_s_mem());
+    
+    // Tell the context to encode base64
+    BIO *command = BIO_new(BIO_f_base64());
+    context = BIO_push(command, context);
+    
+    // Encode all the data
+    BIO_write(context, [data bytes], [data length]);
+    BIO_flush(context);
+    
+    // Get the data out of the context
+    char *outputBuffer;
+    long outputLength = BIO_get_mem_data(context, &outputBuffer);
+    
+     char *bytes = malloc(strlen(outputBuffer)+1);
+    strcpy(bytes, outputBuffer);
+    CFStringRef str = CFStringCreateWithCStringNoCopy(NULL, bytes, kCFStringEncodingUTF8, kCFAllocatorMalloc);
+    /*
+     NSString *encodedString = [NSString
+     stringWithCString:outputBuffer
+     length:outputLength];
+     
+     */
+    //free(outputBuffer);
+    BIO_free_all(context);
+    
+    return CFBridgingRelease(str);
+}
 
 @end
