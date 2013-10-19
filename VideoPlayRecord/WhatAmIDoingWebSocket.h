@@ -21,7 +21,6 @@
     UIButton *stopVideoButton;
  
 }
-
 @property (weak, nonatomic) UIButton *startVideoButton;
 @property (weak, nonatomic) UIButton *stopVideoButton;
 
