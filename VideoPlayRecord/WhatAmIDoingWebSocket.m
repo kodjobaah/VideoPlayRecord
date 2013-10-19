@@ -358,7 +358,6 @@ callback_what_am_i_doing(struct libwebsocket_context *context,
      */
     //free(outputBuffer);
     BIO_free_all(context);
-    
     return CFBridgingRelease(str);
 }
 
