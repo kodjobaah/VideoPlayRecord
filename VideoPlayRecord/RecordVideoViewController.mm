@@ -53,13 +53,13 @@ using namespace cv;
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.emal resignFirstResponder];
-   
+    
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-   
+    
 }
 
 
@@ -109,7 +109,7 @@ using namespace cv;
     self.videoCamera.defaultFPS = 30;
     self.videoCamera.delegate = self;
     self.videoCamera.grayscaleMode = NO;
-  
+    
     /*
      * Creating the websocket request used to publish the movie
      */
@@ -132,13 +132,23 @@ using namespace cv;
 #ifdef __cplusplus
 - (void)processImage:(Mat&)image;
 {
-   // NSLog(@"PROCED IAMGE 1");
+    // NSLog(@"PROCED IAMGE 1");
     if ([self.whatAmIdoingWebSocket connectionStatus]) {
-        Mat image_copy;
-        UIImage *resultUIImage = [self UIImageFromCVMat:image];
-        NSData *tempData = [NSData dataWithData:UIImageJPEGRepresentation(resultUIImage,1.0)];
-        NSString* ns = [tempData base64EncodedString];
-        [self.whatAmIdoingWebSocket send:ns];
+        
+        @autoreleasepool {
+            
+            Mat image_copy;
+            UIImage *resultUIImage = [self UIImageFromCVMat:image];
+            NSData *tempData = [NSData dataWithData:UIImageJPEGRepresentation(resultUIImage,1.0)];
+            //NSString* ns = [tempData base64EncodedString];
+            NSString *ns = [self base64EncodedString:tempData];
+            [self.whatAmIdoingWebSocket send:ns];
+            ns = nil;
+            tempData = nil;
+            resultUIImage = nil;
+            //free(&image);
+        }
+        
         
     }
     
@@ -173,10 +183,10 @@ using namespace cv;
 }
 
 - (IBAction)recordVideo:(id)sender {
-
+    
     [self.videoCamera start];
     [self.whatAmIdoingWebSocket open:self.token.playSession];
-
+    
     
 }
 
@@ -202,10 +212,10 @@ using namespace cv;
         _stopVideoButton.enabled = NO;
         self.startRecording = NO;
     }
-
+    
     self.action = [self.constants logoutAction];
     [self.logout logout:self.token.playSession];
-        
+    
 }
 
 -(UIImage *)UIImageFromCVMat:(cv::Mat)cvMat
@@ -255,5 +265,35 @@ using namespace cv;
     [inviteEmailList displayInvites:sender theToken:self.token.playSession];
     
     
+}
+
+- (NSString *)base64EncodedString: data
+{
+    // Construct an OpenSSL context
+    BIO *context = BIO_new(BIO_s_mem());
+    
+    // Tell the context to encode base64
+    BIO *command = BIO_new(BIO_f_base64());
+    context = BIO_push(command, context);
+    
+    // Encode all the data
+    BIO_write(context, [data bytes], [data length]);
+    BIO_flush(context);
+    
+    // Get the data out of the context
+    char *outputBuffer;
+    long outputLength = BIO_get_mem_data(context, &outputBuffer);
+    
+    NSString *encodedString = [[NSString alloc] initWithUTF8String:outputBuffer];
+    /*
+    NSString *encodedString = [NSString
+                               stringWithCString:outputBuffer
+                               length:outputLength];
+    
+     */
+    //free(outputBuffer);
+    BIO_free_all(context);
+    
+    return encodedString;
 }
 @end

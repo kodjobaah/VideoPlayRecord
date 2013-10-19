@@ -78,8 +78,8 @@
 
 //- (void)replaceObjectAtIndex:(int) withObject:(id)obj;    // replaces object at a given index with the passed object
 
-@property (readonly) TNode *first;
-@property (readonly) TNode *last;
+@property (atomic,retain) TNode *first;
+@property (atomic,retain) TNode *last;
 
 @end
 

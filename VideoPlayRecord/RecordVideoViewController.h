@@ -16,6 +16,8 @@
 #import "InvitePickerDelegate.h"
 #import "WhatAmIDoingWebSocket.h"
 #import "InvitePickerDataSource.h"
+#include <openssl/bio.h>
+#include <openssl/evp.h>
 
 
 
@@ -67,5 +69,6 @@
 - (IBAction)invite:(id)sender;
 - (IBAction)logout:(id)sender;
 - (IBAction)displayInvitePicker:(id)sender;
+- (NSString *)base64EncodedString: data;
 
 @end

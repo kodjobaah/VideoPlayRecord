@@ -46,7 +46,7 @@ static int status = 0;
 -(void) close {
     
     status = 0;
-
+    
     
 }
 static int callback_http(struct libwebsocket_context *context,
@@ -55,11 +55,11 @@ static int callback_http(struct libwebsocket_context *context,
                          void *in, size_t len)
 {
     //NSLog(@"---callback_http");
-   
+    
     switch (reason) {
             
         case LWS_CALLBACK_CLOSED:
-             //NSLog(@"--- libwebsocket close");
+            //NSLog(@"--- libwebsocket close");
             //libwebsocket_context_destroy(context);
             status =0;
             break;
@@ -86,26 +86,28 @@ static int callback_http(struct libwebsocket_context *context,
             
             
             if (status == 1) {
-             NSString *dataToWrite = [theQueue popBack];
-             NSLog(@"data pullued:%lu",(unsigned long)dataToWrite.length);
-            unsigned char *response_buf;
-                count = count + 10;
-            if ((count > 10) && (dataToWrite.length > 1)) {
-             //   NSLog(@"wrting to buffer");
+                @autoreleasepool {
+                    NSString *dataToWrite = [theQueue popBack];
+                    NSLog(@"data pullued:%lu",(unsigned long)dataToWrite.length);
+                    unsigned char *response_buf;
+                    count = count + 10;
+                    if ((count > 10) && (dataToWrite.length > 1)) {
+                        //   NSLog(@"wrting to buffer");
+                        
+                        int len = [dataToWrite lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+                        response_buf = (unsigned char*) malloc(LWS_SEND_BUFFER_PRE_PADDING + len +LWS_SEND_BUFFER_POST_PADDING);
+                        bcopy([dataToWrite cStringUsingEncoding:NSUTF8StringEncoding], &response_buf[LWS_SEND_BUFFER_PRE_PADDING], len);
+                        libwebsocket_write(wsi, &response_buf[LWS_SEND_BUFFER_PRE_PADDING], len, LWS_WRITE_TEXT);
+                        free(response_buf);
+                        //free(dataToWrite);
+                    }
+                    else {
+                        NSLog(@"Attempt to write empty data on the websocket");
+                    }
+                }
                 
-                response_buf = (unsigned char*) malloc(LWS_SEND_BUFFER_PRE_PADDING + dataToWrite.length +LWS_SEND_BUFFER_POST_PADDING);
-                
-                bcopy(CFBridgingRetain(dataToWrite), &response_buf[LWS_SEND_BUFFER_PRE_PADDING], dataToWrite.length);
-                libwebsocket_write(wsi, &response_buf[LWS_SEND_BUFFER_PRE_PADDING], dataToWrite.length, LWS_WRITE_TEXT);
-                free(response_buf);
-                //free(dataToWrite);
-            }
-            else {
-                NSLog(@"Attempt to write empty data on the websocket");
-            }
-            
-            /* get notified as soon as we can write again */
-            libwebsocket_callback_on_writable(context, wsi);
+                /* get notified as soon as we can write again */
+                libwebsocket_callback_on_writable(context, wsi);
             }
             break;
             
@@ -131,8 +133,8 @@ static void lwsl_emit_stderr(int level, const char *line)
 	gettimeofday(&tv, NULL);
     
 	buf[0] = '\0';
-		sprintf(buf, "log - [%ld:%04d] ", tv.tv_sec,
-					(int)(tv.tv_usec / 100));
+    sprintf(buf, "log - [%ld:%04d] ", tv.tv_sec,
+            (int)(tv.tv_usec / 100));
 	
 }
 
@@ -190,15 +192,15 @@ static void lwsl_emit_stderr(int level, const char *line)
             NSLog(@"Able to create context");
             // create client websocket
             wsi = libwebsocket_client_connect(context,
-                                                   "5.79.24.141",
-                                                   9000, // port
-                                                   0, // "ws:" (no SSL)
-                                                   path, // path
-                                                   "5.79.24.141", // host name
-                                                   "controller", // Socket origin name
-                                                   NULL, // libwebsocket protocol name
-                                                   ietf_version
-                                                   );
+                                              "5.79.24.141",
+                                              9000, // port
+                                              0, // "ws:" (no SSL)
+                                              path, // path
+                                              "5.79.24.141", // host name
+                                              "controller", // Socket origin name
+                                              NULL, // libwebsocket protocol name
+                                              ietf_version
+                                              );
             
             
             /*
@@ -247,18 +249,22 @@ static void lwsl_emit_stderr(int level, const char *line)
     
     //char *characters = (char *)malloc(data.length);
     
-   // [data getCString:characters maxLength:data.length encoding:NSUTF8StringEncoding];
-
-   // NSData* data = [str dataUsingEncoding:NSUTF8StringEncoding];
+    // [data getCString:characters maxLength:data.length encoding:NSUTF8StringEncoding];
+    
+    // NSData* data = [str dataUsingEncoding:NSUTF8StringEncoding];
     
     //unsigned char* d = (unsigned char*) [NSData data];
     //char *d = (char *)[data cStringUsingEncoding:NSASCIIStringEncoding];
     //NSLog(@"data being pushed on queued:%lu",(unsigned long)data.length);
+    @autoreleasepool {
+        
     if (status == 1) {
         
-      //  size_t len = strlen(data);
+        //  size_t len = strlen(data);
         NSLog(@"1:%zu",(unsigned long)data.length);
-        [theQueue pushFront:data];
+        [theQueue pushFront:[data copy]] ;
+        data = nil;
+    }
     }
     
 }
@@ -270,7 +276,7 @@ callback_what_am_i_doing(struct libwebsocket_context *context,
                          void *user, void *in, size_t len)
 {
     
-
+    
     switch (reason) {
             
         case LWS_CALLBACK_CLOSED:
