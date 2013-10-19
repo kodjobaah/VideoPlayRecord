@@ -9,24 +9,18 @@
 
 #import <Foundation/Foundation.h>
 
+typedef struct LNode LNode;
 
-@interface TNode: NSObject {
-    TNode *next;
-    TNode *prev;
-    id obj;
-
-}
-
-@property (atomic,retain) TNode *next;
-@property (atomic,retain) TNode *prev;
-@property (atomic,retain) id obj;
-
-@end;
+struct LNode {
+    __unsafe_unretained id obj;
+    LNode *next;
+    LNode *prev;
+};
 
 @interface NSLinkedList : NSObject {
 
-    TNode *first;
-    TNode *last;
+    LNode *first;
+    LNode *last;
 
     unsigned int size;
 
@@ -47,9 +41,9 @@
 - (int)count;                               // how many objects are stored
 - (int)size;                                // how many objects are stored
 - (int)length;                              // how many objects are stored
-- (void)pushNodeBack:(TNode *)n;            // adds a node object to the end of the list
-- (void)pushNodeFront:(TNode *)n;           // adds a node object to the beginning of the list
-- (void)removeNode:(TNode *)aNode;          // remove a given node
+- (void)pushNodeBack:(LNode *)n;            // adds a node object to the end of the list
+- (void)pushNodeFront:(LNode *)n;           // adds a node object to the beginning of the list
+- (void)removeNode:(LNode *)aNode;          // remove a given node
 
 
 - (id)objectAtIndex:(const int)idx;
@@ -58,17 +52,17 @@
 - (id)secondLastObject;
 - (id)top;
 
-- (TNode *)firstNode;
-- (TNode *)lastNode;
+- (LNode *)firstNode;
+- (LNode *)lastNode;
 
 - (NSArray *)allObjects;
 - (NSArray *)allObjectsReverse;
 
 
 // Insert objects
-- (void)insertObject:(id)anObject beforeNode:(TNode *)node;
-- (void)insertObject:(id)anObject afterNode:(TNode *)node;
-- (void)insertObject:(id)anObject betweenNode:(TNode *)previousNode andNode:(TNode *)nextNode;
+- (void)insertObject:(id)anObject beforeNode:(LNode *)node;
+- (void)insertObject:(id)anObject afterNode:(LNode *)node;
+- (void)insertObject:(id)anObject betweenNode:(LNode *)previousNode andNode:(LNode *)nextNode;
 
 - (void)insertObject:(id)anObject orderedPositionByKey:(NSString *)key ascending:(BOOL)ascending;
 
@@ -78,9 +72,11 @@
 
 //- (void)replaceObjectAtIndex:(int) withObject:(id)obj;    // replaces object at a given index with the passed object
 
-@property (readonly) TNode *first;
-@property (readonly) TNode *last;
+@property (readonly) LNode *first;
+@property (readonly) LNode *last;
 
 @end
 
-TNode * TNodeMake(id obj, TNode *next, TNode *prev);    // convenience method for creating a LNode
+
+
+LNode * LNodeMake(id obj, LNode *next, LNode *prev);    // convenience method for creating a LNode

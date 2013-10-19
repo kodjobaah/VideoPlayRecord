@@ -34,12 +34,6 @@
 #endif
 
 
-@implementation TNode
-
-@synthesize next,prev;
-
-@end
-
 @implementation NSLinkedList
 @synthesize first, last;
 
@@ -65,8 +59,7 @@
 
     if ((self = [super init]) == nil) return nil;
 
-   // TNode *n = TNodeMake(anObject, nil, nil);
-    TNode *n = TNodeMake(anObject, nil, nil);
+    LNode *n = LNodeMake(anObject, nil, nil);
 
     first = last = n;
     size = 1;
@@ -79,12 +72,12 @@
 
     if (anObject == nil) return;
 
-    TNode *n = TNodeMake(anObject, nil, last);
+    LNode *n = LNodeMake(anObject, nil, last);
 
     if (size == 0) {
         first = last = n;
     } else {
-        last.next = n;
+        last->next = n;
         last = n;
     }
 
@@ -94,19 +87,19 @@
 
 
 - (id)lastObject {
-    return last ? last.obj : nil;
+    return last ? last->obj : nil;
 }
 
 
 - (id)firstObject {
-    return first ? first.obj : nil;
+    return first ? first->obj : nil;
 }
 
 
 - (id)secondLastObject {
 
-    if (last && last.prev) {
-        return last.prev.obj;
+    if (last && last->prev) {
+        return last->prev->obj;
     }
 
     return nil;
@@ -114,12 +107,12 @@
 }
 
 
-- (TNode *)firstNode {
+- (LNode *)firstNode {
     return first;
 }
 
 
-- (TNode *)lastNode {
+- (LNode *)lastNode {
     return last;
 }
 
@@ -133,17 +126,16 @@
 
     if (anObject == nil) return;
 
-    TNode *n = TNodeMake(anObject, first, nil);
+    LNode *n = LNodeMake(anObject, first, nil);
 
     if (size == 0) {
         first = last = n;
     } else {
-        first.prev = n;
+        first->prev = n;
         first = n;
     }
 
     size++;
-    NSLog(@"this is the size:%u",size);
 
 }
 
@@ -158,30 +150,30 @@
 }
 
 
-- (void)insertObject:(id)anObject beforeNode:(TNode *)node {
-    [self insertObject:anObject betweenNode:node.prev andNode:node];
+- (void)insertObject:(id)anObject beforeNode:(LNode *)node {
+    [self insertObject:anObject betweenNode:node->prev andNode:node];
 }
 
 
-- (void)insertObject:(id)anObject afterNode:(TNode *)node {
-    [self insertObject:anObject betweenNode:node andNode:node.next];
+- (void)insertObject:(id)anObject afterNode:(LNode *)node {
+    [self insertObject:anObject betweenNode:node andNode:node->next];
 }
 
 
-- (void)insertObject:(id)anObject betweenNode:(TNode *)previousNode andNode:(TNode *)nextNode {
+- (void)insertObject:(id)anObject betweenNode:(LNode *)previousNode andNode:(LNode *)nextNode {
 
     if (anObject == nil) return;
 
-    TNode *n = TNodeMake(anObject, nextNode, previousNode);
+    LNode *n = LNodeMake(anObject, nextNode, previousNode);
 
     if (previousNode) {
-        previousNode.next = n;
+        previousNode->next = n;
     } else {
         first = n;
     }
 
     if (nextNode) {
-        nextNode.prev = n;
+        nextNode->prev = n;
     } else {
         last = n;
     }
@@ -196,13 +188,13 @@
 }
 
 
-- (void)pushNodeBack:(TNode *)n {
+- (void)pushNodeBack:(LNode *)n {
 
     if (size == 0) {
-        first = last = TNodeMake(n.obj, nil, nil);
+        first = last = LNodeMake(n->obj, nil, nil);
     } else {
-        last.next = TNodeMake(n.obj, nil, last);
-        last = last.next;
+        last->next = LNodeMake(n->obj, nil, last);
+        last = last->next;
     }
 
     size++;
@@ -210,13 +202,13 @@
 }
 
 
-- (void)pushNodeFront:(TNode *)n {
+- (void)pushNodeFront:(LNode *)n {
 
     if (size == 0) {
-        first = last = TNodeMake(n.obj, nil, nil);
+        first = last = LNodeMake(n->obj, nil, nil);
     } else {
-        first.prev = TNodeMake(n.obj, first, nil);
-        first = first.prev;
+        first->prev = LNodeMake(n->obj, first, nil);
+        first = first->prev;
     }
 
     size++;
@@ -234,18 +226,18 @@
 
     if (idx >= size || idx < 0) return nil;
 
-    TNode *n = nil;
+    LNode *n = nil;
 
     if (idx > (size / 2)) {
         // loop from the back
         int curridx = size - 1;
-        for (n = last; idx < curridx; --curridx) n = n.prev;
-        return n.obj;
+        for (n = last; idx < curridx; --curridx) n = n->prev;
+        return n->obj;
     } else {
         // loop from the front
         int curridx = 0;
-        for (n = first; curridx < idx; ++curridx) n = n.next;
-        return n.obj;
+        for (n = first; curridx < idx; ++curridx) n = n->next;
+        return n->obj;
     }
 
     return nil;
@@ -257,7 +249,7 @@
 
     if (size == 0) return nil;
 
-    id ret = SAFE_ARC_RETAIN(last.obj);
+    id ret = SAFE_ARC_RETAIN(last->obj);
     [self removeNode:last];
     return SAFE_ARC_AUTORELEASE(ret);
 
@@ -268,39 +260,39 @@
 
     if (size == 0) return nil;
 
-    id ret = SAFE_ARC_RETAIN(first.obj);
+    id ret = SAFE_ARC_RETAIN(first->obj);
     [self removeNode:first];
     return SAFE_ARC_AUTORELEASE(ret);
 
 }
 
 
-- (void)removeNode:(TNode *)aNode {
+- (void)removeNode:(LNode *)aNode {
 
     if (size == 0) return;
 
     if (size == 1) {
         // delete first and only
         first = last = nil;
-    } else if (aNode.prev == nil) {
+    } else if (aNode->prev == nil) {
         // delete first of many
-        first = first.next;
-        first.prev = nil;
-    } else if (aNode.next == nil) {
+        first = first->next;
+        first->prev = nil;
+    } else if (aNode->next == nil) {
         // delete last
-        last = last.prev;
-        last.next = nil;
+        last = last->prev;
+        last->next = nil;
     } else {
         // delete in the middle
-        TNode *tmp = aNode.prev;
-        tmp.next = aNode.next;
-        tmp = aNode.next;
-        tmp.prev = aNode.prev;
+        LNode *tmp = aNode->prev;
+        tmp->next = aNode->next;
+        tmp = aNode->next;
+        tmp->prev = aNode->prev;
     }
 
-    SAFE_ARC_RELEASE(aNode.obj);
-    aNode.obj = nil;
-    //free(aNode);
+    SAFE_ARC_RELEASE(aNode->obj);
+    aNode->obj = nil;
+    free(aNode);
     size--;
 
 
@@ -309,10 +301,10 @@
 
 - (BOOL)removeObjectEqualTo:(id)anObject {
 
-    TNode *n = nil;
+    LNode *n = nil;
 
-    for (n = first; n; n=n.next) {
-        if (n.obj == anObject) {
+    for (n = first; n; n=n->next) {
+        if (n->obj == anObject) {
             [self removeNode:n];
             return YES;
         }
@@ -325,13 +317,13 @@
 
 - (void)removeAllObjects {
 
-    TNode *n = first;
+    LNode *n = first;
 
     while (n) {
-        TNode *next = n.next;
-        SAFE_ARC_RELEASE(n.obj);
-        n.obj = nil;
-       // free(n);
+        LNode *next = n->next;
+        SAFE_ARC_RELEASE(n->obj);
+        n->obj = nil;
+        free(n);
         n = next;
     }
 
@@ -341,8 +333,8 @@
 
 
 - (void)dumpList {
-    TNode *n = nil;
-    for (n = first; n; n=n.next) {
+    LNode *n = nil;
+    for (n = first; n; n=n->next) {
         NSLog(@"%p", n);
     }
 }
@@ -360,10 +352,10 @@
 
 - (BOOL)containsObject:(id)anObject {
 
-    TNode *n = nil;
+    LNode *n = nil;
 
-    for (n = first; n; n=n.next) {
-        if (n.obj == anObject) return YES;
+    for (n = first; n; n=n->next) {
+        if (n->obj == anObject) return YES;
     }
 
     return NO;
@@ -374,10 +366,10 @@
 - (NSArray *)allObjects {
 
     NSMutableArray *ret = SAFE_ARC_AUTORELEASE([[NSMutableArray alloc] initWithCapacity:size]);
-    TNode *n = nil;
+    LNode *n = nil;
 
-    for (n = first; n; n=n.next) {
-        [ret addObject:n.obj];
+    for (n = first; n; n=n->next) {
+        [ret addObject:n->obj];
     }
 
     return [NSArray arrayWithArray:ret];
@@ -387,10 +379,10 @@
 - (NSArray *)allObjectsReverse {
 
     NSMutableArray *ret = SAFE_ARC_AUTORELEASE([[NSMutableArray alloc] initWithCapacity:size]);
-    TNode *n = nil;
+    LNode *n = nil;
 
-    for (n = last; n; n=n.prev) {
-        [ret addObject:n.obj];
+    for (n = last; n; n=n->prev) {
+        [ret addObject:n->obj];
     }
 
     return [NSArray arrayWithArray:ret];
@@ -410,15 +402,13 @@
 
 @end
 
-
-TNode * TNodeMake(id obj, TNode *next, TNode *prev) {
-    TNode *n = [TNode alloc];
-    n.next = next;
-    n.prev = prev;
-    n.obj = obj;
+LNode * LNodeMake(id obj, LNode *next, LNode *prev) {
+    LNode *n = malloc(sizeof(LNode));
+    n->next = next;
+    n->prev = prev;
+    n->obj = SAFE_ARC_RETAIN(obj);
     return n;
 };
-
 
 
 
