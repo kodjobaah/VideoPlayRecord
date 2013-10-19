@@ -15,10 +15,8 @@
 @required
 - (id)initWithCapacity:(int)capacity;
 
-- (void)pushBack:(char *)p;
 - (void)pushFront:(char *)p;
 
 - (char *)popBack;
-- (char *)popFront;
 
 @end

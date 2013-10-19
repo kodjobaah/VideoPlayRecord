@@ -8,175 +8,83 @@
 
 #import "LinkedList.h"
 
+
+
 @implementation LinkedList
 
-#pragma mark - Initialisation
-- (id)init
+struct Node
 {
-    return [self initWithCapacity:1000];
-}
+    struct Node *previous;
+    char data[MAXBUFFERSIZE];
+    struct Node *next;
+}*head, *last;
 
-- (id)initWithCapacity:(int)capacity
-{
-    return [self initWithCapacity:capacity incrementSize:1000];
-}
 
-- (id)initWithCapacity:(int)capacity incrementSize:(int)increment
-{
-    self = [super init];
-    if(self) {
-        _cacheSizeIncrements = increment;
-        int bytesRequired = capacity * sizeof(Node);
-        nodeCache = [[NSMutableData alloc] initWithLength:bytesRequired];
-        [self initialiseNodesAtOffset:0 count:capacity];
-        freeNodeOffset = 0;
-        topNodeOffset = FINAL_NODE_OFFSET;
-    }
-    return self;
-}
 
-#pragma mark - Memory management
-- (void)dealloc
-{
-}
-
-#pragma mark - DynamicSizedArray Protocol methods
 - (void)pushFront:(char *)p
 {
-    
-    Node *node = [self getNextFreeNode];
-        // and the length of the input string.
-        size_t len = strlen(p);
-        
-        //allocate space for the result (including NUL terminator).
-       node->value = malloc(len+1);
-     //  memcpy(node->value,p,len);
-   // NSLog(@"--%s",p);
-    //node->value[len] = '\0';
-    node->value = p;
-    //bcopy(p,&node->value,len);
-    //node->value = p;
-    node->nextNodeOffset = topNodeOffset;
-    topNodeOffset = [self offsetOfNode:node];
-}
 
-- (void)pushBack:(char *)p
-{
-    // Prepare the new node
-    Node *node = [self getNextFreeNode];
-    node->value = p;
-    node->nextNodeOffset = FINAL_NODE_OFFSET;
+    NSLog(@"about to push");
+    size_t len = strlen(p);
+    struct Node *temp;
     
-    // If the list is empty then just set topNodeOffset
-    if(topNodeOffset == FINAL_NODE_OFFSET) {
-        topNodeOffset = [self offsetOfNode:node];
-    } else {
-        // Otherwise, we need to find the current last node
-        Node *searchNode = [self nodeAtOffset:topNodeOffset];
-        while (searchNode->nextNodeOffset != FINAL_NODE_OFFSET) {
-            searchNode = [self nodeAtOffset:searchNode->nextNodeOffset];
-        }
-        // searchNode is the current end node
-        searchNode->nextNodeOffset = [self offsetOfNode:node];
-    }
-}
+    struct Node var= {NULL,*p,NULL};
+    
+    //ar->data = malloc(sizeof(len));
+    //var->data[0] = '\0';
+    NSLog(@"about to push 1");
 
-- (char *)popFront
-{
-    if(topNodeOffset == FINAL_NODE_OFFSET) {
-        return "";
+    //sprintf(var->data, "%s", p);
+    NSLog(@"about to push 2");
+
+    //var->data[len]='\0';
+    NSLog(@"about to push 3");
+
+    NSLog(@"added:%s",var.data);
+    if(head==NULL)
+    {
+        head=&var;
+        head->previous=NULL;
+        head->next=NULL;
+        last=head;
     }
-    
-    Node *node = [self nodeAtOffset:topNodeOffset];
-    int thisNodeOffset = topNodeOffset;
-    
-    // Remove this node from the queue
-    topNodeOffset = node->nextNodeOffset;
-    const char *value = node->value;
-    
-    // Reset it and add it to the free node cache
-    node->value = 0;
-    node->nextNodeOffset = freeNodeOffset;
-    freeNodeOffset = thisNodeOffset;
-    
-    return value;
+    else
+    {
+        temp=&var;
+        temp->previous=NULL;
+        temp->next=head;
+        head->previous=temp;
+        head=temp;
+    }
 }
 
 - (char *)popBack
 {
-    // Find the penultimate node
-    if(topNodeOffset == FINAL_NODE_OFFSET) {
-        // The queue is empty
+    struct Node *temp;
+    temp=last;
+    if(temp->previous==NULL)
+    {
+        free(temp);
+        head=NULL;
+        last=NULL;
         return "";
     }
     
-    Node *searchNode = [self nodeAtOffset:topNodeOffset];
-    if(searchNode->nextNodeOffset == FINAL_NODE_OFFSET) {
-        // This is the case when there's one node
-        topNodeOffset = FINAL_NODE_OFFSET;
-    } else {
-        // There's more than one node:
-        Node *priorSearchNode = searchNode;
-        searchNode = [self nodeAtOffset:searchNode->nextNodeOffset];
-        while (searchNode->nextNodeOffset != FINAL_NODE_OFFSET) {
-            priorSearchNode = searchNode;
-            searchNode = [self nodeAtOffset:searchNode->nextNodeOffset];
-        }
-        // Change the last node
-        priorSearchNode->nextNodeOffset = FINAL_NODE_OFFSET;
+    if (last != NULL) {
+        printf("removing data");
+        // printf("\nData deleted from list is %s \n",last->data);
+        last=temp->previous;
+        last->next=NULL;
+        size_t len = strlen(temp->data);
+        
+        char out[len];
+        out[0] = '\0';
+        
+        sprintf(out, "%s", temp->data);
+        free(temp);
+        return out;
     }
-    
-    // Get the value we need to return
-    const char *value = searchNode->value;
-
-    // Make this node available again
-    searchNode->nextNodeOffset = freeNodeOffset;
-    searchNode->value = NULL;
-    freeNodeOffset = [self offsetOfNode:searchNode];
-    
-    return (char *)value;
-}
-
-#pragma mark - utility functions
-
-- (int)offsetOfNode:(Node *)node
-{
-    return node - (Node *)nodeCache.mutableBytes;
-}
-
-- (Node *)nodeAtOffset:(int)offset
-{
-    return (Node *)nodeCache.mutableBytes + offset;
-}
-
-- (Node *)getNextFreeNode
-{
-    if(freeNodeOffset < 0) {
-        // Need to extend the size of the nodeCache
-        int currentSize = nodeCache.length / sizeof(Node);
-        [nodeCache increaseLengthBy:_cacheSizeIncrements * sizeof(Node)];
-        // Set these new nodes to be the free ones
-        [self initialiseNodesAtOffset:currentSize count:_cacheSizeIncrements];
-        freeNodeOffset = currentSize;
-    }
-    
-    Node *node = (Node*)nodeCache.mutableBytes + freeNodeOffset;
-    freeNodeOffset = node->nextNodeOffset;
-    return node;
-}
-
-
-- (void)initialiseNodesAtOffset:(int)offset count:(int)count
-{
-    Node *node = (Node *)nodeCache.mutableBytes + offset;
-    for (int i=0; i<count - 1; i++) {
-        node->value = NULL;
-        node->nextNodeOffset = offset + i + 1;
-        node++;
-    }
-    node->value = NULL;
-    // Set the next node offset to make sure we don't continue
-    node->nextNodeOffset = FINAL_NODE_OFFSET;
+    return "";
 }
 
 @end

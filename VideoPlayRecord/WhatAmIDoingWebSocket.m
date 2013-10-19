@@ -18,7 +18,7 @@
 
 static struct libwebsocket* wsi;
 static struct libwebsocket_context *context;
-static  LinkedList *theQueue;
+static  NSLinkedList *theQueue;
 int force_exit = 0;
 int count = 0;
 
@@ -86,18 +86,19 @@ static int callback_http(struct libwebsocket_context *context,
             
             
             if (status == 1) {
-             char *dataToWrite = [theQueue popBack];
+             NSString *dataToWrite = [theQueue popBack];
+             NSLog(@"data pullued:%lu",(unsigned long)dataToWrite.length);
             unsigned char *response_buf;
                 count = count + 10;
-            if ((count > 10) && (strlen(dataToWrite) > 1)) {
+            if ((count > 10) && (dataToWrite.length > 1)) {
              //   NSLog(@"wrting to buffer");
                 
-                response_buf = (unsigned char*) malloc(LWS_SEND_BUFFER_PRE_PADDING + strlen(dataToWrite) +LWS_SEND_BUFFER_POST_PADDING);
+                response_buf = (unsigned char*) malloc(LWS_SEND_BUFFER_PRE_PADDING + dataToWrite.length +LWS_SEND_BUFFER_POST_PADDING);
                 
-                bcopy(dataToWrite, &response_buf[LWS_SEND_BUFFER_PRE_PADDING], strlen(dataToWrite));
-                libwebsocket_write(wsi, &response_buf[LWS_SEND_BUFFER_PRE_PADDING], strlen(dataToWrite), LWS_WRITE_TEXT);
+                bcopy(CFBridgingRetain(dataToWrite), &response_buf[LWS_SEND_BUFFER_PRE_PADDING], dataToWrite.length);
+                libwebsocket_write(wsi, &response_buf[LWS_SEND_BUFFER_PRE_PADDING], dataToWrite.length, LWS_WRITE_TEXT);
                 free(response_buf);
-                free(dataToWrite);
+                //free(dataToWrite);
             }
             else {
                 NSLog(@"Attempt to write empty data on the websocket");
@@ -123,6 +124,18 @@ void sighandler(int sig)
 }
 
 
+static void lwsl_emit_stderr(int level, const char *line)
+{
+	char buf[300];
+	struct timeval tv;
+	gettimeofday(&tv, NULL);
+    
+	buf[0] = '\0';
+		sprintf(buf, "log - [%ld:%04d] ", tv.tv_sec,
+					(int)(tv.tv_usec / 100));
+	
+}
+
 
 -(void)open:(NSString *)theToken {
     
@@ -131,7 +144,7 @@ void sighandler(int sig)
     /* tell the library what debug level to emit and to send it to syslog */
 	lws_set_log_level(debug_level, lwsl_emit_syslog);
     
-    theQueue = [[LinkedList alloc] initWithCapacity:10000 incrementSize:10000];
+    theQueue = [NSLinkedList alloc];
     
     NSLog(@"Connection worked");
     const char *token = [theToken cStringUsingEncoding:NSASCIIStringEncoding];
@@ -231,10 +244,21 @@ void sighandler(int sig)
 
 -(void) send:(NSString *)data {
     
-    char *d = (char *)[data cStringUsingEncoding:NSASCIIStringEncoding];
+    
+    //char *characters = (char *)malloc(data.length);
+    
+   // [data getCString:characters maxLength:data.length encoding:NSUTF8StringEncoding];
+
+   // NSData* data = [str dataUsingEncoding:NSUTF8StringEncoding];
+    
+    //unsigned char* d = (unsigned char*) [NSData data];
+    //char *d = (char *)[data cStringUsingEncoding:NSASCIIStringEncoding];
     //NSLog(@"data being pushed on queued:%lu",(unsigned long)data.length);
     if (status == 1) {
-        [theQueue pushFront:d];
+        
+      //  size_t len = strlen(data);
+        NSLog(@"1:%zu",(unsigned long)data.length);
+        [theQueue pushFront:data];
     }
     
 }
@@ -246,10 +270,7 @@ callback_what_am_i_doing(struct libwebsocket_context *context,
                          void *user, void *in, size_t len)
 {
     
-    int l = 0;
-    int n;
-    char *dataToWrite;
-    
+
     switch (reason) {
             
         case LWS_CALLBACK_CLOSED:
@@ -273,24 +294,29 @@ callback_what_am_i_doing(struct libwebsocket_context *context,
             
         case LWS_CALLBACK_CLIENT_WRITEABLE:
             
-            dataToWrite = (char *)[theQueue popBack];
-            unsigned char *response_buf;
-            
-            if (strlen(dataToWrite) > 0) {
-                response_buf = (unsigned char*) malloc(LWS_SEND_BUFFER_PRE_PADDING + strlen(dataToWrite) +LWS_SEND_BUFFER_POST_PADDING);
+            if (status == 1) {
+                NSString *dataToWrite = [theQueue popBack];
+                NSLog(@"data pullued:%lu",(unsigned long)dataToWrite.length);
+                unsigned char *response_buf;
+                count = count + 10;
+                if ((count > 10) && (dataToWrite.length > 1)) {
+                    //   NSLog(@"wrting to buffer");
+                    
+                    response_buf = (unsigned char*) malloc(LWS_SEND_BUFFER_PRE_PADDING + dataToWrite.length +LWS_SEND_BUFFER_POST_PADDING);
+                    
+                    bcopy(CFBridgingRetain(dataToWrite), &response_buf[LWS_SEND_BUFFER_PRE_PADDING], dataToWrite.length);
+                    libwebsocket_write(wsi, &response_buf[LWS_SEND_BUFFER_PRE_PADDING], dataToWrite.length, LWS_WRITE_TEXT);
+                    free(response_buf);
+                    //free(dataToWrite);
+                }
+                else {
+                    NSLog(@"Attempt to write empty data on the websocket");
+                }
                 
-                bcopy(dataToWrite, &response_buf[LWS_SEND_BUFFER_PRE_PADDING], strlen(dataToWrite));
-                libwebsocket_write(wsi, &response_buf[LWS_SEND_BUFFER_PRE_PADDING], strlen(dataToWrite), LWS_WRITE_TEXT);
-                free(response_buf);
+                /* get notified as soon as we can write again */
+                libwebsocket_callback_on_writable(context, wsi);
             }
-            else {
-                NSLog(@"Attempt to write empty data on the websocket");
-            }
-            
-            /* get notified as soon as we can write again */
-            libwebsocket_callback_on_writable(context, wsi);
             break;
-            
         default:
             break;
     }

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "libwebsockets/libwebsockets.h"
-#import "LinkedList.h"
+#import "NSLinkedList.h"
 #import <opencv2/highgui/cap_ios.h>
 
 @interface WhatAmIDoingWebSocket : NSObject{

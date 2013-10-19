@@ -7,23 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DynamicSizedArray.h"
-
 #define FINAL_NODE_OFFSET -1
 
-typedef struct Node
-{
-    int nextNodeOffset;
-    char *value;
-} Node;
+#define MAXBUFFERSIZE   3000
 
-@interface LinkedList : NSObject<DynamicSizedArray> {
-    NSMutableData *nodeCache;
-    int freeNodeOffset;
-    int topNodeOffset;
-    int _cacheSizeIncrements;
-}
+@interface LinkedList : NSObject
 
-- (id)initWithCapacity:(int)capacity incrementSize:(int)increment;
+- (void)pushFront:(char *)p;
 
+- (char *)popBack;
 @end

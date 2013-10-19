@@ -39,6 +39,7 @@
 		9F58467F18016B8300CA74DA /* AuthenticationToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F58467E18016B8300CA74DA /* AuthenticationToken.m */; };
 		9F584681180276E700CA74DA /* whatAmIdoing.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F584680180276E700CA74DA /* whatAmIdoing.plist */; };
 		9F5846841802B35400CA74DA /* PropertyAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5846831802B35300CA74DA /* PropertyAccessor.m */; };
+		9F61715F1812C30200EC1A84 /* NSLinkedList.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F61715E1812C30200EC1A84 /* NSLinkedList.m */; };
 		9F6D973317CB9BEF003F0703 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F6D973217CB9BEF003F0703 /* CFNetwork.framework */; };
 		9F6D973517CB9C27003F0703 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F6D973417CB9C27003F0703 /* Security.framework */; };
 		9F6D973717CB9C43003F0703 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F6D973617CB9C43003F0703 /* libicucore.dylib */; };
@@ -135,6 +136,8 @@
 		9F584680180276E700CA74DA /* whatAmIdoing.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = whatAmIdoing.plist; sourceTree = "<group>"; };
 		9F5846821802B35300CA74DA /* PropertyAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyAccessor.h; sourceTree = "<group>"; };
 		9F5846831802B35300CA74DA /* PropertyAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyAccessor.m; sourceTree = "<group>"; };
+		9F61715D1812C30200EC1A84 /* NSLinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSLinkedList.h; sourceTree = "<group>"; };
+		9F61715E1812C30200EC1A84 /* NSLinkedList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSLinkedList.m; sourceTree = "<group>"; };
 		9F6D973217CB9BEF003F0703 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		9F6D973417CB9C27003F0703 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9F6D973617CB9C43003F0703 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
@@ -398,6 +401,8 @@
 		9FA787AA17CB6F5500F0BD40 /* VideoPlayRecord */ = {
 			isa = PBXGroup;
 			children = (
+				9F61715D1812C30200EC1A84 /* NSLinkedList.h */,
+				9F61715E1812C30200EC1A84 /* NSLinkedList.m */,
 				9FAB64161810E13A0094A628 /* NSData+Base64.h */,
 				9FAB64171810E13A0094A628 /* NSData+Base64.m */,
 				9FD6F1BB1810BCC5000C28AA /* SBJson */,
@@ -636,6 +641,7 @@
 				9FA53867180C9C2000500272 /* AbstractActionSheetPicker.m in Sources */,
 				9FA53852180C743800500272 /* InvitePickerDelegate.m in Sources */,
 				9FAB64121810C3C40094A628 /* SBJsonStreamWriter.m in Sources */,
+				9F61715F1812C30200EC1A84 /* NSLinkedList.m in Sources */,
 				9F46FD241810092400382777 /* extension.c in Sources */,
 				9FAB64111810C3C40094A628 /* SBJsonStreamTokeniser.m in Sources */,
 				9FAB640F1810C3C40094A628 /* SBJsonStreamParserAdapter.m in Sources */,

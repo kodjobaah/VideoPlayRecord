@@ -138,8 +138,6 @@ using namespace cv;
         UIImage *resultUIImage = [self UIImageFromCVMat:image];
         NSData *tempData = [NSData dataWithData:UIImageJPEGRepresentation(resultUIImage,1.0)];
         NSString* ns = [tempData base64EncodedString];
-       // tempData = nil;
-        //resultUIImage = nil;
         [self.whatAmIdoingWebSocket send:ns];
         
     }
