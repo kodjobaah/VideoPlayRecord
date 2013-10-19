@@ -38,5 +38,5 @@ static int callback_http(struct libwebsocket_context *context,
 -(WhatAmIDoingWebSocket *) initWithCamera:(CvVideoCamera *)theCamera;
 -(void)close;
 -(int) connectionStatus;
-- (NSString *)base64EncodedString: data
+- (NSString *)base64EncodedString: data;
 @end
