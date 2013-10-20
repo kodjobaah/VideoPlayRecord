@@ -7,14 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PropertyAccessor.h"
 
 @interface InviteEmailList : NSObject<NSURLConnectionDelegate> {
     
     UITextField *email;
     NSMutableData *responseData;
     id sender;
+    PropertyAccessor *propertyAccessor;
 }
 
+@property (atomic,strong) PropertyAccessor *propertyAccessor;
 @property(nonatomic, retain) id sender;
 @property(nonatomic,retain) NSMutableData *responseData;
 @property(nonatomic,retain) UITextField *email;

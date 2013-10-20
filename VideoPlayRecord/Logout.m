@@ -10,7 +10,7 @@
 #import "WhatAmIDoingViewController.h"
 
 @implementation Logout
-
+@synthesize propertyAccessor = _propertyAccessor;
 
 -(Logout*) initWithController:(UIViewController*) rvvc {
     self = [super init];
@@ -18,16 +18,21 @@
     if(self) {
         _recordVideoViewController = rvvc;
         _constants = [[WhatAmIDoingConstants alloc] init];
+        _propertyAccessor = [[PropertyAccessor alloc] init];
     }
     return self;
 }
 
 -(void) logout:(NSString *) token {
     NSLog(@"Logging out");
-    NSString *hostMessage = [NSString stringWithFormat:@"http://5.79.24.141:9000/invalidateToken?token=%@",token];
+    NSString *port = [self.propertyAccessor getPropertyValue:@"WHAT_AM_I_DOING_PORT"];
+    NSString *host = [self.propertyAccessor getPropertyValue:@"WHAT_AM_I_DOING_URL"];
+    NSString *logout = [self.propertyAccessor getPropertyValue:@"WHAT_AM_I_DOING_LOGOUT"];
+    
+    NSString *hostMessage = [NSString stringWithFormat:@"http://%@:%@/%@%@",host,port,logout,token];
     
     NSURL *url=[NSURL URLWithString:hostMessage];
-    NSString *post =[[NSString alloc] initWithFormat:@"invalidateToken=%@",token];
+    NSString *post =[[NSString alloc] initWithFormat:@"%@%@",logout,token];
     NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];

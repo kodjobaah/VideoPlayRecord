@@ -14,11 +14,13 @@
 @synthesize email = _email;
 @synthesize responseData = _responseData;
 @synthesize sender = _sender;
+@synthesize propertyAccessor = _propertyAccessor;
 
 -(InviteEmailList *) initWithData:(UITextField *)theEmail {
     self = [super init];
     if(self) {
         _email = theEmail;
+        _propertyAccessor = [[PropertyAccessor alloc] init];
     }
     return self;
 }
@@ -26,7 +28,10 @@
 -(void) displayInvites:(id)theSender theToken:(NSString *) token{
     NSLog(@"making calling:%@",token);
     self.sender = theSender;
-    NSString *hostMessage = [NSString stringWithFormat:@"http://5.79.24.141:9000/findAllInvites?token=%@",token];
+    NSString *port = [self.propertyAccessor getPropertyValue:@"WHAT_AM_I_DOING_PORT"];
+    NSString *host = [self.propertyAccessor getPropertyValue:@"WHAT_AM_I_DOING_URL"];
+    NSString *findAllInvites = [self.propertyAccessor getPropertyValue:@"WHAT_AM_I_DOING_FIND_ALL_INVITES"];
+    NSString *hostMessage = [NSString stringWithFormat:@"http://%@:%@/%@%@",host,port,findAllInvites,token];
     
     NSURL *url=[NSURL URLWithString:hostMessage];
     NSString *post =[[NSString alloc] initWithFormat:@"token=%@",token];

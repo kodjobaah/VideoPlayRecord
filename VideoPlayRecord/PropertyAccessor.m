@@ -38,7 +38,7 @@
 -(NSString *) getPropertyValue:(NSString *)key
 {
     
-    return [properties objectForKey:key];
+    return [self.properties objectForKey:key];
     
 }
 

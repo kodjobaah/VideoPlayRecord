@@ -86,7 +86,6 @@
 		9FAB64181810E13A0094A628 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FAB64171810E13A0094A628 /* NSData+Base64.m */; };
 		9FB1B8EE1801685000E3ACBA /* WhatAmIdoing.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9FB1B8EC1801685000E3ACBA /* WhatAmIdoing.xcdatamodeld */; };
 		9FDED6E8181025DF00916FC1 /* WhatAmIDoingWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FDED6E7181025DF00916FC1 /* WhatAmIDoingWebSocket.m */; };
-		9FFAE8671810579A0077EBFB /* LinkedList.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FFAE8661810579A0077EBFB /* LinkedList.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -225,9 +224,6 @@
 		9FB1B8ED1801685000E3ACBA /* WhatAmIdoing.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WhatAmIdoing.xcdatamodel; sourceTree = "<group>"; };
 		9FDED6E6181025DF00916FC1 /* WhatAmIDoingWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhatAmIDoingWebSocket.h; sourceTree = "<group>"; };
 		9FDED6E7181025DF00916FC1 /* WhatAmIDoingWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhatAmIDoingWebSocket.m; sourceTree = "<group>"; };
-		9FFAE8651810579A0077EBFB /* LinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkedList.h; sourceTree = "<group>"; };
-		9FFAE8661810579A0077EBFB /* LinkedList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkedList.m; sourceTree = "<group>"; };
-		9FFAE868181058F80077EBFB /* DynamicSizedArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DynamicSizedArray.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -406,9 +402,6 @@
 				9FAB64161810E13A0094A628 /* NSData+Base64.h */,
 				9FAB64171810E13A0094A628 /* NSData+Base64.m */,
 				9FD6F1BB1810BCC5000C28AA /* SBJson */,
-				9FFAE868181058F80077EBFB /* DynamicSizedArray.h */,
-				9FFAE8651810579A0077EBFB /* LinkedList.h */,
-				9FFAE8661810579A0077EBFB /* LinkedList.m */,
 				9F46FD041810092400382777 /* libwebsockets */,
 				9FA5386D180C9C3400500272 /* ActionSheetPicker.h */,
 				9FA53859180C9C2000500272 /* Pickers */,
@@ -618,7 +611,6 @@
 				9F46FD271810092400382777 /* libwebsockets.c in Sources */,
 				9FAB640E1810C3C40094A628 /* SBJsonStreamParserAccumulator.m in Sources */,
 				9F46FD2C1810092400382777 /* sha-1.c in Sources */,
-				9FFAE8671810579A0077EBFB /* LinkedList.m in Sources */,
 				9FA787B517CB6F5500F0BD40 /* WhatAmIDoingAppDelegate.m in Sources */,
 				9FA5386B180C9C2000500272 /* ActionSheetStringPicker.m in Sources */,
 				9FA787C417CB6F5600F0BD40 /* WhatAmIDoingViewController.m in Sources */,
