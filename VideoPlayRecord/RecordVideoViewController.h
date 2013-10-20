@@ -16,6 +16,7 @@
 #import "InvitePickerDelegate.h"
 #import "WhatAmIDoingWebSocket.h"
 #import "InvitePickerDataSource.h"
+#import "NSLinkedList.h"
 
 
 
@@ -67,5 +68,6 @@
 - (IBAction)invite:(id)sender;
 - (IBAction)logout:(id)sender;
 - (IBAction)displayInvitePicker:(id)sender;
+
 
 @end

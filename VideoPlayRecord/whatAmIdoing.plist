@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>WHAT_AM_I_DOING_FIND_ALL_INVITES</key>
+	<string>findAllInvites?token=</string>
+	<key>WHAT_AM_I_DOING_INVITE_EMAIL</key>
+	<string>invite?email=</string>
+	<key>WHAT_AM_I_DOING_LOGOUT</key>
+	<string>invalidateToken?token=</string>
 	<key>WHAT_AM_I_DOING_URL</key>
 	<string>5.79.24.141</string>
 	<key>WHAT_AM_I_DOING_PORT</key>

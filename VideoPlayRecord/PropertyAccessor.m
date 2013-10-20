@@ -25,7 +25,7 @@
             plistPath = [[NSBundle mainBundle] pathForResource:@"whatAmIdoing" ofType:@"plist"];
         }
         NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
-        self.properties = (NSDictionary *)[NSPropertyListSerialization
+        _properties = (NSDictionary *)[NSPropertyListSerialization
                                               propertyListFromData:plistXML
                                               mutabilityOption:NSPropertyListMutableContainersAndLeaves
                                               format:&format

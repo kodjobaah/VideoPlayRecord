@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "WhatAmIDoingConstants.h"
+#import "PropertyAccessor.h"
 
 @interface Logout : NSObject<NSURLConnectionDelegate> {
+         PropertyAccessor *propertyAccessor;  
 }
-
+@property (atomic,strong) PropertyAccessor *propertyAccessor;
 @property (nonatomic, strong) UIViewController * recordVideoViewController;
 @property (nonatomic, strong) WhatAmIDoingConstants *constants;
 @property (nonatomic, strong) NSMutableData *responseData;

@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "PropertyAccessor.h"
 @interface SendInvite : NSObject<NSURLConnectionDelegate>{
-    
+     PropertyAccessor *propertyAccessor;   
     
 }
+@property (atomic,strong) PropertyAccessor *propertyAccessor;
 @property (nonatomic, retain) UITextField *emal;
 @property (nonatomic, retain) NSMutableData *responseData;
 -(SendInvite*) initWithEmail:(UITextField*) email;

@@ -13,6 +13,6 @@
 }
 
 
-@property (weak) NSDictionary *properties;
+@property (atomic,strong) NSDictionary *properties;
 - (NSString *) getPropertyValue:(NSString *)key;
 @end

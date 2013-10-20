@@ -53,13 +53,13 @@ using namespace cv;
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.emal resignFirstResponder];
-   
+    
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-   
+    
 }
 
 
@@ -109,7 +109,7 @@ using namespace cv;
     self.videoCamera.defaultFPS = 30;
     self.videoCamera.delegate = self;
     self.videoCamera.grayscaleMode = NO;
-  
+    
     /*
      * Creating the websocket request used to publish the movie
      */
@@ -132,13 +132,19 @@ using namespace cv;
 #ifdef __cplusplus
 - (void)processImage:(Mat&)image;
 {
-   // NSLog(@"PROCED IAMGE 1");
+    // NSLog(@"PROCED IAMGE 1");
     if ([self.whatAmIdoingWebSocket connectionStatus]) {
-        Mat image_copy;
-        UIImage *resultUIImage = [self UIImageFromCVMat:image];
-        NSData *tempData = [NSData dataWithData:UIImageJPEGRepresentation(resultUIImage,1.0)];
-        NSString* ns = [tempData base64EncodedString];
-        [self.whatAmIdoingWebSocket send:ns];
+        
+        @autoreleasepool {
+            
+            Mat image_copy;
+            UIImage *resultUIImage = [self UIImageFromCVMat:image];
+            NSData *tempData = [NSData dataWithData:UIImageJPEGRepresentation(resultUIImage,1.0)];
+            [self.whatAmIdoingWebSocket send:tempData];
+            tempData = nil;
+            resultUIImage = nil;
+        }
+        
         
     }
     
@@ -173,10 +179,10 @@ using namespace cv;
 }
 
 - (IBAction)recordVideo:(id)sender {
-
+    
     [self.videoCamera start];
     [self.whatAmIdoingWebSocket open:self.token.playSession];
-
+    
     
 }
 
@@ -202,10 +208,10 @@ using namespace cv;
         _stopVideoButton.enabled = NO;
         self.startRecording = NO;
     }
-
+    
     self.action = [self.constants logoutAction];
     [self.logout logout:self.token.playSession];
-        
+    
 }
 
 -(UIImage *)UIImageFromCVMat:(cv::Mat)cvMat
@@ -256,4 +262,5 @@ using namespace cv;
     
     
 }
+
 @end

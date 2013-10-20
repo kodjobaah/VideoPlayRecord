@@ -10,16 +10,24 @@
 
 @implementation SendInvite
 
+@synthesize propertyAccessor = _propertyAccessor;
+
 -(SendInvite*) initWithEmail:(UITextField*) email {
     self = [super init];
     if(self) {
         _emal = email;
+        _propertyAccessor = [[PropertyAccessor alloc] init];
     }
     return self;
 }
 
 -(void) sendInvitation:(NSString *) token {
-    NSString *hostMessage = [NSString stringWithFormat:@"http://5.79.24.141:9000/invite?email=%@&token=%@",self.emal.text,token];
+    
+    NSString *port = [self.propertyAccessor getPropertyValue:@"WHAT_AM_I_DOING_PORT"];
+    NSString *host = [self.propertyAccessor getPropertyValue:@"WHAT_AM_I_DOING_URL"];
+    NSString *inviteEmail = [self.propertyAccessor getPropertyValue:@"WHAT_AM_I_DOING_INVITE_EMAIL"];
+    
+    NSString *hostMessage = [NSString stringWithFormat:@"http://%@:%@/%@=%@&token=%@",host,port,inviteEmail,self.emal.text,token];
     
     NSURL *url=[NSURL URLWithString:hostMessage];
     NSString *post =[[NSString alloc] initWithFormat:@"email=%@&token=%@",self.emal.text,token];
