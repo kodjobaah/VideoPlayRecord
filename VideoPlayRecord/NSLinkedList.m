@@ -63,7 +63,7 @@
     if (size == 0) {
         first = last = n;
     } else {
-        first->prev = n;
+        first.prev = n;
         first = n;
     }
     
@@ -118,8 +118,8 @@
 }
 
 - (void)dumpList {
-    LNode *n = nil;
-    for (n = first; n; n=n->next) {
+    TNode *n = nil;
+    for (n = first; n; n=n.next) {
         NSLog(@"%p", n);
     }
 }
@@ -141,7 +141,6 @@ TNode * TNodeMake(id obj, TNode *next, TNode *prev) {
     n.prev = prev;
     n.obj = obj;
     obj = nil;
->>>>>>> 5816755
     return n;
 };
 
