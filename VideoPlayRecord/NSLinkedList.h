@@ -14,9 +14,8 @@
     TNode *next;
     TNode *prev;
     id obj;
-
+  
 }
-
 @property (atomic,retain) TNode *next;
 @property (atomic,retain) TNode *prev;
 @property (atomic,retain) id obj;
@@ -29,6 +28,7 @@
     TNode *last;
 
     unsigned int size;
+    NSMutableArray *needToBeRelease;
 
 }
 
@@ -80,6 +80,7 @@
 
 @property (atomic,retain) TNode *first;
 @property (atomic,retain) TNode *last;
+@property (atomic, retain) NSMutableArray *needToBeRelease;
 
 @end
 

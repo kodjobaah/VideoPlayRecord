@@ -99,13 +99,17 @@ static int callback_http(struct libwebsocket_context *context,
                         bcopy([dataToWrite cStringUsingEncoding:NSUTF8StringEncoding], &response_buf[LWS_SEND_BUFFER_PRE_PADDING], len);
                         libwebsocket_write(wsi, &response_buf[LWS_SEND_BUFFER_PRE_PADDING], len, LWS_WRITE_TEXT);
                         free(response_buf);
+                        response_buf = NULL;
+                        CFStringRef del = (__bridge_retained CFStringRef) dataToWrite;
+                        CFRelease(del);
+                        dataToWrite = nil;
                         //free(dataToWrite);
                     }
                     else {
                         NSLog(@"Attempt to write empty data on the websocket");
                     }
-                }
                 
+                }
                 /* get notified as soon as we can write again */
                 libwebsocket_callback_on_writable(context, wsi);
             }
@@ -146,7 +150,7 @@ static void lwsl_emit_stderr(int level, const char *line)
     /* tell the library what debug level to emit and to send it to syslog */
 	lws_set_log_level(debug_level, lwsl_emit_syslog);
     
-    theQueue = [NSLinkedList alloc];
+    theQueue = [[NSLinkedList alloc] init];
     
     NSLog(@"Connection worked");
     const char *token = [theToken cStringUsingEncoding:NSASCIIStringEncoding];
@@ -261,8 +265,10 @@ static void lwsl_emit_stderr(int level, const char *line)
     if (status == 1) {
         
         //  size_t len = strlen(data);
-        NSLog(@"1:%zu",(unsigned long)data.length);
+        //NSLog(@"1:%zu",(unsigned long)data.length);
+         NSLog(@"Retain count is -send- 2:%ld", CFGetRetainCount((__bridge CFTypeRef)data));
         [theQueue pushFront:data] ;
+         NSLog(@"Retain count is -send- 6:%ld", CFGetRetainCount((__bridge CFTypeRef)data));
         data = nil;
     }
     }
@@ -301,6 +307,7 @@ callback_what_am_i_doing(struct libwebsocket_context *context,
         case LWS_CALLBACK_CLIENT_WRITEABLE:
             
             if (status == 1) {
+                
                 NSString *dataToWrite = [theQueue popBack];
                 NSLog(@"data pullued:%lu",(unsigned long)dataToWrite.length);
                 unsigned char *response_buf;
@@ -318,10 +325,9 @@ callback_what_am_i_doing(struct libwebsocket_context *context,
                 else {
                     NSLog(@"Attempt to write empty data on the websocket");
                 }
-                
+                }
                 /* get notified as soon as we can write again */
                 libwebsocket_callback_on_writable(context, wsi);
-            }
             break;
         default:
             break;
@@ -330,7 +336,7 @@ callback_what_am_i_doing(struct libwebsocket_context *context,
     return 0;
 }
 
-- (NSString *)base64EncodedString: data
+- (CFStringRef *)base64EncodedString: data
 {
     // Construct an OpenSSL context
     BIO *context = BIO_new(BIO_s_mem());
@@ -358,7 +364,11 @@ callback_what_am_i_doing(struct libwebsocket_context *context,
      */
     //free(outputBuffer);
     BIO_free_all(context);
-    return CFBridgingRelease(str);
+   // NSString *val = CFBridgingRelease(str);
+   // str = nil;
+    NSLog(@"Retain count is -encodebase5-:%ld", CFGetRetainCount(str));
+
+    return str;
 }
 
 @end

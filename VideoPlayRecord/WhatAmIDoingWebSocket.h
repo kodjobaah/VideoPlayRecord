@@ -10,8 +10,10 @@
 #import "libwebsockets/libwebsockets.h"
 #import "NSLinkedList.h"
 #import <opencv2/highgui/cap_ios.h>
+#import "NSLinkedList.h"
 #include <openssl/bio.h>
 #include <openssl/evp.h>
+#import "NSLinkedList.h"
 
 @interface WhatAmIDoingWebSocket : NSObject{
 
@@ -19,6 +21,7 @@
     NSInteger *recordingStatus;
     UIButton *startVideoButton;
     UIButton *stopVideoButton;
+
  
 }
 @property (weak, nonatomic) UIButton *startVideoButton;
@@ -32,10 +35,11 @@ static int callback_http(struct libwebsocket_context *context,
                          enum libwebsocket_callback_reasons reason, void *user,
                          void *in, size_t len);
 
+-(void)remove;
 -(void)open:(NSString *)token;
 -(void) send:(NSString *)data;
 -(WhatAmIDoingWebSocket *) initWithCamera:(CvVideoCamera *)theCamera;
 -(void)close;
 -(int) connectionStatus;
-- (NSString *)base64EncodedString: data;
+- (CFStringRef *)base64EncodedString: data;
 @end

@@ -37,15 +37,18 @@
 @implementation TNode
 
 @synthesize next,prev;
+@synthesize obj;
 
 @end
 
 @implementation NSLinkedList
 @synthesize first, last;
+@synthesize needToBeRelease;
 
 
 - (id)init {
     
+    self.needToBeRelease = [[NSMutableArray alloc] init];
     if ((self = [super init]) == nil) return nil;
     
     first = last = nil;
@@ -132,7 +135,7 @@
 - (void)pushFront:(id)anObject {
     
     if (anObject == nil) return;
-    
+     NSLog(@"Retain count is -pushFront- 3:%ld", CFGetRetainCount((__bridge CFTypeRef)anObject));
     TNode *n = TNodeMake(anObject, first, nil);
     
     if (size == 0) {
@@ -142,8 +145,10 @@
         first = n;
     }
     
+    anObject =  nil;
+     NSLog(@"Retain count is -pushFront- 5:%ld", CFGetRetainCount((__bridge CFTypeRef)n.obj));
     size++;
-    NSLog(@"this is the size:%u",size);
+   // NSLog(@"this is the size:%u",size);
     
 }
 
@@ -193,6 +198,7 @@
 
 - (void)addObject:(id)anObject {
     [self pushBack:anObject];
+    anObject = nil;
 }
 
 
@@ -258,7 +264,14 @@
     if (size == 0) return nil;
     
     id ret = SAFE_ARC_RETAIN(last.obj);
+    last.obj = nil;
     [self removeNode:last];
+    
+    /*
+    @synchronized(self.needToBeRelease) {
+        [self.needToBeRelease addObject:ret];
+    }
+     */
     return SAFE_ARC_AUTORELEASE(ret);
     
 }
@@ -291,6 +304,7 @@
         } else if (aNode.next == nil) {
             // delete last
             last = last.prev;
+            last.next.obj = nil;
             last.next = nil;
         } else {
             // delete in the middle
@@ -300,8 +314,9 @@
             tmp.prev = aNode.prev;
         }
         
-        SAFE_ARC_RELEASE(aNode.obj);
         aNode.obj = nil;
+        SAFE_ARC_RELEASE(aNode.obj);
+      
         //free(aNode);
     }
     
@@ -364,7 +379,6 @@
     assert(0); // currently not implemented
 }
 
-
 - (int)count  { return size; }
 - (int)size   { return size; }
 - (int)length { return size; }
@@ -419,15 +433,14 @@
     return [NSString stringWithFormat:@"NSLinkedList with %d objects", size];
 }
 
-
 @end
-
-
 TNode * TNodeMake(id obj, TNode *next, TNode *prev) {
     TNode *n = [TNode alloc];
     n.next = next;
     n.prev = prev;
     n.obj = obj;
+    obj = nil;
+    NSLog(@"Retain count is -TNodeMake - 4:%ld", CFGetRetainCount((__bridge CFTypeRef)n.obj));
     return n;
 };
 
