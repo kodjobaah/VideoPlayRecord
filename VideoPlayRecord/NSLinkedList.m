@@ -43,12 +43,10 @@
 
 @implementation NSLinkedList
 @synthesize first, last;
-@synthesize needToBeRelease;
 
 
 - (id)init {
     
-    self.needToBeRelease = [[NSMutableArray alloc] init];
     if ((self = [super init]) == nil) return nil;
     
     first = last = nil;
@@ -57,85 +55,9 @@
     return self;
 }
 
-
-+ (id)listWithObject:(id)anObject {
-    NSLinkedList *n = [[NSLinkedList alloc] initWithObject:anObject];
-    return SAFE_ARC_AUTORELEASE(n);
-}
-
-
-- (id)initWithObject:(id)anObject {
-    
-    if ((self = [super init]) == nil) return nil;
-    
-    // TNode *n = TNodeMake(anObject, nil, nil);
-    TNode *n = TNodeMake(anObject, nil, nil);
-    
-    first = last = n;
-    size = 1;
-    
-    return self;
-}
-
-
-- (void)pushBack:(id)anObject {
-    
-    if (anObject == nil) return;
-    
-    TNode *n = TNodeMake(anObject, nil, last);
-    
-    if (size == 0) {
-        first = last = n;
-    } else {
-        last.next = n;
-        last = n;
-    }
-    
-    size++;
-    
-}
-
-
-- (id)lastObject {
-    return last ? last.obj : nil;
-}
-
-
-- (id)firstObject {
-    return first ? first.obj : nil;
-}
-
-
-- (id)secondLastObject {
-    
-    if (last && last.prev) {
-        return last.prev.obj;
-    }
-    
-    return nil;
-    
-}
-
-
-- (TNode *)firstNode {
-    return first;
-}
-
-
-- (TNode *)lastNode {
-    return last;
-}
-
-
-- (id)top {
-    return [self lastObject];
-}
-
-
 - (void)pushFront:(id)anObject {
     
     if (anObject == nil) return;
-     NSLog(@"Retain count is -pushFront- 3:%ld", CFGetRetainCount((__bridge CFTypeRef)anObject));
     TNode *n = TNodeMake(anObject, first, nil);
     
     if (size == 0) {
@@ -146,117 +68,11 @@
     }
     
     anObject =  nil;
-     NSLog(@"Retain count is -pushFront- 5:%ld", CFGetRetainCount((__bridge CFTypeRef)n.obj));
     size++;
    // NSLog(@"this is the size:%u",size);
     
 }
 
-
-- (void)prependObject:(id)anObject {
-    [self pushFront:anObject];
-}
-
-
-- (void)appendObject:(id)anObject {
-    [self pushBack:anObject];
-}
-
-
-- (void)insertObject:(id)anObject beforeNode:(TNode *)node {
-    [self insertObject:anObject betweenNode:node.prev andNode:node];
-}
-
-
-- (void)insertObject:(id)anObject afterNode:(TNode *)node {
-    [self insertObject:anObject betweenNode:node andNode:node.next];
-}
-
-
-- (void)insertObject:(id)anObject betweenNode:(TNode *)previousNode andNode:(TNode *)nextNode {
-    
-    if (anObject == nil) return;
-    
-    TNode *n = TNodeMake(anObject, nextNode, previousNode);
-    
-    if (previousNode) {
-        previousNode.next = n;
-    } else {
-        first = n;
-    }
-    
-    if (nextNode) {
-        nextNode.prev = n;
-    } else {
-        last = n;
-    }
-    
-    size++;
-    
-}
-
-
-- (void)addObject:(id)anObject {
-    [self pushBack:anObject];
-    anObject = nil;
-}
-
-
-- (void)pushNodeBack:(TNode *)n {
-    
-    if (size == 0) {
-        first = last = TNodeMake(n.obj, nil, nil);
-    } else {
-        last.next = TNodeMake(n.obj, nil, last);
-        last = last.next;
-    }
-    
-    size++;
-    
-}
-
-
-- (void)pushNodeFront:(TNode *)n {
-    
-    if (size == 0) {
-        first = last = TNodeMake(n.obj, nil, nil);
-    } else {
-        first.prev = TNodeMake(n.obj, first, nil);
-        first = first.prev;
-    }
-    
-    size++;
-}
-
-
-// With support for negative indexing!
-- (id)objectAtIndex:(const int)inidx {
-    
-    int idx = inidx;
-    
-    // they've given us a negative index
-    // we just need to convert it positive
-    if (inidx < 0) idx = size + inidx;
-    
-    if (idx >= size || idx < 0) return nil;
-    
-    TNode *n = nil;
-    
-    if (idx > (size / 2)) {
-        // loop from the back
-        int curridx = size - 1;
-        for (n = last; idx < curridx; --curridx) n = n.prev;
-        return n.obj;
-    } else {
-        // loop from the front
-        int curridx = 0;
-        for (n = first; curridx < idx; ++curridx) n = n.next;
-        return n.obj;
-    }
-    
-    return nil;
-    
-}
 
 
 - (id)popBack {
@@ -267,26 +83,9 @@
     last.obj = nil;
     [self removeNode:last];
     
-    /*
-    @synchronized(self.needToBeRelease) {
-        [self.needToBeRelease addObject:ret];
-    }
-     */
     return SAFE_ARC_AUTORELEASE(ret);
     
 }
-
-
-- (id)popFront {
-    
-    if (size == 0) return nil;
-    
-    id ret = SAFE_ARC_RETAIN(first.obj);
-    [self removeNode:first];
-    return SAFE_ARC_AUTORELEASE(ret);
-    
-}
-
 
 - (void)removeNode:(TNode *)aNode {
     
@@ -316,56 +115,9 @@
         
         aNode.obj = nil;
         SAFE_ARC_RELEASE(aNode.obj);
-      
-        //free(aNode);
     }
-    
     size--;
-    
-    
 }
-
-
-- (BOOL)removeObjectEqualTo:(id)anObject {
-    
-    TNode *n = nil;
-    
-    @autoreleasepool {
-        
-        
-        for (n = first; n; n=n.next) {
-            if (n.obj == anObject) {
-                [self removeNode:n];
-                return YES;
-            }
-        }
-        
-    }
-    return NO;
-    
-}
-
-
-- (void)removeAllObjects {
-    
-    @autoreleasepool {
-        
-        
-        TNode *n = first;
-        
-        while (n) {
-            TNode *next = n.next;
-            SAFE_ARC_RELEASE(n.obj);
-            n.obj = nil;
-            // free(n);
-            n = next;
-        }
-        
-        first = last = nil;
-        size = 0;
-    }
-}
-
 
 - (void)dumpList {
     TNode *n = nil;
@@ -374,59 +126,9 @@
     }
 }
 
-
-- (void)insertObject:(id)anObject orderedPositionByKey:(NSString *)key ascending:(BOOL)ascending {
-    assert(0); // currently not implemented
-}
-
 - (int)count  { return size; }
 - (int)size   { return size; }
 - (int)length { return size; }
-
-
-- (BOOL)containsObject:(id)anObject {
-    
-    TNode *n = nil;
-    
-    for (n = first; n; n=n.next) {
-        if (n.obj == anObject) return YES;
-    }
-    
-    return NO;
-    
-}
-
-
-- (NSArray *)allObjects {
-    
-    NSMutableArray *ret = SAFE_ARC_AUTORELEASE([[NSMutableArray alloc] initWithCapacity:size]);
-    TNode *n = nil;
-    
-    for (n = first; n; n=n.next) {
-        [ret addObject:n.obj];
-    }
-    
-    return [NSArray arrayWithArray:ret];
-}
-
-
-- (NSArray *)allObjectsReverse {
-    
-    NSMutableArray *ret = SAFE_ARC_AUTORELEASE([[NSMutableArray alloc] initWithCapacity:size]);
-    TNode *n = nil;
-    
-    for (n = last; n; n=n.prev) {
-        [ret addObject:n.obj];
-    }
-    
-    return [NSArray arrayWithArray:ret];
-}
-
-
-- (void)dealloc {
-    [self removeAllObjects];
-    SAFE_ARC_SUPER_DEALLOC();
-}
 
 
 - (NSString *)description {
@@ -434,13 +136,13 @@
 }
 
 @end
+
 TNode * TNodeMake(id obj, TNode *next, TNode *prev) {
     TNode *n = [TNode alloc];
     n.next = next;
     n.prev = prev;
     n.obj = obj;
     obj = nil;
-    NSLog(@"Retain count is -TNodeMake - 4:%ld", CFGetRetainCount((__bridge CFTypeRef)n.obj));
     return n;
 };
 

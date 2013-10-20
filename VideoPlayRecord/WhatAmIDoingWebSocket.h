@@ -14,16 +14,19 @@
 #include <openssl/bio.h>
 #include <openssl/evp.h>
 #import "NSLinkedList.h"
-
+#import "PropertyAccessor.h"
 @interface WhatAmIDoingWebSocket : NSObject{
 
     CvVideoCamera *camera;
     NSInteger *recordingStatus;
     UIButton *startVideoButton;
     UIButton *stopVideoButton;
+    PropertyAccessor *propertyAccessor;
 
  
 }
+
+@property (atomic,strong) PropertyAccessor *propertyAccessor;
 @property (weak, nonatomic) UIButton *startVideoButton;
 @property (weak, nonatomic) UIButton *stopVideoButton;
 
@@ -35,11 +38,9 @@ static int callback_http(struct libwebsocket_context *context,
                          enum libwebsocket_callback_reasons reason, void *user,
                          void *in, size_t len);
 
--(void)remove;
 -(void)open:(NSString *)token;
--(void) send:(NSString *)data;
+-(void) send:(NSData *)data;
 -(WhatAmIDoingWebSocket *) initWithCamera:(CvVideoCamera *)theCamera;
 -(void)close;
 -(int) connectionStatus;
-- (CFStringRef *)base64EncodedString: data;
 @end

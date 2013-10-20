@@ -124,9 +124,7 @@ using namespace cv;
 {
     [super didReceiveMemoryWarning];
     NSLog(@"---------------------------- RECEIVED MEMORY WARNING ---------");
-    [self.whatAmIdoingWebSocket remove];
-    
-        // Dispose of any resources that can be recreated.
+    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Protocol CvVideoCameraDelegate
@@ -142,16 +140,7 @@ using namespace cv;
             Mat image_copy;
             UIImage *resultUIImage = [self UIImageFromCVMat:image];
             NSData *tempData = [NSData dataWithData:UIImageJPEGRepresentation(resultUIImage,1.0)];
-            //NSString* ns = [tempData base64EncodedString];
-            CFStringRef *str = [self.whatAmIdoingWebSocket base64EncodedString:tempData];
-            NSLog(@"Retain count is 0.6: %ld", CFGetRetainCount(str));
-            NSString *ns =  CFBridgingRelease(str);
-            NSLog(@"Retain count is 0.7: %ld", CFGetRetainCount(str));
-            NSLog(@"Retain count is 1: %ld", CFGetRetainCount((__bridge CFTypeRef)ns));
-            [self.whatAmIdoingWebSocket send:ns];
-            NSLog(@"Retain count is end 7:%ld", CFGetRetainCount((__bridge CFTypeRef)ns));
-            NSLog(@"Retain count is end 8:%ld", CFGetRetainCount(str));
-            ns = nil;
+            [self.whatAmIdoingWebSocket send:tempData];
             tempData = nil;
             resultUIImage = nil;
         }
