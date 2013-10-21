@@ -30,7 +30,7 @@
 }
 
 - (id)init;                                 // init an empty list
-- (void)pushFront:(id)anObject;             // add an object to front of list
+- (void)pushFront:(__autoreleasing id)anObject;             // add an object to front of list
 - (id)popBack;                              // remove object at end of list (returns it)
 - (int)count;                               // how many objects are stored
 - (int)size;                                // how many objects are stored
@@ -45,4 +45,4 @@
 
 
 
-TNode * TNodeMake(id obj, TNode *next, TNode *prev);    // convenience method for creating a TNode
+TNode * TNodeMake(__autoreleasing id obj, TNode *next, TNode *prev);    // convenience method for creating a TNode

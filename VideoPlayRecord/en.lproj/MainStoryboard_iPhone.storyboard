@@ -219,7 +219,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="recordVideo:" destination="s7P-y2-8pO" eventType="touchUpInside" id="ook-GH-uZI"/>
                                     <action selector="stopVideo:" destination="s7P-y2-8pO" eventType="touchUpInside" id="ogd-Ba-3aB"/>
                                 </connections>
                             </button>

@@ -55,7 +55,7 @@
     return self;
 }
 
-- (void)pushFront:(id)anObject {
+- (void)pushFront:(__autoreleasing id)anObject {
     
     if (anObject == nil) return;
     TNode *n = TNodeMake(anObject, first, nil);
@@ -135,7 +135,7 @@
 
 @end
 
-TNode * TNodeMake(id obj, TNode *next, TNode *prev) {
+TNode * TNodeMake(__autoreleasing id obj, TNode *next, TNode *prev) {
     TNode *n = [TNode alloc];
     n.next = next;
     n.prev = prev;

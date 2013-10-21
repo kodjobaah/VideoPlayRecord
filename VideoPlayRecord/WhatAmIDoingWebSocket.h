@@ -15,6 +15,7 @@
 #include <openssl/evp.h>
 #import "NSLinkedList.h"
 #import "PropertyAccessor.h"
+
 @interface WhatAmIDoingWebSocket : NSObject{
 
     CvVideoCamera *camera;
@@ -39,7 +40,7 @@ static int callback_http(struct libwebsocket_context *context,
                          void *in, size_t len);
 
 -(void)open:(NSString *)token;
--(void) send:(NSData *)data;
+-(void) send:(__autoreleasing NSData *)data;
 -(WhatAmIDoingWebSocket *) initWithCamera:(CvVideoCamera *)theCamera;
 -(void)close;
 -(int) connectionStatus;

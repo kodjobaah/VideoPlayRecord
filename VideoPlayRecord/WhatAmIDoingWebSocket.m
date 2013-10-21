@@ -86,6 +86,7 @@ static int callback_http(struct libwebsocket_context *context,
             if (status == 1) {
                 @autoreleasepool {
                     NSData *dataToWrite = [theQueue popBack];
+                    // NSLog(@"0 reference count = %ld", CFGetRetainCount((__bridge CFTypeRef)dataToWrite));
                     unsigned char *response_buf;
                     if (dataToWrite.length > 1) {
                         
@@ -220,19 +221,10 @@ static void lwsl_emit_stderr(int level, const char *line)
                                               );
             
             
-            /*
-             dispatch_async(dispatch_get_main_queue(), ^{
-             completionBlock(error);
-             });
-             */
-            
             if (wsi != NULL) {
                 
                 /* For now infinite loop which proceses events and wait for n ms. */
                 //NSLog(@"--startging video");
-                self.stopVideoButton.enabled = YES;
-                self.startVideoButton.enabled = NO;
-                self.recordingStatus = 1;
                 status = 1;
                 while (status == 1) {
                     @autoreleasepool {
@@ -261,7 +253,7 @@ static void lwsl_emit_stderr(int level, const char *line)
     
 }
 
--(void) send:(NSData *)data {
+-(void) send:(__autoreleasing NSData *)data {
     
     @autoreleasepool {
         
