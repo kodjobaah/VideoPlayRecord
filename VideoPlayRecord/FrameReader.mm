@@ -82,44 +82,6 @@ static NSDate * theDate = nil;
     
 }
 #endif
-- (void)start {
-    
-    NSLog(@"START THE THREAD");
-    
-    // Always check for cancellation before launching the task.
-    if ([self isCancelled])
-    {
-        // Must move the operation to the finished state if it is canceled.
-        [self willChangeValueForKey:@"isFinished"];
-        finished = YES;
-        [self didChangeValueForKey:@"isFinished"];
-        return;
-    }
-    
-    self.videoCamera = [[CvVideoCamera alloc] initWithParentView:self.displayFrame];
-    self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionFront;
-    self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset352x288;
-    self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
-    self.videoCamera.defaultFPS = 30;
-    self.videoCamera.delegate = self;
-    self.videoCamera.grayscaleMode = NO;
-    
-    
-    /*
-     * Creating the websocket request used to publish the movie
-     */
-    self.whatAmIdoingWebSocket = [[WhatAmIDoingWebSocket alloc] initWithCamera:_videoCamera];
-    self.whatAmIdoingWebSocket.recordingStatus = 0;
-    
-    // If the operation is not canceled, begin executing the task.
-    [self willChangeValueForKey:@"isExecuting"];
-    [NSThread detachNewThreadSelector:@selector(main) toTarget:self withObject:nil];
-    executing = YES;
-    [self didChangeValueForKey:@"isExecuting"];
-    
-    [self.videoCamera start];
-    [self.whatAmIdoingWebSocket open:self.token.playSession];
-}
 
 -(UIImage *)UIImageFromCVMat:(cv::Mat)cvMat
 {
@@ -142,17 +104,17 @@ static NSDate * theDate = nil;
         
         // Creating CGImage from cv::Mat
         CGImageRef imageRef = CGImageCreate(cvMat.cols,  //width
-                        cvMat.rows,                      //height
-                        8,                               //bits per component
-                        8 * cvMat.elemSize(),            //bits per pixel
-                        cvMat.step[0],                   //bytesPerRow
-                        colorSpace,                      //colorspace
-                        bitMapInfo,                      // bitmap info
-                        provider,                        // CGDataProviderRef
-                        NULL,                            //decode
-                        false,                           //should interpolate
-                        kCGRenderingIntentDefault        //intent
-                        );
+                                            cvMat.rows,                      //height
+                                            8,                               //bits per component
+                                            8 * cvMat.elemSize(),            //bits per pixel
+                                            cvMat.step[0],                   //bytesPerRow
+                                            colorSpace,                      //colorspace
+                                            bitMapInfo,                      // bitmap info
+                                            provider,                        // CGDataProviderRef
+                                            NULL,                            //decode
+                                            false,                           //should interpolate
+                                            kCGRenderingIntentDefault        //intent
+                                            );
         
         
         // Getting UIImage from CGImage
@@ -163,6 +125,45 @@ static NSDate * theDate = nil;
         data = nil;
         return finalImage;
     }
+}
+
+- (void)start {
+    
+    NSLog(@"START THE THREAD");
+    
+    // Always check for cancellation before launching the task.
+    if ([self isCancelled])
+    {
+        // Must move the operation to the finished state if it is canceled.
+        [self willChangeValueForKey:@"isFinished"];
+        finished = YES;
+        [self didChangeValueForKey:@"isFinished"];
+        return;
+    }
+    
+    self.videoCamera = [[CvVideoCamera alloc] initWithParentView:self.displayFrame];
+    self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionBack;
+    self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset352x288;
+    self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
+    self.videoCamera.defaultFPS = 30;
+    self.videoCamera.delegate = self;
+    self.videoCamera.grayscaleMode = NO;
+    
+    
+    /*
+     * Creating the websocket request used to publish the movie
+     */
+    self.whatAmIdoingWebSocket = [[WhatAmIDoingWebSocket alloc] initWithCamera:_videoCamera];
+    self.whatAmIdoingWebSocket.recordingStatus = 0;
+    
+    // If the operation is not canceled, begin executing the task.
+    [self willChangeValueForKey:@"isExecuting"];
+    [NSThread detachNewThreadSelector:@selector(main) toTarget:self withObject:nil];
+    executing = YES;
+    [self didChangeValueForKey:@"isExecuting"];
+    
+    [self.videoCamera start];
+    [self.whatAmIdoingWebSocket open:self.token.playSession];
 }
 
 

@@ -222,7 +222,7 @@
                                     <action selector="stopVideo:" destination="s7P-y2-8pO" eventType="touchUpInside" id="ogd-Ba-3aB"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter email and click invite to share your video or click on find previous" translatesAutoresizingMaskIntoConstraints="NO" id="L3d-c2-XJt">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Enter email and click invite to share your video or click on find previous" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L3d-c2-XJt">
                                 <rect key="frame" x="40" y="17" width="240" height="45"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>

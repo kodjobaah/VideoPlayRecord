@@ -5,28 +5,20 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>7269A5EE-8319-4F87-AEEF-C95B599C1534</string>
+	<string>CA47C425-8C1D-4581-AE9F-49D4301C8685</string>
 	<key>IDESourceControlProjectName</key>
 	<string>VideoPlayRecord</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>4B651F7C-CA9D-412C-8579-BB477CD46918</key>
-		<string>https://github.com/robbiehanson/CocoaAsyncSocket.git</string>
 		<key>4BD89127-3AAD-4E8A-8500-35D87AD81BD2</key>
 		<string>https://github.com/kodjobaah/VideoPlayRecord.git</string>
-		<key>8A971E1C-B9C7-424E-B8B4-5C8B1D5742F1</key>
-		<string>https://github.com/DamnedFacts/RSWebSocket.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>VideoPlayRecord.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>4B651F7C-CA9D-412C-8579-BB477CD46918</key>
-		<string>../../RSWebSocket/RSWebSocket/CocoaAsyncSocket</string>
 		<key>4BD89127-3AAD-4E8A-8500-35D87AD81BD2</key>
 		<string>../..</string>
-		<key>8A971E1C-B9C7-424E-B8B4-5C8B1D5742F1</key>
-		<string>../../RSWebSocket</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/kodjobaah/VideoPlayRecord.git</string>
@@ -36,22 +28,6 @@
 	<string>4BD89127-3AAD-4E8A-8500-35D87AD81BD2</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>4B651F7C-CA9D-412C-8579-BB477CD46918</string>
-			<key>IDESourceControlWCCName</key>
-			<string>CocoaAsyncSocket</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>8A971E1C-B9C7-424E-B8B4-5C8B1D5742F1</string>
-			<key>IDESourceControlWCCName</key>
-			<string>RSWebSocket</string>
-		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
