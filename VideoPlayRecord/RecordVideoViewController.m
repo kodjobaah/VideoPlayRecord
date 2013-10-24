@@ -73,13 +73,13 @@ static int counter = 0;
     self.action = [self.constants nothing];
     self.queue = [[NSOperationQueue alloc] init];
     self.errorOccured = NO;
-   
+    
     _startVideoButton.enabled = YES;
     _stopVideoButton.enabled = NO;
     self.sendInvite = [[SendInvite alloc] initWithEmail: self.emal];
     self.logout = [[Logout alloc] initWithController:self];
-    
-    frameReader = [[FrameReader alloc] initWithData:_displayImage];
+
+   
     
     
     /*
@@ -116,7 +116,7 @@ static int counter = 0;
                           cancelButtonTitle:@"Ok"
                           otherButtonTitles: nil];
         [mes show];
-    }else if([self.frameReader getStatus] == 1) {
+    }else if([self.frameReader getStatus] == NO) {
         self.action = [self.constants inviteAction];
         [self.sendInvite sendInvitation:self.token.playSession];
     } else {
@@ -134,28 +134,41 @@ static int counter = 0;
 
 - (IBAction)recordVideo:(id)sender {
     
-    [self.queue addOperation:frameReader];
+    
+    [self.queue cancelAllOperations];
+    [self.queue waitUntilAllOperationsAreFinished];
+    self.frameReader = [[FrameReader alloc] initWithData:_displayImage];
+    [self.queue addOperation:self.frameReader];
     _startVideoButton.enabled = NO;
     _stopVideoButton.enabled = YES;
 }
 
 -(IBAction) stopVideo:(id)sender
 {
-    if (self.frameReader.getStatus == 1) {
-        _startVideoButton.enabled = YES;
-        _stopVideoButton.enabled = NO;
+    
+    if (self.frameReader.getStatus == NO) {
+        [self.frameReader cancel];
+        if(self.frameReader.completeOperation == YES) {
+            _startVideoButton.enabled = YES;
+            _stopVideoButton.enabled = NO;
+        }
+        
     }
+     self.frameReader = nil;
     
 }
 - (IBAction)logout:(id)sender {
     
-    
-    if (self.frameReader.getStatus == 1) {
-        [self.frameReader completeOperation];
-        _startVideoButton.enabled = NO;
-        _stopVideoButton.enabled = NO;
+    NSLog(@"Frame satus:%d",[self.frameReader getStatus]);
+    if (self.frameReader.getStatus == NO) {
+        [self.frameReader cancel];
+        if(self.frameReader.completeOperation == YES) {
+            _startVideoButton.enabled = YES;
+            _stopVideoButton.enabled = NO;
+        }
     }
     
+    self.frameReader = nil;
     self.action = [self.constants logoutAction];
     [self.logout logout:self.token.playSession];
     

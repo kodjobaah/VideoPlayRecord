@@ -29,6 +29,7 @@
 {
     [super viewDidLoad];
     
+    
     WhatAmIDoingAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     self.managedObjectContext = appDelegate.managedObjectContext;
     
@@ -46,6 +47,8 @@
     //if (self.registerUrl == nil) {
         self.registerUrl = @"http://5.79.24.141:9000/registerLogin?";
     ///}
+    NSArray *fileList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[[NSBundle mainBundle] resourcePath] error: nil];
+    NSLog(@"the fileList is %d",[fileList count]);
     
 
 }

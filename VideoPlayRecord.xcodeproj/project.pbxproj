@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		9F0ED70D17CD332700555D3C /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F0ED70C17CD332700555D3C /* libssl.a */; };
 		9F0ED71117CD335400555D3C /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F0ED71017CD335400555D3C /* libcrypto.a */; };
+		9F1863E9181841E2005414CD /* base-buttton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F1863E7181841E2005414CD /* base-buttton.png */; };
+		9F1863EA181841E3005414CD /* grey-buttton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F1863E8181841E2005414CD /* grey-buttton.png */; };
+		9F1863EC1818455A005414CD /* grey-round-buttton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F1863EB1818455A005414CD /* grey-round-buttton.png */; };
+		9F1863F218184C12005414CD /* base-round-buttton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F1863F118184C12005414CD /* base-round-buttton.png */; };
+		9F1863F418184C1D005414CD /* grey-round-1-buttton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F1863F318184C1D005414CD /* grey-round-1-buttton.png */; };
+		9F1863F6181854D1005414CD /* stop-round-buttton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F1863F5181854D1005414CD /* stop-round-buttton.png */; };
 		9F23CBE7180B5EB300388D54 /* WhatAmIDoingConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F23CBE6180B5EB300388D54 /* WhatAmIDoingConstants.m */; };
 		9F2719AC180B8C2100DA873E /* SendInvite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2719AB180B8C2100DA873E /* SendInvite.m */; };
 		9F35E60E18082CB200AD4F79 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F35E60D18082CB200AD4F79 /* SenTestingKit.framework */; };
@@ -94,6 +100,12 @@
 /* Begin PBXFileReference section */
 		9F0ED70C17CD332700555D3C /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = lib/libssl.a; sourceTree = "<group>"; };
 		9F0ED71017CD335400555D3C /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = lib/libcrypto.a; sourceTree = "<group>"; };
+		9F1863E7181841E2005414CD /* base-buttton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "base-buttton.png"; sourceTree = "<group>"; };
+		9F1863E8181841E2005414CD /* grey-buttton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grey-buttton.png"; sourceTree = "<group>"; };
+		9F1863EB1818455A005414CD /* grey-round-buttton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grey-round-buttton.png"; sourceTree = "<group>"; };
+		9F1863F118184C12005414CD /* base-round-buttton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "base-round-buttton.png"; sourceTree = "<group>"; };
+		9F1863F318184C1D005414CD /* grey-round-1-buttton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grey-round-1-buttton.png"; sourceTree = "<group>"; };
+		9F1863F5181854D1005414CD /* stop-round-buttton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stop-round-buttton.png"; sourceTree = "<group>"; };
 		9F23CBE5180B5EB300388D54 /* WhatAmIDoingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhatAmIDoingConstants.h; sourceTree = "<group>"; };
 		9F23CBE6180B5EB300388D54 /* WhatAmIDoingConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhatAmIDoingConstants.m; sourceTree = "<group>"; };
 		9F2719AA180B8C2100DA873E /* SendInvite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendInvite.h; sourceTree = "<group>"; };
@@ -426,13 +438,19 @@
 		9FA787AB17CB6F5500F0BD40 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9F1863F5181854D1005414CD /* stop-round-buttton.png */,
+				9F1863EB1818455A005414CD /* grey-round-buttton.png */,
+				9F1863E7181841E2005414CD /* base-buttton.png */,
+				9F1863E8181841E2005414CD /* grey-buttton.png */,
 				9F9D69AD181736110020226A /* Default-568h@2x.png */,
 				9F9D69AE181736110020226A /* Default.png */,
 				9F9D69AF181736110020226A /* Default@2x.png */,
 				9F9D69B0181736110020226A /* icon-57.png */,
 				9F9D69B1181736110020226A /* icon-76.png */,
 				9F9D69B2181736110020226A /* icon-152.png */,
+				9F1863F118184C12005414CD /* base-round-buttton.png */,
 				9FA787AC17CB6F5500F0BD40 /* VideoPlayRecord-Info.plist */,
+				9F1863F318184C1D005414CD /* grey-round-1-buttton.png */,
 				9FA787AD17CB6F5500F0BD40 /* InfoPlist.strings */,
 				9FA787B017CB6F5500F0BD40 /* main.m */,
 				9FA787B217CB6F5500F0BD40 /* VideoPlayRecord-Prefix.pch */,
@@ -552,7 +570,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F9D69B6181736110020226A /* icon-57.png in Resources */,
+				9F1863F6181854D1005414CD /* stop-round-buttton.png in Resources */,
+				9F1863E9181841E2005414CD /* base-buttton.png in Resources */,
+				9F1863F418184C1D005414CD /* grey-round-1-buttton.png in Resources */,
 				9FA787AF17CB6F5500F0BD40 /* InfoPlist.strings in Resources */,
+				9F1863EA181841E3005414CD /* grey-buttton.png in Resources */,
+				9F1863EC1818455A005414CD /* grey-round-buttton.png in Resources */,
 				9F9D69B4181736110020226A /* Default.png in Resources */,
 				9FBFE9951816060700D32FE2 /* Images.xcassets in Resources */,
 				9FA787BE17CB6F5500F0BD40 /* MainStoryboard_iPhone.storyboard in Resources */,
@@ -560,6 +583,7 @@
 				9F9D69B5181736110020226A /* Default@2x.png in Resources */,
 				9F584681180276E700CA74DA /* whatAmIdoing.plist in Resources */,
 				9F9D69B7181736110020226A /* icon-76.png in Resources */,
+				9F1863F218184C12005414CD /* base-round-buttton.png in Resources */,
 				9F9D69B8181736110020226A /* icon-152.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

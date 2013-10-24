@@ -35,6 +35,6 @@
 @property (nonatomic, strong) WhatAmIDoingConstants *constants;
 
 -(id)initWithData:(id)data;
--(void)completeOperation;
+-(BOOL)completeOperation;
 -(BOOL)getStatus;
 @end

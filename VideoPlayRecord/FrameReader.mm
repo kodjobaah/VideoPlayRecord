@@ -12,7 +12,7 @@ using namespace cv;
 
 @implementation FrameReader
 
-
+@synthesize displayFrame = _displayFrame;
 @synthesize constants = _constants;
 @synthesize videoCamera = _videoCamera;
 @synthesize whatAmIdoingWebSocket = _whatAmIdoingWebSocket;
@@ -21,11 +21,14 @@ using namespace cv;
 
 static int counter = 0;
 static NSDate * theDate = nil;
+static BOOL isDone = NO;
+static BOOL startWebsocket = YES;
+
 - (id)initWithData:(UIImageView *)displayImage {
     
     if (self = [super init])
         
-        _displayFrame = displayImage;
+    _displayFrame = displayImage;
     _propertyAccessor = [[PropertyAccessor alloc] init];
     _constants = [[WhatAmIDoingConstants alloc] init];
     
@@ -48,8 +51,7 @@ static NSDate * theDate = nil;
 - (void)processImage:(Mat&)image;
 {
     // NSLog(@"PROCED IAMGE 1");
-    if ([self.whatAmIdoingWebSocket connectionStatus]) {
-        
+    
         @autoreleasepool {
             
             if (counter == 0) {
@@ -59,7 +61,7 @@ static NSDate * theDate = nil;
             counter = counter + 1;
             
             if (counter == 30) {
-                NSLog(@" Time to transmit 30 frames: %g",[theDate timeIntervalSinceNow]*-1);
+               // NSLog(@" Time to transmit 30 frames: %g",[theDate timeIntervalSinceNow]*-1);
                 counter = 0;
             }
             Mat image_copy;
@@ -67,15 +69,19 @@ static NSDate * theDate = nil;
                 
                 //UIImage *resultUIImage = MatToUIImage(image);
                 UIImage *resultUIImage = [self UIImageFromCVMat:image];
-                //NSData  __weak *tempData =  UIImageJPEGRepresentation(resultUIImage,1.0);
-                NSData __weak *tempData = [NSData dataWithData:UIImageJPEGRepresentation(resultUIImage,1.0)];
-                NSLog(@"0 reference count = %ld", CFGetRetainCount((__bridge CFTypeRef)tempData));
+                NSData  __weak *tempData =  UIImageJPEGRepresentation(resultUIImage,1.0);
+                //NSData *tempData = [NSData dataWithData:UIImageJPEGRepresentation(resultUIImage,1.0)];
+                //NSLog(@"0 reference count = %ld", CFGetRetainCount((__bridge CFTypeRef)tempData));
                 [self.whatAmIdoingWebSocket send:tempData];
-                NSLog(@"0 reference count = %ld", CFGetRetainCount((__bridge CFTypeRef)tempData));
+                //NSLog(@"0 reference count = %ld", CFGetRetainCount((__bridge CFTypeRef)tempData));
                 tempData = nil;
                 resultUIImage = nil;
+                
+                if (startWebsocket == YES) {
+                    [self.whatAmIdoingWebSocket open:self.token.playSession];
+                    startWebsocket = NO;
+                }
             }
-        }
         
         
     }
@@ -142,7 +148,7 @@ static NSDate * theDate = nil;
     }
     
     self.videoCamera = [[CvVideoCamera alloc] initWithParentView:self.displayFrame];
-    self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionBack;
+    self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionFront;
     self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset352x288;
     self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
     self.videoCamera.defaultFPS = 30;
@@ -163,14 +169,14 @@ static NSDate * theDate = nil;
     [self didChangeValueForKey:@"isExecuting"];
     
     [self.videoCamera start];
-    [self.whatAmIdoingWebSocket open:self.token.playSession];
+
 }
 
 
 
 - (void)main {
     @try {
-        BOOL isDone = NO;
+       
         
         while (![self isCancelled] && !isDone) {
             // Do some work and set isDone to YES when finished
@@ -182,11 +188,16 @@ static NSDate * theDate = nil;
 }
 
 -(BOOL)getStatus {
-    return executing;
+    return isDone;
 }
 
 
-- (void)completeOperation {
+- (void) stopVideo {
+    [self.videoCamera stop];
+}
+- (BOOL)completeOperation {
+    NSLog(@"--done");
+    isDone = YES;
     [self willChangeValueForKey:@"isFinished"];
     [self willChangeValueForKey:@"isExecuting"];
     
@@ -197,6 +208,10 @@ static NSDate * theDate = nil;
     [self didChangeValueForKey:@"isFinished"];
     [self.videoCamera stop];
     [self.whatAmIdoingWebSocket close];
+    
+    self.whatAmIdoingWebSocket = nil;
+    self.videoCamera = nil;
+    return YES;
 }
 
 - (BOOL)isConcurrent {

@@ -30,7 +30,7 @@ static  NSLinkedList *theQueue;
 int force_exit = 0;
 int count = 0;
 
-static int pollingInterval = 20000;
+static int pollingInterval = 20;
 
 static int status = 0;
 
@@ -54,6 +54,7 @@ static int status = 0;
     
 }
 -(void) close {
+     NSLog(@"CLOSE:%d",status);
     status = 0;
 }
 
@@ -62,46 +63,11 @@ static void dequeueAndTransmit() {
     dispatch_queue_t serialQueue = dispatch_queue_create("com.whatamidoing.queue", DISPATCH_QUEUE_SERIAL);
     dispatch_async(serialQueue, ^(void){
         
-        NSData *dataToWrite = [theQueue popBack];
-        // NSLog(@"0 reference count = %ld", CFGetRetainCount((__bridge CFTypeRef)dataToWrite));
-        unsigned char *response_buf;
-        if (dataToWrite.length > 1) {
-            
-            //Base64 encoding
-            BIO *context = BIO_new(BIO_s_mem());
-            
-            // Tell the context to encode base64
-            BIO *command = BIO_new(BIO_f_base64());
-            context = BIO_push(command, context);
-            
-            // Encode all the data
-            BIO_write(context, [dataToWrite bytes], [dataToWrite length]);
-            BIO_flush(context);
-            
-            // Get the data out of the context
-            char *outputBuffer;
-            long res = BIO_get_mem_data(context, &outputBuffer);
-            int len = strlen(outputBuffer);
-            
-            response_buf = (unsigned char*) malloc(LWS_SEND_BUFFER_PRE_PADDING + len +LWS_SEND_BUFFER_POST_PADDING);
-            
-            memcpy(outputBuffer, &response_buf[LWS_SEND_BUFFER_PRE_PADDING], len);
-            
-            libwebsocket_write(wsi, &response_buf[LWS_SEND_BUFFER_PRE_PADDING], len, LWS_WRITE_TEXT);
-            BIO_free_all(context);
-            free(response_buf);
-            response_buf = NULL;
-            outputBuffer = NULL;
-            dataToWrite = nil;
-            
-        }
-        else {
-            NSLog(@"Attempt to write empty data on the websocket");
-        }
+       
     });
     
 }
-static int callback_http(struct libwebsocket_context *context,
+static int http_only(struct libwebsocket_context *context,
                          struct libwebsocket *wsi,
                          enum libwebsocket_callback_reasons reason, void *user,
                          void *in, size_t len)
@@ -109,16 +75,50 @@ static int callback_http(struct libwebsocket_context *context,
     switch (reason) {
             
         case LWS_CALLBACK_CLOSED:
-            //NSLog(@"--- libwebsocket close");
-            //libwebsocket_context_destroy(context);
+            NSLog(@"--- libwebsocket close");
+            libwebsocket_context_destroy(context);
             status =0;
             break;
             
-        case LWS_CALLBACK_CLIENT_ESTABLISHED:
+        case LWS_CALLBACK_CLIENT_ESTABLISHED: {
             
             status = 1;
-            count = 0;
-            dequeueAndTransmit();
+            NSLog(@"pop");
+             libwebsocket_callback_on_writable(context, wsi);
+           
+        }
+        case LWS_CALLBACK_CLIENT_RECEIVE:
+            NSLog(@"--libwebsocket client receive--");
+            break;
+            
+        case LWS_CALLBACK_CLIENT_WRITEABLE:
+        {
+        
+            NSData *dataToWrite = [theQueue popBack];
+            // NSLog(@"0 reference count = %ld", CFGetRetainCount((__bridge CFTypeRef)dataToWrite));
+            unsigned char *response_buf;
+            if (dataToWrite.length > 1) {
+                
+                NSString *base64 = [dataToWrite base64Encoding];
+                
+                NSData *bytes = [base64 dataUsingEncoding:NSUTF8StringEncoding];
+                
+                response_buf = (unsigned char*) malloc(LWS_SEND_BUFFER_PRE_PADDING + bytes.length +LWS_SEND_BUFFER_POST_PADDING);
+                
+                bcopy([bytes bytes], &response_buf[LWS_SEND_BUFFER_PRE_PADDING], bytes.length);
+                
+                libwebsocket_write(wsi, &response_buf[LWS_SEND_BUFFER_PRE_PADDING], bytes.length, LWS_WRITE_TEXT);
+                free(response_buf);
+                response_buf = NULL;
+                //outputBuffer = NULL;
+                dataToWrite = nil;
+                base64 = nil;
+                bytes = nil;
+                
+            }
+            else {
+                NSLog(@"Attempt to write empty data on the websocket");
+            }
             //NSLog(@"--- libwebsocket client established");
             /*
              * start the ball rolling,
@@ -127,20 +127,7 @@ static int callback_http(struct libwebsocket_context *context,
             
             libwebsocket_callback_on_writable(context, wsi);
             break;
-            
-        case LWS_CALLBACK_CLIENT_RECEIVE:
-            //NSLog(@"--libwebsocket client receive--");
-            break;
-            
-        case LWS_CALLBACK_CLIENT_WRITEABLE:
-        
-            if (status == 1) {
-                dequeueAndTransmit();
-                /* get notified as soon as we can write again */
-                libwebsocket_callback_on_writable(context, wsi);
-            }
-            break;
-            
+        }
         default:
             break;
     }
@@ -203,8 +190,7 @@ static void lwsl_emit_stderr(int level, const char *line)
             /* first protocol must always be HTTP handler */
             {
                 "http-only",
-                callback_http,
-                0
+                 http_only,
             },
             {
                 NULL, NULL, 0   /* End of list */
@@ -243,6 +229,7 @@ static void lwsl_emit_stderr(int level, const char *line)
              });
              */
             
+            
             if (wsi != NULL) {
                 
                 /* For now infinite loop which proceses events and wait for n ms. */
@@ -252,12 +239,10 @@ static void lwsl_emit_stderr(int level, const char *line)
                 self.recordingStatus = 1;
                 status = 1;
                 while (status == 1) {
-                    @autoreleasepool {
+                    //  NSLog(@"polling");
                         libwebsocket_service(context, 0);
                         libwebsocket_callback_on_writable_all_protocol(&protocols[0]);
-                        
                         usleep(pollingInterval);
-                    }
                     
                 }
                 
@@ -278,17 +263,20 @@ static void lwsl_emit_stderr(int level, const char *line)
     
 }
 
--(void) send:(__autoreleasing NSData *)data {
+-(void) send:(NSData *)data {
     
     @autoreleasepool {
         
         if (status == 1) {
             
-            [theQueue pushFront:data] ;
-            data = nil;
+            @synchronized(theQueue) {
+                [theQueue pushFront:data] ;
+            }
+           // data = nil;
         }
     }
     
 }
+
 
 @end

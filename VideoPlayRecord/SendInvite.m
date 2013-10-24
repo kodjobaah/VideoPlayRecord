@@ -27,7 +27,8 @@
     NSString *host = [self.propertyAccessor getPropertyValue:@"WHAT_AM_I_DOING_URL"];
     NSString *inviteEmail = [self.propertyAccessor getPropertyValue:@"WHAT_AM_I_DOING_INVITE_EMAIL"];
     
-    NSString *hostMessage = [NSString stringWithFormat:@"http://%@:%@/%@=%@&token=%@",host,port,inviteEmail,self.emal.text,token];
+    NSString *hostMessage = [NSString stringWithFormat:@"http://%@:%@/%@%@&token=%@",host,port,inviteEmail,self.emal.text,token];
+    
     
     NSURL *url=[NSURL URLWithString:hostMessage];
     NSString *post =[[NSString alloc] initWithFormat:@"email=%@&token=%@",self.emal.text,token];

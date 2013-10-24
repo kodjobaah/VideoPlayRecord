@@ -40,7 +40,7 @@ static int callback_http(struct libwebsocket_context *context,
                          void *in, size_t len);
 
 -(void)open:(NSString *)token;
--(void) send:(__autoreleasing NSData *)data;
+-(void) send:(NSData *)data;
 -(WhatAmIDoingWebSocket *) initWithCamera:(CvVideoCamera *)theCamera;
 -(void)close;
 -(int) connectionStatus;

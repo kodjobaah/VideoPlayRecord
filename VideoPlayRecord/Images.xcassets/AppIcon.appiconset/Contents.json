@@ -1,6 +1,11 @@
 {
   "images" : [
     {
+      "idiom" : "iphone",
+      "size" : "29x29",
+      "scale" : "1x"
+    },
+    {
       "size" : "29x29",
       "idiom" : "iphone",
       "filename" : "shinobi-logo-red-square_58.png",
@@ -18,6 +23,11 @@
       "scale" : "1x"
     },
     {
+      "idiom" : "iphone",
+      "size" : "57x57",
+      "scale" : "2x"
+    },
+    {
       "size" : "60x60",
       "idiom" : "iphone",
       "filename" : "shinobi-logo-red-square_120.png",
@@ -33,6 +43,16 @@
       "size" : "29x29",
       "idiom" : "ipad",
       "filename" : "shinobi-logo-red-square_58-1.png",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "40x40",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "40x40",
       "scale" : "2x"
     },
     {
