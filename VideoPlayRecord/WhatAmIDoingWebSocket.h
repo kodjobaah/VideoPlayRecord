@@ -18,21 +18,12 @@
 
 @interface WhatAmIDoingWebSocket : NSObject{
 
-    CvVideoCamera *camera;
-    NSInteger *recordingStatus;
-    UIButton *startVideoButton;
-    UIButton *stopVideoButton;
     PropertyAccessor *propertyAccessor;
 
  
 }
 
 @property (atomic,strong) PropertyAccessor *propertyAccessor;
-@property (weak, nonatomic) UIButton *startVideoButton;
-@property (weak, nonatomic) UIButton *stopVideoButton;
-
-@property (nonatomic,assign) NSInteger recordingStatus;
-@property (nonatomic,assign) CvVideoCamera *camera;
 
 static int callback_http(struct libwebsocket_context *context,
                          struct libwebsocket *wsi,
@@ -41,7 +32,7 @@ static int callback_http(struct libwebsocket_context *context,
 
 -(void)open:(NSString *)token;
 -(void) send:(NSData *)data;
--(WhatAmIDoingWebSocket *) initWithCamera:(CvVideoCamera *)theCamera;
+-(WhatAmIDoingWebSocket *) init;
 -(void)close;
 -(int) connectionStatus;
 @end

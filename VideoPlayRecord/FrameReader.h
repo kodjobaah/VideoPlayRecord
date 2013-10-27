@@ -12,6 +12,7 @@
 #import "WhatAmIDoingAppDelegate.h"
 #import "AuthenticationToken.h"
 #import "WhatAmIDoingConstants.h"
+#import "UIImage+Scale.h"
 
 @interface FrameReader : NSOperation<CvVideoCameraDelegate>{
     CvVideoCamera *videoCamera;
@@ -22,10 +23,11 @@
     UIImageView *displayFrame;
     BOOL        executing;
     BOOL        finished;
+    AVCaptureDevicePosition devicePosition;
     
 }
 
-
+@property (nonatomic)   AVCaptureDevicePosition devicePosition;
 @property (nonatomic, strong) AuthenticationToken *token;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) PropertyAccessor *propertyAccessor;
@@ -35,6 +37,6 @@
 @property (nonatomic, strong) WhatAmIDoingConstants *constants;
 
 -(id)initWithData:(id)data;
--(BOOL)completeOperation;
+-(void)completeOperation;
 -(BOOL)getStatus;
 @end

@@ -25,10 +25,20 @@
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize responseData = _responseData;
 
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBar.hidden = YES;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    
+    UIImage *image = [UIImage imageNamed:@"main"];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
+
     
     WhatAmIDoingAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     self.managedObjectContext = appDelegate.managedObjectContext;
@@ -54,9 +64,11 @@
 }
 - (IBAction)registerOrLoginAction:(id)sender {
     
+    NSLog(@"registr ofr login");
     NSString *params = [NSString stringWithFormat:@"email=%@&password=%@&firstName=%@&lastName=%@", self.email.text,self.password.text, self.firstName.text,self.lastName.text];
    
     NSString *hostMessage = [self.registerUrl stringByAppendingString:params];
+    NSLog(@"URL:%@",hostMessage);
     NSURL *url=[NSURL URLWithString:hostMessage];
     NSData *postData = [params dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     
@@ -180,10 +192,14 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    
+    /*
     [self.email resignFirstResponder];
     [self.password resignFirstResponder];
     [self.firstName resignFirstResponder];
     [self.lastName resignFirstResponder];
+     */
 }
 
 - (void) deleteAllObjects: (NSString *) entityDescription  {

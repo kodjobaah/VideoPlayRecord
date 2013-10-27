@@ -18,6 +18,7 @@ using namespace cv;
 @synthesize whatAmIdoingWebSocket = _whatAmIdoingWebSocket;
 @synthesize propertyAccessor = _propertyAccessor;
 @synthesize token = _token;
+@synthesize devicePosition = _devicePosition;
 
 static int counter = 0;
 static NSDate * theDate = nil;
@@ -26,6 +27,8 @@ static BOOL startWebsocket = YES;
 
 - (id)initWithData:(UIImageView *)displayImage {
     
+    isDone = NO;
+    startWebsocket = YES;
     if (self = [super init])
         
     _displayFrame = displayImage;
@@ -67,21 +70,32 @@ static BOOL startWebsocket = YES;
             Mat image_copy;
             @autoreleasepool {
                 
+                
                 //UIImage *resultUIImage = MatToUIImage(image);
+                
                 UIImage *resultUIImage = [self UIImageFromCVMat:image];
-                NSData  __weak *tempData =  UIImageJPEGRepresentation(resultUIImage,1.0);
+                UIImage *resized = [resultUIImage  imageScaledToScale:0.9f withInterpolationQuality:kCGInterpolationHigh];
+                
+                
+                NSData  __weak *tempData =  UIImageJPEGRepresentation(resized,1.0);
+                
                 //NSData *tempData = [NSData dataWithData:UIImageJPEGRepresentation(resultUIImage,1.0)];
-                //NSLog(@"0 reference count = %ld", CFGetRetainCount((__bridge CFTypeRef)tempData));
-                [self.whatAmIdoingWebSocket send:tempData];
+               // NSLog(@"0 reference count = %ld", CFGetRetainCount((__bridge CFTypeRef)tempData));
+                if (startWebsocket == YES) {
+                    NSLog(@"---------- starting websockets");
+                    [self.whatAmIdoingWebSocket open:self.token.playSession];
+                    startWebsocket = NO;
+                }
+
+                if ([self.whatAmIdoingWebSocket connectionStatus] == YES) {
+                    [self.whatAmIdoingWebSocket send:tempData];
+                }
+                
                 //NSLog(@"0 reference count = %ld", CFGetRetainCount((__bridge CFTypeRef)tempData));
                 tempData = nil;
                 resultUIImage = nil;
                 
-                if (startWebsocket == YES) {
-                    [self.whatAmIdoingWebSocket open:self.token.playSession];
-                    startWebsocket = NO;
-                }
-            }
+                            }
         
         
     }
@@ -106,8 +120,10 @@ static BOOL startWebsocket = YES;
         CGDataProviderRef provider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
         
         bool alpha = cvMat.channels() == 4;
-        CGBitmapInfo bitMapInfo = (alpha ? kCGImageAlphaLast : kCGImageAlphaNone) | kCGBitmapByteOrderDefault;
+      //  CGBitmapInfo bitMapInfo = (alpha ? kCGImageAlphaLast : kCGImageAlphaNone) | kCGBitmapByteOrderDefault;
         
+        
+        CGBitmapInfo bitMapInfo = alpha ? kCGImageAlphaPremultipliedLast : kCGImageAlphaNoneSkipLast;
         // Creating CGImage from cv::Mat
         CGImageRef imageRef = CGImageCreate(cvMat.cols,  //width
                                             cvMat.rows,                      //height
@@ -148,7 +164,7 @@ static BOOL startWebsocket = YES;
     }
     
     self.videoCamera = [[CvVideoCamera alloc] initWithParentView:self.displayFrame];
-    self.videoCamera.defaultAVCaptureDevicePosition = AVCaptureDevicePositionFront;
+    self.videoCamera.defaultAVCaptureDevicePosition = self.devicePosition;
     self.videoCamera.defaultAVCaptureSessionPreset = AVCaptureSessionPreset352x288;
     self.videoCamera.defaultAVCaptureVideoOrientation = AVCaptureVideoOrientationPortrait;
     self.videoCamera.defaultFPS = 30;
@@ -159,8 +175,8 @@ static BOOL startWebsocket = YES;
     /*
      * Creating the websocket request used to publish the movie
      */
-    self.whatAmIdoingWebSocket = [[WhatAmIDoingWebSocket alloc] initWithCamera:_videoCamera];
-    self.whatAmIdoingWebSocket.recordingStatus = 0;
+    self.whatAmIdoingWebSocket = [[WhatAmIDoingWebSocket alloc] init];
+    
     
     // If the operation is not canceled, begin executing the task.
     [self willChangeValueForKey:@"isExecuting"];
@@ -195,7 +211,7 @@ static BOOL startWebsocket = YES;
 - (void) stopVideo {
     [self.videoCamera stop];
 }
-- (BOOL)completeOperation {
+- (void)completeOperation {
     NSLog(@"--done");
     isDone = YES;
     [self willChangeValueForKey:@"isFinished"];
@@ -211,7 +227,7 @@ static BOOL startWebsocket = YES;
     
     self.whatAmIdoingWebSocket = nil;
     self.videoCamera = nil;
-    return YES;
+  
 }
 
 - (BOOL)isConcurrent {

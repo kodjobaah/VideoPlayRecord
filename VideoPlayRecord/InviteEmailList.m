@@ -87,7 +87,7 @@ NSLog(@"finnish making calling");
     ActionStringCancelBlock cancel = ^(ActionSheetStringPicker *picker) {
         NSLog(@"Block Picker Canceled");
     };
-    [ActionSheetStringPicker showPickerWithTitle:@"Select a Block" rows:myArray initialSelection:0 doneBlock:done cancelBlock:cancel origin:self.sender];
+    [ActionSheetStringPicker showPickerWithTitle:@"Select an email" rows:myArray initialSelection:0 doneBlock:done cancelBlock:cancel origin:self.sender];
     
     
 }

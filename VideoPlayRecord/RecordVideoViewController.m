@@ -29,6 +29,7 @@ static NSDate * theDate = nil;
 
 @implementation RecordVideoViewController
 
+@synthesize devicePosition = _devicePosition;
 @synthesize queue = _queue;
 @synthesize frameReader = _frameReader;
 @synthesize sendInvite = _sendInvite;
@@ -73,6 +74,8 @@ static int counter = 0;
     self.action = [self.constants nothing];
     self.queue = [[NSOperationQueue alloc] init];
     self.errorOccured = NO;
+    self.devicePosition = AVCaptureDevicePositionBack;
+    self.topLabel.layer.cornerRadius = 8;
     
     _startVideoButton.enabled = YES;
     _stopVideoButton.enabled = NO;
@@ -97,6 +100,7 @@ static int counter = 0;
     
 }
 
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -116,7 +120,7 @@ static int counter = 0;
                           cancelButtonTitle:@"Ok"
                           otherButtonTitles: nil];
         [mes show];
-    }else if([self.frameReader getStatus] == NO) {
+    }else if(self.frameReader != nil) {
         self.action = [self.constants inviteAction];
         [self.sendInvite sendInvitation:self.token.playSession];
     } else {
@@ -135,37 +139,69 @@ static int counter = 0;
 - (IBAction)recordVideo:(id)sender {
     
     
+    self.frameReader = [[FrameReader alloc] initWithData:_displayImage];
+    self.frameReader.devicePosition = _devicePosition;
+    
     [self.queue cancelAllOperations];
     [self.queue waitUntilAllOperationsAreFinished];
-    self.frameReader = [[FrameReader alloc] initWithData:_displayImage];
     [self.queue addOperation:self.frameReader];
     _startVideoButton.enabled = NO;
     _stopVideoButton.enabled = YES;
 }
 
+- (IBAction)toggleTorch:(id)sender {
+    // check if flashlight available
+    Class captureDeviceClass = NSClassFromString(@"AVCaptureDevice");
+    if (captureDeviceClass != nil) {
+        AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+        if ([device hasTorch] && [device hasFlash]){
+            
+            [device lockForConfiguration:nil];
+            if (device.torchMode == AVCaptureTorchModeOff)
+            {
+                [device setTorchMode:AVCaptureTorchModeOn];
+                [device setFlashMode:AVCaptureFlashModeOn];
+                //torchIsOn = YES;
+            }
+            else
+            {
+                [device setTorchMode:AVCaptureTorchModeOff];
+                [device setFlashMode:AVCaptureFlashModeOff];
+                // torchIsOn = NO;
+            }
+            [device unlockForConfiguration];
+        }
+    }
+    
+}
+
 -(IBAction) stopVideo:(id)sender
 {
+    [self performStopVideoAction];
+}
+
+- (void) performStopVideoAction {
     
-    if (self.frameReader.getStatus == NO) {
+    NSLog(@"status:%d",self.frameReader.getStatus);
+    if (self.frameReader != nil) {
+        [self.frameReader completeOperation];
         [self.frameReader cancel];
-        if(self.frameReader.completeOperation == YES) {
-            _startVideoButton.enabled = YES;
-            _stopVideoButton.enabled = NO;
-        }
-        
     }
-     self.frameReader = nil;
+    _startVideoButton.enabled = YES;
+    _stopVideoButton.enabled = NO;
+    self.frameReader = nil;
+ 
     
 }
 - (IBAction)logout:(id)sender {
     
     NSLog(@"Frame satus:%d",[self.frameReader getStatus]);
-    if (self.frameReader.getStatus == NO) {
+    if (self.frameReader != nil) {
+        [self.frameReader completeOperation];
         [self.frameReader cancel];
-        if(self.frameReader.completeOperation == YES) {
-            _startVideoButton.enabled = YES;
-            _stopVideoButton.enabled = NO;
-        }
+        
+        _startVideoButton.enabled = YES;
+        _stopVideoButton.enabled = NO;
     }
     
     self.frameReader = nil;
@@ -180,6 +216,52 @@ static int counter = 0;
     
     [inviteEmailList displayInvites:sender theToken:self.token.playSession];
     
+    
+}
+
+- (IBAction)valuChanged:(id)sender {
+    
+    NSLog(@"FREAM:%@",self.frameReader);
+    RIButtonItem *cancelItem = [RIButtonItem itemWithLabel:@"No" action:^{
+  
+    }];
+    
+    RIButtonItem *deleteItem = [RIButtonItem itemWithLabel:@"Yes" action:^{
+        
+     [self performStopVideoAction];
+        
+        if (self.backOrFrontCamera.on) {
+             _devicePosition = AVCaptureDevicePositionBack;
+           
+        } else {
+            _devicePosition = AVCaptureDevicePositionFront;
+        }
+        
+    }];
+
+    
+    if (self.frameReader != nil) {
+    
+        NSString *title = @"Streaiming";
+        NSString *message = @"This will cause the current stream to end";
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                            message:message
+                                                   cancelButtonItem:cancelItem
+                                                   otherButtonItems:deleteItem, nil];
+        [alertView show];   [alertView show];
+        
+    } else {
+    
+        if (self.backOrFrontCamera.on) {
+          _devicePosition = AVCaptureDevicePositionBack;
+        } else {
+           _devicePosition = AVCaptureDevicePositionFront;
+            
+        }
+    }
+    
+    NSLog(@"--:%d",self.backOrFrontCamera.on);
     
 }
 

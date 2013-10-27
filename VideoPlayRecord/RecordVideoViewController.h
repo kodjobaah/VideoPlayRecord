@@ -18,6 +18,7 @@
 #import "InvitePickerDataSource.h"
 #import "NSLinkedList.h"
 #import "FrameReader.h"
+#import "UIAlertView+Blocks.h"
 
 
 
@@ -41,12 +42,15 @@
     SendInvite *sendInvite;
     Logout *logout;
     FrameReader *frameReader;
+    AVCaptureDevicePosition devicePosition;
     
 }
 
 //Framework guis
 @property (nonatomic, retain) UIPickerView *pickerView;
 @property (nonatomic,retain) IBOutlet UIActionSheet *actionSheet;
+
+
 
 //Actions
 @property (nonatomic, strong) NSString *action;
@@ -57,10 +61,13 @@
 @property (nonatomic, strong) CvVideoCamera* videoCamera;
 @property (nonatomic, strong) NSOperationQueue *queue;
 
+
+@property (weak, nonatomic) IBOutlet UILabel *topLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *displayImage;
 @property (weak, nonatomic) IBOutlet UIButton *startVideoButton;
 @property (weak, nonatomic) IBOutlet UIButton *stopVideoButton;
 @property (weak, nonatomic) IBOutlet UITextField *emal;
+@property (weak, nonatomic) IBOutlet UISwitch *backOrFrontCamera;
 
 @property (nonatomic, retain) FrameReader *frameReader;
 @property (nonatomic, strong) Logout *logout;
@@ -68,12 +75,15 @@
 @property (nonatomic, strong) WhatAmIDoingConstants *constants;
 @property (nonatomic, strong) AuthenticationToken *token;
 @property (nonatomic, strong) PropertyAccessor *propertyAccessor;
-
+@property (nonatomic) AVCaptureDevicePosition devicePosition;
+- (IBAction)toggleTorch:(id)sender;
 - (IBAction)stopVideo:(UIButton *)sender;
 - (IBAction)recordVideo:(id)sender;
 - (IBAction)invite:(id)sender;
 - (IBAction)logout:(id)sender;
 - (IBAction)displayInvitePicker:(id)sender;
+- (IBAction)valuChanged:(id)sender;
+- (void) performStopVideoAction;
 
 
 @end
